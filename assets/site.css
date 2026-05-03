@@ -120,6 +120,18 @@ h1 {
   letter-spacing: 0;
 }
 
+.home-title {
+  display: grid;
+  gap: 0.06em;
+  max-width: none;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.home-title span {
+  display: block;
+}
+
 .page-title h1 {
   font-size: clamp(2.5rem, 7vw, 5.5rem);
   line-height: 0.95;
@@ -314,6 +326,22 @@ p {
 .step-card p:not(.section-label) {
   margin: 12px 0 0;
   color: var(--text-soft);
+}
+
+.step-card .resource-links {
+  margin-top: 14px;
+  font-weight: 700;
+}
+
+.resource-links a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(16, 185, 129, 0.42);
+  text-underline-offset: 0.22em;
+}
+
+.resource-links a:hover {
+  color: var(--text);
 }
 
 .contract-button {
