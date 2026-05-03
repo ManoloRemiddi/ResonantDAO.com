@@ -152,6 +152,7 @@ h1 {
   max-width: none;
   overflow-wrap: normal;
   word-break: keep-all;
+  color: var(--text);
 }
 
 .home-title span {
