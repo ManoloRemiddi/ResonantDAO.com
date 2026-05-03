@@ -3,68 +3,655 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ResonantDAO</title>
+    <title>ResonantDAO - Community of Communities</title>
     <meta
       name="description"
-      content="ResonantDAO is the Community of Communities layer for ResonantOS."
+      content="ResonantDAO issues non-transferable on-chain credentials for Manifesto agreement, DAO membership, ResonantOS co-ownership, and early pioneers."
+    />
+    <meta property="og:title" content="ResonantDAO - Community of Communities" />
+    <meta
+      property="og:description"
+      content="Soulbound DAO credentials for Augmentatism, Community membership, Symbiotic Licence, and Pioneer status."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://resonantdao.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap"
+      rel="stylesheet"
     />
     <style>
       :root {
         color-scheme: dark;
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        --color-primary: #10b981;
+        --color-secondary: #d97706;
+        --color-accent-1: #34d399;
+        --color-accent-2: #92400e;
+        --color-warning: #ea580c;
+        --color-tertiary: #78350f;
+        --bg: #090d0f;
+        --bg-soft: #101518;
+        --panel: rgba(24, 24, 27, 0.62);
+        --panel-strong: rgba(24, 24, 27, 0.88);
+        --line: rgba(255, 255, 255, 0.08);
+        --muted: #a1a1aa;
+        --text: #f4f4f5;
+        --text-soft: #d4d4d8;
+        font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont,
           "Segoe UI", sans-serif;
-        background: #0c0f12;
-        color: #f4f0e8;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
         margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
         background:
-          linear-gradient(135deg, rgba(79, 141, 116, 0.18), transparent 42%),
-          linear-gradient(315deg, rgba(174, 111, 78, 0.16), transparent 44%),
-          #0c0f12;
+          radial-gradient(circle at 20% 8%, rgba(16, 185, 129, 0.22), transparent 28rem),
+          radial-gradient(circle at 78% 24%, rgba(217, 119, 6, 0.18), transparent 30rem),
+          linear-gradient(180deg, #090d0f 0%, #0d1114 46%, #090d0f 100%);
+        color: var(--text);
+        overflow-x: hidden;
       }
 
-      main {
-        width: min(760px, calc(100% - 48px));
-      }
-
-      p {
-        max-width: 680px;
-        color: #c9c0b3;
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        line-height: 1.7;
-      }
-
-      h1 {
-        margin: 0 0 16px;
-        font-size: clamp(3rem, 10vw, 7rem);
-        line-height: 0.92;
-        font-weight: 760;
-        letter-spacing: 0;
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to bottom, black, transparent 85%);
       }
 
       a {
-        color: #90d4b5;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(9, 13, 15, 0.78);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav-inner {
+        width: min(1180px, calc(100% - 32px));
+        height: 64px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        font-size: 1.18rem;
+        font-weight: 700;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+
+      .brand span {
+        color: var(--color-primary);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .nav-links a:hover {
+        color: var(--text);
+      }
+
+      .nav-action {
+        color: white;
+        background: var(--color-primary);
+        padding: 0.62rem 0.88rem;
+        border-radius: 8px;
+        font-weight: 650;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero {
+        min-height: 96vh;
+        display: grid;
+        align-items: center;
+        padding: 128px 0 64px;
+      }
+
+      .wrap {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+        gap: clamp(32px, 6vw, 80px);
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 22px;
+        color: var(--color-accent-1);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--color-primary);
+        box-shadow: 0 0 28px rgba(16, 185, 129, 0.9);
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(4rem, 11vw, 8.8rem);
+        line-height: 0.88;
+        letter-spacing: 0;
+      }
+
+      .gradient-text {
+        background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 28px 0 0;
+        color: var(--text-soft);
+        font-size: clamp(1.13rem, 2vw, 1.38rem);
+        line-height: 1.65;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-weight: 700;
+        border: 1px solid transparent;
+      }
+
+      .button-primary {
+        background: var(--color-primary);
+        color: #fff;
+        box-shadow: 0 16px 38px rgba(16, 185, 129, 0.22);
+      }
+
+      .button-secondary {
+        border-color: rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+      }
+
+      .credential-panel {
+        background: linear-gradient(180deg, rgba(24, 24, 27, 0.76), rgba(9, 13, 15, 0.82));
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.78rem;
+      }
+
+      .credential-list {
+        padding: 16px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .credential {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 14px;
+        min-height: 104px;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.075);
+        border-radius: 8px;
+      }
+
+      .mark {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        border: 1px solid rgba(16, 185, 129, 0.28);
+        color: var(--color-accent-1);
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        background: rgba(16, 185, 129, 0.08);
+      }
+
+      .credential h2,
+      .credential h3 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+        line-height: 1.2;
+      }
+
+      .credential p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      section {
+        padding: 86px 0;
+      }
+
+      .section-title {
+        max-width: 780px;
+        margin-bottom: 34px;
+      }
+
+      .section-title p {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.68;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.8rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .band {
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(18px);
+      }
+
+      .rules {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .rule,
+      .flow-step,
+      .gate {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 22px;
+      }
+
+      .kicker {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--color-secondary);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .rule h3,
+      .flow-step h3,
+      .gate h3 {
+        margin: 0 0 10px;
+        font-size: 1.18rem;
+      }
+
+      .rule p,
+      .flow-step p,
+      .gate p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .flow-step {
+        position: relative;
+        min-height: 210px;
+      }
+
+      .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 18px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.24);
+        color: var(--color-accent-1);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .status-line {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      footer {
+        padding: 42px 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        background: rgba(9, 13, 15, 0.88);
+      }
+
+      .footer-inner {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 0.94rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+      }
+
+      @media (max-width: 920px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-grid,
+        .rules,
+        .flow,
+        .gates {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+
+        .flow-step {
+          min-height: auto;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>ResonantDAO</h1>
-      <p>
-        The Community of Communities layer for ResonantOS. Membership,
-        credentials, and DAO access are moving on-chain.
-      </p>
-      <p>
-        Public website foundation. The NFT registration flow will connect here
-        once the membership program is deployed.
-      </p>
+    <nav class="nav" aria-label="Primary">
+      <div class="nav-inner">
+        <a class="brand" href="/">Resonant<span>DAO</span></a>
+        <div class="nav-links">
+          <a href="#credentials">Credentials</a>
+          <a href="#flow">Registration</a>
+          <a href="#access">Access</a>
+          <a href="https://resonantos.com/dao/">ResonantOS DAO</a>
+          <a class="nav-action" href="#flow">NFT Flow</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="page">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">On-chain membership for ResonantOS</p>
+            <h1>Resonant<span class="gradient-text">DAO</span></h1>
+            <p class="lead">
+              The Community of Communities layer for ResonantOS. Membership is
+              expressed through non-transferable credentials issued by the DAO
+              and verified by smart contracts.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#flow">Explore the registration flow</a>
+              <a class="button button-secondary" href="#credentials">View credentials</a>
+            </div>
+            <p class="status-line mono">
+              Devnet architecture active. Mainnet launch follows audit and DAO
+              authority migration.
+            </p>
+          </div>
+
+          <aside class="credential-panel" aria-label="ResonantDAO credentials">
+            <div class="panel-header">
+              <span>DAO CREDENTIAL STACK</span>
+              <span>SOULBOUND</span>
+            </div>
+            <div class="credential-list">
+              <article class="credential">
+                <div class="mark">01</div>
+                <div>
+                  <h2>Augmentatism Manifesto</h2>
+                  <p>Proof that the wallet signed and agreed to the manifesto.</p>
+                </div>
+              </article>
+              <article class="credential">
+                <div class="mark">02</div>
+                <div>
+                  <h2>Community Member</h2>
+                  <p>One per wallet. The access key for DAO smart contracts.</p>
+                </div>
+              </article>
+              <article class="credential">
+                <div class="mark">03</div>
+                <div>
+                  <h2>Symbiotic Licence</h2>
+                  <p>Co-ownership credential for ResonantOS, gated by membership.</p>
+                </div>
+              </article>
+              <article class="credential">
+                <div class="mark">04</div>
+                <div>
+                  <h2>Resonant Pioneer</h2>
+                  <p>First 1000 early adopters, issued only to Community Members.</p>
+                </div>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="credentials" class="band">
+        <div class="wrap">
+          <div class="section-title">
+            <h2>Originals are verified by the program, not by metadata.</h2>
+            <p>
+              Names, images, and marketplace listings can be copied. A valid
+              ResonantDAO credential must be backed by the official membership
+              program and the member record derived from the wallet.
+            </p>
+          </div>
+          <div class="rules">
+            <article class="rule">
+              <span class="kicker">One wallet</span>
+              <h3>One Community NFT max</h3>
+              <p>
+                The member record is derived from the wallet address. A second
+                active Community credential is rejected on-chain.
+              </p>
+            </article>
+            <article class="rule">
+              <span class="kicker">Non-transferable</span>
+              <h3>Locked to the holder</h3>
+              <p>
+                Credentials use Token-2022 non-transferable mints. Membership
+                cannot be sold, moved, or delegated by normal token transfer.
+              </p>
+            </article>
+            <article class="rule">
+              <span class="kicker">DAO-issued</span>
+              <h3>Program-owned mints</h3>
+              <p>
+                The DAO program creates deterministic credential mints, sends
+                one token to the wallet, and then removes mint authority.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="flow">
+        <div class="wrap">
+          <div class="section-title">
+            <h2>The website registration flow is one clear action.</h2>
+            <p>
+              A person joins by signing the Augmentatism Manifesto. The program
+              then issues both the Manifesto credential and the Community Member
+              credential in the same transaction path.
+            </p>
+          </div>
+          <div class="flow">
+            <article class="flow-step">
+              <span class="step-number">1</span>
+              <h3>Connect wallet</h3>
+              <p>
+                The user connects a Solana wallet. This wallet becomes the
+                human member identity for the current DAO stage.
+              </p>
+            </article>
+            <article class="flow-step">
+              <span class="step-number">2</span>
+              <h3>Sign the Manifesto</h3>
+              <p>
+                The wallet signs the canonical Augmentatism Manifesto hash as
+                proof of agreement.
+              </p>
+            </article>
+            <article class="flow-step">
+              <span class="step-number">3</span>
+              <h3>Mint credentials</h3>
+              <p>
+                The program issues Manifesto and Community NFTs as soulbound
+                Token-2022 credentials.
+              </p>
+            </article>
+            <article class="flow-step">
+              <span class="step-number">4</span>
+              <h3>Unlock DAO access</h3>
+              <p>
+                The active Community record becomes the on-chain gate for DAO
+                contracts, licence actions, and Pioneer eligibility.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="access" class="band">
+        <div class="wrap">
+          <div class="section-title">
+            <h2>Membership becomes the shared gate for the DAO.</h2>
+            <p>
+              Future DAO contracts should verify the official member record
+              instead of trusting website state, metadata, or a private server.
+            </p>
+          </div>
+          <div class="gates">
+            <article class="gate">
+              <span class="kicker">Community required</span>
+              <h3>Licence and Pioneer credentials</h3>
+              <p>
+                The Symbiotic Licence and Resonant Pioneer NFTs can only be
+                issued to wallets with active Community Member status.
+              </p>
+            </article>
+            <article class="gate">
+              <span class="kicker">Future gates</span>
+              <h3>Proposals, voting, rewards, protocol access</h3>
+              <p>
+                DAO programs receive the member record PDA and verify that the
+                signer is active before allowing protected actions.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>Copyright 2026 ResonantDAO. Built for sovereign human-AI communities.</span>
+        <div class="footer-links">
+          <a href="https://resonantos.com/">ResonantOS</a>
+          <a href="https://augmentatism.com/">Augmentatism</a>
+          <a href="https://github.com/ManoloRemiddi/ResonantDAO.com">GitHub</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
-
