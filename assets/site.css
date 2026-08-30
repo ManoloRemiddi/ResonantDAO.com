@@ -1216,9 +1216,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   margin: 0 2px;
 }
 
-/* nav: lowercase mono like 005 */
-.nav-links a { text-transform: lowercase; letter-spacing: 0.04em; }
-
 /* secondary buttons: ghost underline, not a pill (005 grammar) */
 .button.secondary {
   background: transparent;
@@ -1244,3 +1241,68 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .hero { min-height: 0; padding-top: 72px; padding-bottom: 24px; }
 
 /* explore-list (legacy home aside) no longer used on home; keep for about */
+
+
+
+/* ===== v6 header: the Contribution Economy header, site-wide ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  width: 100%;
+  min-height: 64px;
+  padding-right: max(16px, calc((100% - 78rem) / 2));
+  padding-left: max(16px, calc((100% - 78rem) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(10, 25, 17, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.site-header .brand {
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--jade);
+  font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.site-header .brand span { color: var(--jade); }
+.site-header .brand span::before {
+  content: "\00B7";
+  color: var(--amber);
+  margin: 0 2px;
+}
+.site-header .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+}
+.site-header .nav-links a {
+  color: var(--text-soft);
+  text-decoration: none;
+  border-bottom: none;
+  transition: color 0.25s;
+}
+.site-header .nav-links a:hover { color: var(--jade); }
+.site-header .nav-links a[aria-current="page"] { color: var(--jade); }
+@media (max-width: 48rem) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+  .site-header .nav-links { justify-content: flex-start; font-size: 0.88rem; gap: 6px 14px; }
+}
