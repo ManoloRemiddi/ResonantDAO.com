@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>The 22 · Contribution Economy Whitepaper · ResonantDAO</title>
+<meta name="description" content="A plain-language specification for recording community contribution across 22 dimensions, deriving $RCT, and governing separate $RES rewards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0b08; --bg2:#12100c; --paper:#171410; --paper2:#1c1813;
+  --ink:#e8e0d0; --ink-dim:#b0a48c; --muted:#7d7361; --faint:#57503f;
+  --gold:#c9a227; --gold-soft:#a3842e; --gold-dim:rgba(201,162,39,.14);
+  --border:rgba(201,162,39,.16); --border-soft:rgba(201,162,39,.09);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --body:'Spectral',Georgia,serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --measure:46rem; --w-wide:78rem;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;
+  font-size:1.075rem;line-height:1.75;text-wrap:pretty;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold-dim);color:var(--gold)}
+
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold-soft),var(--gold));z-index:60}
+
+.hero{min-height:78vh;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 80% 55% at 50% 108%,rgba(201,162,39,.10),transparent 65%),
+             radial-gradient(ellipse 60% 40% at 50% -10%,rgba(230,220,190,.05),transparent 60%),var(--bg)}
+.hero-stars{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.hero-inner{position:relative;text-align:center;padding:5rem 1.5rem 4rem;max-width:62rem}
+.hero-fool{width:150px;height:auto;border-radius:6px;box-shadow:0 24px 70px -18px rgba(0,0,0,.85),0 0 0 1px var(--border);
+  transform:rotate(-3.5deg);margin-bottom:2.4rem;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.hero:hover .hero-fool{transform:rotate(0deg) translateY(-6px)}
+.hero-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.06;letter-spacing:-.015em}
+.hero h1 em{font-style:italic;color:var(--gold);font-weight:400}
+.hero-sub{max-width:40rem;margin:1.7rem auto 0;color:var(--ink-dim);font-size:1.13rem;line-height:1.7}
+.hero-meta{margin-top:2.7rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:flex;gap:2.2rem;justify-content:center;flex-wrap:wrap}
+.hero-meta span b{color:var(--ink-dim);font-weight:400}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:var(--faint);font-family:var(--mono);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+@media(prefers-reduced-motion:reduce){.hero-scroll{animation:none}}
+
+.shell{display:grid;grid-template-columns:minmax(0,1fr);max-width:var(--w-wide);margin:0 auto}
+@media(min-width:66rem){.shell{grid-template-columns:16rem minmax(0,1fr);gap:0}}
+nav.toc{display:none}
+@media(min-width:66rem){
+  nav.toc{display:block;position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+    padding:3.2rem 1.6rem 3rem 1.2rem;border-right:1px solid var(--border-soft)}
+  nav.toc::-webkit-scrollbar{width:0}
+  .toc-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1rem}
+  .toc a{display:block;padding:.34rem .8rem;margin-left:-.8rem;border-left:1px solid transparent;
+    color:var(--muted);text-decoration:none;font-size:.83rem;line-height:1.45;border-radius:0 3px 3px 0;transition:color .25s,border-color .25s}
+  .toc a:hover{color:var(--ink-dim)}
+  .toc a.active{color:var(--gold);border-left-color:var(--gold)}
+  .toc .toc-sub{padding-left:1.1rem;font-size:.76rem;color:var(--faint)}
+}
+main{padding:0 1.4rem;min-width:0}
+@media(min-width:66rem){main{padding:0 3.4rem}}
+section{padding:4.6rem 0 1.2rem;max-width:var(--measure)}
+section.wide{max-width:none}
+.sec-num{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.12;margin-bottom:.9rem;letter-spacing:-.01em}
+h3{font-family:var(--serif);font-weight:600;font-size:1.38rem;margin:2.6rem 0 .7rem;color:var(--ink)}
+h4{font-family:var(--serif);font-weight:600;font-size:1.12rem;margin:1.8rem 0 .5rem;color:var(--gold-soft)}
+p{margin:0 0 1.1rem}
+p.lead{font-size:1.16rem;line-height:1.7;color:var(--ink);margin-bottom:1.5rem}
+em{color:var(--ink)}
+strong{font-weight:500;color:#f0e9da}
+a{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-dim)}
+a:hover{border-bottom-color:var(--gold)}
+
+.abstract{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:2rem 2.1rem;margin:0 0 1rem}
+.abstract .kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.abstract p{font-size:.98rem;line-height:1.7;color:var(--ink-dim);margin-bottom:.8rem}
+.abstract p:last-child{margin-bottom:0}
+.abstract strong{color:var(--ink)}
+
+.callout{background:var(--paper);border:1px solid var(--border-soft);border-radius:8px;padding:1.5rem 1.7rem;margin:2rem 0}
+.callout .kicker{font-family:var(--mono);font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.callout p{margin:0}
+.kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin:0 0 .6rem}
+blockquote{margin:2.2rem 0;padding:0 0 0 1.6rem;border-left:2px solid var(--gold);
+  font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.3rem;line-height:1.5;color:var(--ink)}
+blockquote cite{display:block;margin-top:.8rem;font-family:var(--mono);font-style:normal;font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+
+.tbl-wrap{overflow-x:auto;margin:2rem 0;border:1px solid var(--border-soft);border-radius:8px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:.86rem;line-height:1.55;min-width:34rem}
+th{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  text-align:left;padding:.85rem 1rem;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:.8rem 1rem;border-bottom:1px solid var(--border-soft);vertical-align:top;color:var(--ink-dim)}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--gold);font-family:var(--mono);font-size:.78rem;white-space:nowrap}
+td b{color:var(--ink);font-weight:500}
+
+.axis-note{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin:3.2rem 0 1.2rem;display:flex;align-items:center;gap:1rem}
+.axis-note::after{content:"";flex:1;height:1px;background:var(--border-soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.2rem,1fr));gap:1.1rem;margin:1.4rem 0 1rem}
+.card{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;
+  display:flex;flex-direction:column;transition:border-color .3s,transform .3s;position:relative}
+.card:hover{border-color:var(--border);transform:translateY(-3px)}
+.card-img{aspect-ratio:3/4.35;overflow:hidden;background:var(--bg2);position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92;transition:opacity .3s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.card:hover .card-img img{opacity:1;transform:scale(1.035)}
+.card-num{position:absolute;top:.6rem;left:.6rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;
+  background:rgba(13,11,8,.78);color:var(--gold);padding:.22rem .55rem;border-radius:4px;border:1px solid var(--border-soft);backdrop-filter:blur(3px)}
+.card-body{padding:1.05rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.card-name{font-family:var(--serif);font-weight:600;font-size:1.28rem;line-height:1.15}
+.card-cls{font-family:var(--mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.card-def{font-size:.86rem;line-height:1.6;color:var(--ink-dim)}
+.card-bound{margin-top:auto;padding-top:.7rem;border-top:1px dashed var(--border-soft);font-size:.78rem;line-height:1.55;color:var(--muted)}
+.card-bound b{color:var(--ink-dim);font-weight:400;font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase}
+.card.sys .card-cls{color:#c98b5a}
+
+.lifecycle{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:2rem 0;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:var(--muted)}
+.lifecycle .st{background:var(--paper);border:1px solid var(--border-soft);border-radius:99px;padding:.34rem .8rem;white-space:nowrap;color:var(--ink-dim)}
+.lifecycle .st.hot{border-color:var(--gold);color:var(--gold)}
+.lifecycle .arr{color:var(--faint)}
+
+ol.mech{counter-reset:m;list-style:none;margin:1.6rem 0}
+ol.mech li{counter-increment:m;position:relative;padding:0 0 1.5rem 3.2rem}
+ol.mech li::before{content:counter(m,upper-roman);position:absolute;left:0;top:.1rem;font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--gold);opacity:.85}
+ol.mech b{color:var(--ink);font-weight:500}
+
+footer{border-top:1px solid var(--border-soft);margin-top:5rem;padding:3rem 1.4rem 4rem;max-width:var(--w-wide);margin-left:auto;margin-right:auto}
+.foot-inner{max-width:var(--measure);font-size:.85rem;color:var(--muted);line-height:1.7}
+.foot-inner .kicker{color:var(--gold)}
+.src-list{margin:1rem 0 0;padding-left:1.1rem}
+.src-list li{margin-bottom:.45rem}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+.mtoc{display:flex;gap:.5rem;flex-wrap:wrap;padding:1.2rem 1.4rem 0;max-width:var(--w-wide);margin:0 auto}
+.mtoc a{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--border-soft);border-radius:99px;padding:.3rem .7rem;background:var(--paper)}
+.mtoc a:hover{color:var(--gold);border-color:var(--border)}
+@media(min-width:66rem){.mtoc{display:none}}
+
+/* ---------- ResonantDAO site header (theme-adapted) ---------- */
+.site-header{position:sticky;top:0;z-index:70;width:100%;min-height:64px;
+  padding-right:max(16px,calc((100% - 78rem)/2));padding-left:max(16px,calc((100% - 78rem)/2));
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  border-bottom:1px solid var(--border-soft);background:rgba(13,11,8,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.site-header .brand{font-size:1.18rem;font-weight:800;white-space:nowrap;color:var(--ink);
+  font-family:var(--serif);text-decoration:none;border-bottom:none;letter-spacing:.01em}
+.site-header .brand span{color:var(--gold)}
+.site-header .nav-links{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;
+  gap:8px 18px;color:var(--muted);font-size:.95rem;font-family:var(--body)}
+.site-header .nav-links a{color:var(--ink-dim);text-decoration:none;border-bottom:none;transition:color .25s}
+.site-header .nav-links a:hover{color:var(--gold)}
+.site-header .nav-links a[aria-current="page"]{color:var(--gold)}
+@media(max-width:48rem){.site-header{flex-direction:column;align-items:flex-start;gap:.6rem;padding-top:.8rem;padding-bottom:.8rem}
+  .site-header .nav-links{justify-content:flex-start;font-size:.88rem;gap:6px 14px}}
+
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../">Resonant<span>DAO</span></a>
+  <nav class="nav-links" aria-label="Primary navigation">
+    <a href="../">Home</a>
+    <a href="../register/">Register</a>
+    <a href="../about/">About</a>
+    <a href="../whitepaper/">Whitepaper</a>
+    <a href="./">Contribution Economy</a>
+    <a href="https://resonantos.com/">ResonantOS</a>
+  </nav>
+</header>
+
+<div id="progress"></div>
+
+<header class="hero" id="top">
+  <canvas class="hero-stars" id="stars"></canvas>
+  <div class="hero-inner">
+    <img class="hero-fool" src="img/RWS_Tarot_00_Fool.jpg" alt="The Fool, Rider-Waite 1909" loading="eager">
+    <div class="hero-eyebrow">ResonantDAO · Contribution Economy · Working specification</div>
+    <h1>The 22:<br>a structural foundation for the <em>contribution economy</em></h1>
+    <p class="hero-sub">A proposed system for recording how people create value in a community, from building and teaching to care, research, conflict resolution, and completion.</p>
+    <div class="hero-meta">
+      <span><b>22</b> contribution dimensions</span>
+      <span><b>22</b> accounting balances</span>
+      <span><b>1</b> derived <code>$RCT</code> summary</span>
+    </div>
+  </div>
+  <div class="hero-scroll">Abstract</div>
+</header>
+
+<nav class="mtoc">
+  <a href="#abstract">Abstract</a><a href="#intro">1 Introduction</a><a href="#why22">2 Why 22</a>
+  <a href="#ontology">3 Ontology</a><a href="#payment">4 Reward engine</a><a href="#completeness">5 Completeness</a>
+  <a href="#alignment">6 Alignment</a><a href="#license">7 Conclusion</a><a href="#appendix-rules">Appendices</a>
+</nav>
+
+<div class="shell">
+<nav class="toc" aria-label="Contents">
+  <div class="toc-label">Contents</div>
+  <a href="#abstract">Abstract</a>
+  <a href="#intro">1 · Introduction</a>
+  <a href="#why22">2 · Why 22 are enough</a>
+  <a href="#why22-axes" class="toc-sub">Orthogonal axes</a>
+  <a href="#why22-lock" class="toc-sub">Design hypothesis</a>
+  <a href="#ontology">3 · Contribution ontology</a>
+  <a href="#ontology-grid" class="toc-sub">The 22 classes</a>
+  <a href="#payment">4 · The reward engine</a>
+  <a href="#payment-table" class="toc-sub">Trigger, rule, guard</a>
+  <a href="#payment-human" class="toc-sub">Governed parameters</a>
+  <a href="#completeness">5 · Completeness test</a>
+  <a href="#alignment">6 · Alignment</a>
+  <a href="#alignment-pollack" class="toc-sub">Pollack research</a>
+  <a href="#license">7 · Conclusion</a>
+  <a href="#appendix-rules">A · Accounting and payment rules</a>
+  <a href="#appendix-open" class="toc-sub">Open questions</a>
+  <a href="#sources">C · Sources</a>
+</nav>
+
+<main>
+
+<!-- ================= ABSTRACT ================= -->
+<section id="abstract" style="padding-top:3.6rem">
+  <div class="abstract rv">
+    <div class="kicker">Abstract</div>
+    <p>The ResonantDAO Contribution Economy is a proposed system for recording and rewarding the different ways people create value in a community. A person may build software, teach, care for other members, preserve knowledge, investigate uncertainty, resolve conflict, or complete a project. Counting only tasks or hours misses some of this work, while one overall score hides how the work was done.</p>
+    <p>This page explains how a real action becomes a contribution record. After evidence and context are collected, the action receives a 22-dimensional profile. Each dimension is a number showing how strongly the action expresses one kind of contribution. One action can activate several dimensions. For example, a course can involve creation, knowledge preservation, teaching, learner support, research, orientation, and completion. A dimension is credited only when the evidence supports it.</p>
+    <p>To tell the story of any contribution, this specification needed a series of dimensions whose number was not known in advance. What was required was not a count but a system that could describe any kind of action without changing its own rules. For 350 years, the Tarot has done exactly that. This document treats the cards as a map of action, not as a way to read the future. The surprise is how little it took: the same 22 cards have carried the stories of courts and kingdoms, war and love, and the ordinary course of a single life. The number has not grown in 350 years, which is the evidence that the system can absorb any level of complexity of action without adding dimensions. That is why the dimensions borrow their names from it.</p>
+    <p>The names of the 22 dimensions come from the Major Arcana, a 22-card group in Tarot. Here, the cards provide a shared vocabulary and a set of design hypotheses. This document does not claim that Tarot scientifically measures value. Rachel Pollack's <em>Seventy-Eight Degrees of Wisdom</em> informs the language used for relationships and sequences between dimensions, but it does not determine payment.</p>
+  </div>
+</section>
+
+<!-- ================= 1 INTRODUCTION ================= -->
+<section id="intro">
+  <div class="sec-num rv">Section 1</div>
+  <h2 class="rv">Introduction</h2>
+  <p class="lead rv">A bottom-up community needs a measurement system that preserves complexity without commanding purpose. This document specifies one: 22 contribution dimensions, a multidimensional accounting record, and a software-assisted reward process governed by humans.</p>
+  <p class="rv">The contribution economy records the dimensions of an action first, then derives an overall contribution value from the resulting profile. Six-sector views can make a complex profile easier to read, but they remain optional projections.</p>
+  <p class="rv">The design began with a practical question: how can a structure make community contribution visible without turning structure into a top-down assignment? The answer developed here treats structure as a measurement surface. The map is fixed enough to be readable, while the filling remains bottom-up and open to correction.</p>
+  <div class="callout rv">
+    <div class="kicker">What this document is</div>
+    <p>The 22 foundations are the canonical interpretive and measurement layer. A member action can activate several dimensions. Software proposes and calculates; humans govern definitions, calibration, review, and appeals. The six sectors are optional views, not the underlying economy.</p>
+  </div>
+</section>
+
+<!-- ================= 2 WHY 22 ================= -->
+<section id="why22" class="wide" style="max-width:var(--measure)">
+  <div class="sec-num rv">Section 2</div>
+  <h2 class="rv">Why 22 are enough</h2>
+  <p class="rv">Twenty-two dimensions are enough for a useful first model because they name distinct kinds of work, relationship, system condition, and transition without making the accounting impossible to learn or audit. The dimensions work as a <strong>generative grammar</strong>: their combinations can describe actions that no single category can capture.</p>
+
+  <h3 class="rv">2.1 A finite vocabulary for contribution</h3>
+  <p class="rv"><strong>The 22 dimensions make contribution discussable.</strong> Each Major Arcana card names one kind of contribution, such as building, teaching, care, research, conflict resolution, uncertainty reduction, or completion. The names give members a common language for describing work that a single activity label would miss.</p>
+  <p class="rv"><strong>The 22 dimensions also create boundaries.</strong> Each dimension has a definition, neighboring distinctions, evidence requirements, and limits. A contribution is not credited because a card sounds appropriate. It is credited when the action and its outcome support the proposed dimension.</p>
+  <div class="callout rv">
+    <div class="kicker">Design basis</div>
+    <p>The number 22 is a working hypothesis. It earns its place only if real community actions can be represented clearly, if the dimensions remain distinguishable, and if the resulting record helps the community recognize contribution fairly.</p>
+  </div>
+
+  <h3 class="rv">2.2 Primitives, not stories</h3>
+  <p class="rv">The common error is to treat each card as one story. The cards are not stories; they are a <strong>generative grammar</strong>. Each card is an archetype: a role, a force, or a state. Meaning emerges when they are sequenced. Drawn alone, The Tower is one symbol; placed between The Chariot (control) and The Star (hope), it is a complete three-act structure of collapse and recovery.</p>
+  <p class="rv">With 22 elements, the number of meaningful ordered sequences is astronomically large, far beyond any human lifetime of stories. The count that matters is the combinations, not the primitives. The corollary defines the design envelope: <strong>add cards and you gain redundancy, not coverage; remove them and you cut axes of experience.</strong></p>
+  <p class="rv">Readers of Tarot also distinguish upright and reversed cards, which raises a natural question: is the map 44 elements? It is not. The reversal is not a second archetype but the same archetype in a blocked, internalized, or shadowed condition. The convention belongs to divination practice, added in the late eighteenth century, long after the 22 were fixed. Here those cases are handled where they belong: an action that expresses a dimension badly is the same dimension failing its outcome check or triggering its guard, not a new dimension. The shadow work that is genuinely productive already has its own foundations: Devil exposes what captures the system, and Tower answers breakdown.</p>
+
+  <h3 class="rv">2.3 The universal story skeleton</h3>
+  <p class="rv">Jung proposed that the psyche is organized around a small set of inherited patterns (Self, Shadow, Anima/Animus, Persona, Great Mother, Wise Elder, Hero, Trickster), and the 22 map onto these almost one-to-one: the Empress is the Great Mother, the Hermit the Wise Elder, the Devil the Shadow, the World the integrated Self. Campbell showed that myths across cultures compress to a single spine, the monomyth, later reduced by Vogler to roughly 12 stages. <strong>The tarot's 22 is more granular than the structure it needs to represent.</strong></p>
+  <p class="rv">Read as a sequence, the "Fool's Journey" encodes the full arc: departure and potential (Fool), tools and will (Magician, Chariot), structure and teaching (Emperor, Hierophant), crisis and reversal (Wheel, Death, Tower), integration (Star, Sun, World). Any human drama, project, or community lifecycle is a traversal of a subset of these stations.</p>
+  <div class="lifecycle rv" aria-label="The Fool's Journey as a lifecycle">
+    <span class="st hot">0 Fool: departure</span><span class="arr">→</span>
+    <span class="st">1 Magician, 7 Chariot: tools and will</span><span class="arr">→</span>
+    <span class="st">4 Emperor, 5 Hierophant: structure and teaching</span><span class="arr">→</span>
+    <span class="st">10 Wheel, 13 Death, 16 Tower: crisis and reversal</span><span class="arr">→</span>
+    <span class="st">17 Star, 19 Sun, 21 World: integration</span><span class="arr">↻</span>
+    <span class="st hot">next Fool</span>
+  </div>
+
+  <h3 class="rv" id="why22-axes">2.4 Orthogonal axes of experience</h3>
+  <p class="rv">The 22 are not 22 variations on one theme. They span distinct axes, and this is what makes a small set sufficient:</p>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Axis</th><th>Cards</th></tr></thead>
+    <tbody>
+      <tr><td>Persons</td><td><b>Roles and figures encountered</b>: Emperor, Empress, Hierophant, Hermit</td></tr>
+      <tr><td>Forces</td><td><b>What acts on you, beyond your control</b>: Wheel of Fortune, Tower, Death</td></tr>
+      <tr><td>States</td><td><b>Inner, psychological conditions</b>: Sun, Moon, Star</td></tr>
+      <tr><td>Thresholds</td><td><b>Moments of decision</b>: Lovers, Fool, Judgement</td></tr>
+    </tbody>
+  </table></div>
+  <p class="rv">A set that covers distinct axes rather than one theme goes a very long way, for the same reason a few primary colors mix into every hue.</p>
+
+  <h3 class="rv" id="why22-lock">2.5 A testable design hypothesis</h3>
+  <p class="rv">The 22 dimensions are a design hypothesis, not a claim of metaphysical completeness. The model is adequate only if real community activity can be represented clearly and fairly.</p>
+  <ol class="mech rv">
+    <li><b>Distinct boundaries.</b> Each dimension must describe something different enough from its neighbors for members and reviewers to explain the distinction.</li>
+    <li><b>Useful combinations.</b> Several dimensions must be able to describe one action without flattening its different effects into a single label.</li>
+    <li><b>Observed coverage.</b> Actions that do not fit, or that fit only through strained interpretation, must be logged as evidence for a boundary change or a missing dimension.</li>
+  </ol>
+  <p class="rv">Completeness is supported only when the model performs well on real examples, including visible work, care, research, maintenance, conflict resolution, uncertainty reduction, and slow work. Section 5 defines that test.</p>
+  <blockquote class="rv">The 22 are useful when they make different kinds of contribution visible, explainable, and open to correction.
+  <cite>Section 2, summary</cite></blockquote>
+</section>
+
+<!-- ================= 3 ONTOLOGY ================= -->
+<section id="ontology" class="wide">
+  <div class="sec-num rv">Section 3</div>
+  <h2 class="rv">The contribution ontology</h2>
+  <div style="max-width:var(--measure)">
+    <p class="rv">If the 22 are a generative grammar of human experience, then a community's actions, being a subset of human action, should be expressible in that grammar. That is the founding hypothesis of the ontology:</p>
+    <blockquote class="rv">Every action a member takes can be read as a combination of the 22 action classes.</blockquote>
+    <p class="rv">Three properties follow directly from Section 2:</p>
+    <ol class="mech rv">
+      <li><b>Multi-classification.</b> Because the cards form a generative grammar, an action is classified as a <em>weighted combination</em> of classes, never a single label, exactly as a spread is read as cards interacting. Writing an onboarding document is simultaneously Priestess (recording), Hierophant (teaching), and Empress (nurturing).</li>
+      <li><b>Orthogonal axes preserved.</b> The classes span work, people, forces acting on the community, systemic integrity, and thresholds. No single theme dominates, which is why the set is exhaustive rather than arbitrary.</li>
+      <li><b>The arc is the lifecycle.</b> Fool to World to next Fool is the community loop: entry, growth, crisis, reckoning, integration, re-entry.</li>
+    </ol>
+    <p class="rv">All 22 foundations are contribution dimensions. Some describe visible work, some describe relationships, some describe system conditions, and some describe thresholds or transitions. This is a measurement distinction, not a fixed payment split. The dimensions keep the Tarot's own numbering, 0 through 21: the Fool is 0, the step before the count begins, which is also why an entry event can be measured at exactly zero value. The full 22-dimensional accounting model is specified in <a href="#appendix-rules">Appendix A</a>.</p>
+    <p class="rv">Each class below is specified with a definition, the boundary against its nearest neighbors (the classifier's discrimination logic), and observable actions (the classifier's input). The full payment rules are specified in Section 4.</p>
+  </div>
+
+  <div class="axis-note rv" id="ontology-grid" style="margin-top:3rem;font-size:.78rem;color:var(--ink-dim)">The 22 classes · imagery: Rider-Waite 1909, public domain</div>
+  <p class="rv" style="font-size:.95rem;font-style:italic;color:var(--ink);max-width:var(--measure);margin:-0.5rem 0 1.5rem">A note on the imagery. The card images are the Rider-Waite deck, drawn in 1909 by Pamela Colman Smith (of Jamaican-American-British heritage) and published in London, and are used because they are the most widely recognized rendering of the 22 archetypes and are in the public domain. The figures reflect the conventions of their time and place, and the lack of diversity in them is understood and regretted. The dimensions are the map, not the pictures: any faithful rendering of the 22 archetypes could serve the same measurement.</p>
+  <div class="grid" id="cardgrid"></div>
+</section>
+
+<!-- ================= 4 REWARD ENGINE ================= -->
+<section id="payment" class="wide">
+  <div class="sec-num rv">Section 4</div>
+  <h2 class="rv">The reward engine</h2>
+  <div style="max-width:var(--measure)">
+    <p class="lead rv">Software reads each verified action across 22 dimensions. It records the resulting contribution balances, derives an overall <code>$RCT</code> value, and applies any approved <code>$RES</code> reward rule. Humans govern definitions, evidence standards, calibration, review, and appeals.</p>
+    <p class="rv">The engine is built on one admission: measurement of human contribution is never perfect. So the design does not chase perfection; it arranges the imperfection fairly. Three commitments carry the philosophy. <strong>What pays is what happened, not what was performed:</strong> outcome, broadly defined, is the anchor because effort alone cannot distinguish work from the appearance of work. <strong>Where measurement is weak, the system pays the cost, not the member:</strong> uncertain cases stay pending, settle late, and are corrected with back-pay, never quietly zeroed. <strong>Every rule is guarded and every decision explainable,</strong> so the system can be challenged exactly where it is weakest. The sections below specify the mechanics; 4.2 defines what counts as an outcome, and 4.9 states what happens when measurement fails.</p>
+    <h3 class="rv">4.1 Cross-cutting mechanics</h3>
+    <ol class="mech rv">
+      <li><b>22-dimensional profile.</b> Each action receives a sparse weighted profile across the 22 foundations. Several dimensions can be active, and the weights do not need to add up to one.</li>
+      <li><b>22 contribution balances.</b> Verified dimension deltas accrue to <code>C_0</code> through <code>C_21</code>. These are non-transferable contribution accounting units. Separate on-chain tokenization remains an implementation decision.</li>
+      <li><b>Derived <code>$RCT</code>.</b> The normalized 22-dimensional balances generate the approximate overall contribution value. The vector remains the source record; <code>$RCT</code> does not erase the profile.</li>
+      <li><b>Separate <code>$RES</code>.</b> The transferable reward and utility token is paid only when a class-specific outcome rule fires. Holding or receiving <code>$RES</code> does not create contribution value.</li>
+      <li><b>Selective human review.</b> Deterministic actions can be verified automatically. Ambiguous, relational, invisible, or high-impact actions use independent review, explanations, appeals, and fairness audits.</li>
+      <li><b>Cycle dependency.</b> Cycle-gated dimensions are finalized only with a current Justice calibration and a readable audit record. No unresolved judgment becomes an automatic negative balance.</li>
+    </ol>
+    <h3 class="rv">4.2 Governing principle</h3>
+    <p class="rv">The principle that runs through every guard in the specification: <strong>pay on outcome, never on activity.</strong> Mentored hours do not pay; enabled growth pays. Pause duration does not pay; the changed decision pays. Research length does not pay; the adopted direction pays. A symbolic interpretation without evidence does not pay.</p>
+    <p class="rv">An outcome is a change in the state of the world that verification can confirm. Three families cover all 22 dimensions: effects on artifacts (a creation accepted, a record reused), effects on people (a learner made capable, a conflict resolved, a member who continues), and effects on system states (a cycle completed with fair coverage, a balance held in range). What the principle excludes is paying for inputs and effort as such: hours logged, messages sent, attendance, frequency, and the appearance of work. What it pays is the confirmed result those inputs produced.</p>
+    <p class="rv">Two clarifications carry most of the load in practice.</p>
+    <p class="rv"><strong>A maintained state is an outcome; the activity of maintaining it is not.</strong> Reliability looks like nothing happening, so it is paid as what it is: an audited state. The Temperance retainer pays a health metric held in range, evidenced by measurement, never hours of vigilance. The Wheel retainer pays a cycle completed with coverage and fairness, not time served. If the audit cannot distinguish a held state from a stalled one, nothing pays.</p>
+    <p class="rv"><strong>Outcome does not mean deliverable.</strong> Some contributions are complete as acts of presence: listening to a member in difficulty, witnessing a reckoning, being the audience that makes an event whole. These are outcomes because they leave a verified effect on the person who was met, who stayed, returned, or continued as a result. Presence is held to the same standard as any other outcome, and the standard is the safeguard: beneficiary-side evidence is required, but mutual attestation alone is not verification, and caps, cycle-gating, and under-recognition audits bound what any presence claim can earn. Care work is the case this clause exists for.</p>
+    <p class="rv">Two further conditions apply everywhere. <strong>Harm can void an outcome:</strong> a result achieved at verified cost to people or systems is reduced or cancelled, starting with Chariot's net-of-harm rule. <strong>Some outcomes need time:</strong> when the effect of an action only becomes visible later, credit is accrued and finalized at the cycle, on the timing rules in Appendix A.7, rather than paid on the spot or lost.</p>
+    <p class="rv"><strong>An outcome can be information.</strong> A well-run experiment that fails produces one: the knowledge that a path does not work, the boundary it mapped, the cost it revealed. When that knowledge is recorded and later steers work away from repeating the failure, it pays as discovery or preservation like any other outcome. The attempt earns nothing for effort; the learning earns on use. Work of small reach follows the same rule at its own scale: music that measurably moves five people is worth exactly that verified effect, no more and no less. Where a community wants more such work than verified effect alone would fund, that is an investment decision, not a measurement one: the governed Fool pool may stake resources on risky crossings as portfolio bets, judged on the portfolio and never on the single bet.</p>
+    <p class="rv"><strong>Value travels in chains, and the chain pays.</strong> A small act inspires a member, whose work inspires another, and somewhere down the line the community changes direction. The system does not predict inspiration; it records provenance. Every action may declare what informed it, and those declarations form a chain. When a downstream outcome pays, attribution flows back along the chain with governed decay, settled at the cycle by Judgement. The nurture multiplier was the first instance of this pattern; provenance makes it general. No one is paid for inspiring in advance. The chain pays when the last tile falls, and the credit travels back up the tiles.</p>
+    <p class="rv">This principle assumes measurement works. In practice some outcomes will be hard or impossible to verify at the time. That case is not an exception bolted on afterwards; it has its own doctrine in Section 4.9: measurement failure is the system's debt, never the contributor's. Read 4.2 as what the engine aims at, and 4.9 as the fairness guarantee that holds when it cannot aim straight.</p>
+    <h3 class="rv">4.3 From action to vector</h3>
+    <p class="rv">For an action <code>a</code>, the classifier proposes a sparse profile <code>P(a) = [p_0 ... p_21]</code>. After evidence and verification, each dimension receives a governed delta <code>ΔC_i</code>. The values do not need to sum to one because one action can be strong across several foundations.</p>
+    <div class="callout rv">
+      <div class="kicker">Derived value, preserved profile</div>
+      <p><code>$RCT = aggregate(weight_i × normalize(C_i))</code> for <code>i = 0</code> through <code>21</code>. The coefficients, normalization, recency, caps, and zero-value policy are governed parameters under pilot calibration. <code>$RCT</code> is an approximation, not a replacement for the 22 balances.</p>
+    </div>
+  </div>
+
+  <h3 class="rv" id="payment-table" style="margin-top:3rem">4.4 Trigger, rule, guard: the executable specification</h3>
+  <div class="tbl-wrap rv"><table id="paytable">
+    <thead><tr><th>#</th><th>Class</th><th>Trigger: software detects</th><th>Contribution output / $RES condition</th><th>Guard: anti-gaming</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+
+  <h3 class="rv" style="margin-top:3rem">4.5 The engine in one view</h3>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Layer</th><th>What it stores or does</th><th>Output</th><th>Timing</th></tr></thead>
+    <tbody>
+      <tr><td>Evidence</td><td>Action, provenance, context, outcome</td><td>Action record</td><td>At event time</td></tr>
+      <tr><td>Interpretation</td><td>Reads one action across all 22 foundations</td><td>Profile P(a)</td><td>At proposal time</td></tr>
+      <tr><td>Contribution accounting</td><td>Accrues verified dimension deltas</td><td>C_0 through C_21</td><td>Continuous or cycle-gated</td></tr>
+      <tr><td>Overall value</td><td>Normalizes and aggregates the 22 balances</td><td><code>$RCT</code></td><td>At approved calculation</td></tr>
+      <tr><td>Compensation</td><td>Applies class-specific outcome rules</td><td><code>$RES</code></td><td>When the rule fires</td></tr>
+      <tr><td>Reporting</td><td>Projects the vector for human readability</td><td>Optional sector views</td><td>On query</td></tr>
+    </tbody>
+  </table></div>
+
+  <div style="max-width:var(--measure)" id="payment-human">
+    <h3 class="rv">4.6 Human-governed parameters</h3>
+    <p class="rv">Humans govern the parameters and the safeguards. The software enforces approved versions; it does not silently set them.</p>
+    <ol class="mech rv">
+      <li><b>Dimension definitions and boundaries.</b> The community approves what each of the 22 dimensions means and what it does not mean.</li>
+      <li><b>Normalization and <code>$RCT</code> weights.</b> The community approves comparable scales, recency treatment, invisible-work protection, and aggregate weights.</li>
+      <li><b>Review thresholds.</b> The community defines which actions can be verified automatically and which require independent human review.</li>
+      <li><b>Reward parameters.</b> The community governs <code>$RES</code> emissions, caps, timing, and anti-farming conditions.</li>
+      <li><b>Cycle length.</b> The cycle bounds long-horizon work and determines when Judgement reconciles the record.</li>
+    </ol>
+    <h3 class="rv">4.7 Fairness and selective review</h3>
+    <p class="rv">Human review is used where context is necessary, not as a single approval gate for every action. Deterministic events can be verified automatically. Ambiguous, relational, invisible, or high-impact actions use two independent reviewers, conflict checks, visible reasoning, appeals, and periodic under-recognition audits. Unresolved judgment remains pending and cannot create an automatic negative balance.</p>
+    <h3 class="rv">4.8 Known failure modes and countermeasures</h3>
+    <div class="tbl-wrap rv"><table style="min-width:30rem">
+      <thead><tr><th>Failure mode</th><th>Countermeasure</th></tr></thead>
+      <tbody>
+        <tr><td><b>Metric capture</b>: what the scale weighs becomes what people do</td><td>Devil (15) operates permanently, paid to re-audit the weights themselves</td></tr>
+        <tr><td><b>Performance over work</b></td><td>Sun (19) keyed to Justice-verified records, not audience metrics</td></tr>
+        <tr><td><b>Conflict farming</b></td><td>Strength (8) requires a non-party resolver and acceptance by both parties</td></tr>
+        <tr><td><b>Closure theater</b></td><td>Death (13) pays only with the learning archived and resources released</td></tr>
+        <tr><td><b>Reflection theater</b></td><td>Hanged Man (12) pays only on a changed decision</td></tr>
+        <tr><td><b>Sybil entry</b></td><td>Fool (0) is measured, but entry alone may remain zero-valued; one verified identity record</td></tr>
+        <tr><td><b>Dimension flattening</b></td><td>The full 22-vector is canonical; sector views cannot replace it</td></tr>
+        <tr><td><b>Scalar capture</b></td><td><code>$RCT</code> summarizes the profile but does not erase it; profile-aware decisions remain possible</td></tr>
+        <tr><td><b>Reviewer capture</b></td><td>Selective review, rotation, conflict checks, independent reviewers, appeals, and agreement audits</td></tr>
+        <tr><td><b>Interpretation without evidence</b></td><td>Pollack-inspired language explains combinations; verified outcomes determine credit</td></tr>
+        <tr><td><b>Velocity farming</b></td><td>No dimension pays on frequency alone; outcome and cycle guards apply</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div style="max-width:var(--measure)">
+    <h3 class="rv">4.9 When measurement fails</h3>
+    <p class="rv">Some of what this specification tries to measure is genuinely hard to measure, and a system that under-credits members because its own instruments are weak is unfair by construction. The rule that prevents this: <strong>measurement failure is the system's debt, never the contributor's.</strong> Three obligations follow.</p>
+    <ol class="mech rv">
+      <li><b>Unmeasured is not zero.</b> The record distinguishes no evidence from evidence of nothing. A dimension the system could not assess is null, not zero, and null never turns into zero by timeout or inattention. The single exception is deliberate and named: a Fool entry event can be a verified zero.</li>
+      <li><b>Pending does not decay.</b> A claim that cannot yet be verified stays pending into later cycles without penalty to the contributor, and settles retroactively when evidence arrives. Attribution along provenance chains settles late by nature; lateness is priced into the cycle rules, not charged to the person who did the work.</li>
+      <li><b>Chronic under-measurement is a fault in the map.</b> When a class of work consistently lands null, that is a defect in the instruments, logged as a gap under Section 5 and surfaced by the under-recognition audits. Correction includes settlement of the credit owed back to when the work happened. If a dimension cannot be measured well enough to be fair, the honest outcomes are calibration or retirement of the rule, never silent underpayment.</li>
+    </ol>
+    <p class="rv">Difficulty of measurement is also what the review tiers are for: work that is hard to verify mechanically is routed to human review with context, not scored zero for being inconvenient. A member who cannot prove an effect is never treated as a member who did not have one.</p>
+  </div>
+</section>
+
+<!-- ================= 5 COMPLETENESS ================= -->
+<section id="completeness">
+  <div class="sec-num rv">Section 5</div>
+  <h2 class="rv">The completeness test</h2>
+  <p class="lead rv">Section 2 sets out the design basis. Completeness is not assumed; it is tested continuously against real community actions.</p>
+  <ol class="mech rv">
+    <li><b>Log real actions.</b> The software logs every member action together with its candidate class combination.</li>
+    <li><b>Detect the unmapped.</b> Any action that cannot be expressed as a combination of the 22 classes is flagged as a <b>gap</b>.</li>
+    <li><b>Close gaps on evidence.</b> A confirmed gap becomes a new class or a refined boundary. The ontology grows only on evidence, never on speculation.</li>
+  </ol>
+  <p class="rv">Completeness is tested against real community activity. When an action cannot be represented clearly, the record marks a gap. The gap may show that a boundary needs refinement or that a new dimension is required. The system does not treat an unrepresented action as a failure of the contributor.</p>
+  <p class="rv">The failure modes are known in advance on both sides: adding classes without evidence buys redundancy, and removing them cuts axes. The gap logger is the instrument that holds the system honest in both directions.</p>
+</section>
+
+<!-- ================= 5b ALIGNMENT ================= -->
+<section id="alignment">
+  <div class="sec-num rv">Section 6</div>
+  <h2 class="rv">Alignment with existing doctrine</h2>
+  <p class="lead rv">This section explains how the Contribution Economy fits the ResonantDAO governance and reward model and how it follows <a href="https://augmentatism.com/" target="_blank" rel="noopener">Augmentatism</a> principles. The focus is practical: definitions, accounting, rewards, governance, and fairness.</p>
+
+  <h3 class="rv">6.1 Compatibility with the Augmentatism Manifesto</h3>
+  <p class="rv">The ontology reads the <em>how</em> of contribution and never touches the <em>why</em>. Sovereign Purpose sits outside the ontology by design: the Fool enters with no role and no prescribed direction, and no class ranks, filters, or gates purposes. The Devil class operationalizes the Law of Anti-Capture applied inward to the DAO's own incentive: making the slow corruption visible is paid, the same way Anti-Capture names external capture.</p>
+  <p class="rv">The Law of Creative Latency is the one managed tension. An automated classifier risks rewarding velocity; the counterweights are already in the spec and are now named explicitly. Hermit, Hanged Man, and Temperance are the institutionalized Creative Latency, and an invariant prohibits any class from scaling output with action frequency alone.</p>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Manifesto principle</th><th>Verdict</th><th>Where it lives in the spec</th></tr></thead>
+    <tbody>
+      <tr><td>Sovereign Purpose, anti-dogma</td><td><b>Compatible</b></td><td>Section 2 invariant (M1); the gap test as anti-dogma in mechanical form</td></tr>
+      <tr><td>Law of Anti-Capture</td><td><b>Strong positive alignment</b></td><td>Devil (15) and Tower (16), with calibrated bounty caps</td></tr>
+      <tr><td>Law of Creative Latency</td><td><b>Managed tension</b></td><td>Hermit, Hanged Man, Temperance as the institutionalized Gap; no-frequency-scaling invariant (M2)</td></tr>
+      <tr><td>World Building as Cultivation</td><td><b>Compatible</b></td><td>Multi-axis measurement is a soil report, not a single optimizer; no-leaderboard invariant (M3)</td></tr>
+      <tr><td>Discovery over Acceleration</td><td><b>Compatible</b></td><td>Nothing rewards being first; no class output scales with frequency</td></tr>
+      <tr><td>Inter-Agent Economy</td><td><b>Out of scope, not in conflict</b></td><td>Performer-agnostic classification (M4); AI-member rules remain subject to the same evidence and governance boundaries</td></tr>
+      <tr><td>Community-Verified Integrity</td><td><b>Direct mapping</b></td><td>Justice (11), Moon (18), evidence standards, selective review, appeals, and audit records</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv">6.2 The 22-dimensional token model</h3>
+  <p class="rv">Six-sector views can help people read a complex profile, but they are projections of the canonical 22-dimensional record. The current flow is:</p>
+  <ol class="mech rv">
+    <li><b>Evidence.</b> The system records an action, its context, provenance, and outcome.</li>
+    <li><b>Interpretation.</b> Software proposes a sparse weighted profile across all 22 foundations.</li>
+    <li><b>Contribution accounting.</b> Verified dimension deltas accrue to 22 contribution balances, provisionally <code>C_0</code> through <code>C_21</code>.</li>
+    <li><b>Overall value.</b> Normalized dimension balances generate the approximate overall contribution value represented by <code>$RCT</code>.</li>
+    <li><b>Compensation.</b> Approved class-specific outcome rules may pay the transferable reward and utility token <code>$RES</code>.</li>
+    <li><b>Human-facing views.</b> The six sectors and other future lenses may project the vector for readability without rewriting it.</li>
+  </ol>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Concept</th><th>Role</th><th>Final status</th></tr></thead>
+    <tbody>
+      <tr><td>22 foundations</td><td>Interpretive and measurement dimensions</td><td><b>Canonical</b></td></tr>
+      <tr><td><code>C_0</code> through <code>C_21</code></td><td>Dimension-specific contribution balances or future non-transferable tokens</td><td><b>Provisional model</b></td></tr>
+      <tr><td><code>$RCT</code></td><td>Derived overall contribution value</td><td><b>Formula pending calibration</b></td></tr>
+      <tr><td><code>$RES</code></td><td>Transferable Phase 1 reward and utility token</td><td><b>Separate from contribution measurement</b></td></tr>
+      <tr><td>Six sectors</td><td>Optional projections for human readability</td><td><b>Not the source of truth</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv">6.3 Governance, identity, and fairness wiring</h3>
+  <p class="rv">The Fool identity event uses the existing membership credential flow. Dimension definitions, evidence standards, normalization, <code>$RCT</code> weights, review thresholds, sector views, and <code>$RES</code> emissions are governed parameters. Deterministic actions can be verified automatically. Ambiguous, relational, invisible, or high-impact actions use independent review, conflict checks, visible reasoning, appeals, and periodic under-recognition audits. Justice and Judgement operators remain human-only during bootstrap.</p>
+
+  <h3 class="rv">6.4 Profile-aware voting weight</h3>
+  <p class="rv">Expertise should carry more weight on the questions it belongs to: a member with a long record of enabling community learning should count for more on education decisions, as a doctor should count for more on a treatment protocol. Sectors are no longer the mechanism, and they were always too coarse for it. The 22-dimensional profile does the work directly.</p>
+  <ol class="mech rv">
+    <li><b>Every question declares its salient dimensions.</b> A proposal names the small set of dimensions its decision depends on, from a governed template. An education decision names Hierophant and Hermit; a dispute-process decision names Strength and Justice; a treatment-protocol question names Hermit and Moon. The declaration is visible and appealable, so salience cannot be gamed quietly.</li>
+    <li><b>Weight follows the declared dimensions.</b> Voting weight is base membership plus a bounded multiplier drawn from the voter's verified balances in exactly the salient dimensions, with recency treatment and a hard cap on any single member's weight. An expert is simply a member whose verified record concentrates where the question lives. Two exclusions are absolute. Capital-derived contribution never enters a salience template, so no amount of committed capital can multiply into voting power. And salience counts only the human-attributed portion of any balance: work amplified by a member's AI earns measurement and <code>$RES</code> in full, but the portion performed by agents does not become votes, because a vote exercises human judgment and judgment cannot be bought at scale.</li>
+    <li><b><code>$RCT</code> sets thresholds, never weights.</b> The overall value may gate eligibility, quorum, or standing. It never scales a vote, because a scalar cannot see the difference between the profiles that matter here.</li>
+    <li><b>The weight function is auditable.</b> How balances become weight is a governed parameter, versioned like any other calibration, and the Devil function audits it: if the weighting itself becomes a capture vector, exposing that is paid work.</li>
+  </ol>
+
+  <h3 class="rv" id="alignment-pollack">6.5 Pollack as interpretive research</h3>
+  <p class="rv">The current interpretation research focuses on Rachel Pollack's <em>Seventy-Eight Degrees of Wisdom</em>. The book is used to develop language for symbolism, psychological meaning, relationships, and sequences. It is not a payment authority, measurement formula, or substitute for evidence. This phase keeps the interpretive basis deliberately narrow so the community can test one coherent method before adding others.</p>
+
+  <h3 class="rv">6.6 Open questions for implementation</h3>
+  <p class="rv">Implementation still needs decisions about how the 22 balances are represented, how <code>$RCT</code> is normalized and weighted, how sector projections are defined, how review and fairness controls operate, how <code>$RES</code> emissions are governed, how UCI (Universal Contribution Income) eligibility is handled, and how contribution records are represented technically.</p>
+</section>
+
+<!-- ================= 7 CONCLUSION ================= -->
+<section id="license">
+  <div class="sec-num rv">Section 7</div>
+  <h2 class="rv">Conclusion: what this specifies</h2>
+  <ol class="mech rv">
+    <li><b>A complete measurement surface.</b> The community's activity becomes readable through 22 finite, learnable foundations whose combinations can express multidimensional work without forcing one label.</li>
+    <li><b>A derived contribution value.</b> The 22 balances remain detailed; normalized aggregation produces the approximate <code>$RCT</code> summary without erasing the profile.</li>
+    <li><b>A machine-assisted reward system.</b> Software proposes profiles and executes approved rules; humans govern definitions, parameters, review, appeals, and fairness.</li>
+    <li><b>A structure that measures without commanding.</b> The map is shared, the filling stays bottom-up, and any gap in the map becomes evidence for revision rather than a failure of the contributor.</li>
+  </ol>
+  <blockquote class="rv">The map is 22. The filling is open. The profile stays visible, the summary stays approximate, and the gap itself becomes the next lesson.</blockquote>
+</section>
+
+<!-- ================= APPENDIX A: RULES ================= -->
+<section id="appendix-rules">
+  <div class="sec-num rv">Appendix A</div>
+  <h2 class="rv">The accounting and payment rules</h2>
+  <p class="lead rv">This appendix is the executable specification behind Section 4: the canonical layers, the cross-cutting rules, the calculation shape, the review tiers, the anti-farming controls, and the record every decision must leave behind. No final numerical coefficient, token ticker, or emission amount is approved here. Calibration remains a governed, versioned parameter.</p>
+
+  <h3 class="rv">A.1 Canonical economic layers</h3>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Layer</th><th>Function</th><th>Canonical record</th></tr></thead>
+    <tbody>
+      <tr><td>Evidence</td><td>Records what happened and what changed</td><td>Action record</td></tr>
+      <tr><td>Interpretation</td><td>Reads the action across the 22 foundations</td><td>Candidate profile <code>P(a)</code></td></tr>
+      <tr><td>Verification</td><td>Confirms the action, outcome, and provenance</td><td>Verified outcome record</td></tr>
+      <tr><td>Contribution accounting</td><td>Accrues dimension-specific value</td><td><code>C_0</code> through <code>C_21</code></td></tr>
+      <tr><td>Overall value</td><td>Summarizes the multidimensional record</td><td>Derived <code>$RCT</code></td></tr>
+      <tr><td>Compensation</td><td>Pays approved transferable rewards</td><td><code>$RES</code></td></tr>
+      <tr><td>Reporting</td><td>Offers human-readable views</td><td>Optional sector projections</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv">A.2 Cross-cutting rules</h3>
+  <ol class="mech rv">
+    <li><b>Multidimensional classification.</b> Every candidate action receives a vector <code>P(a) = [p_0 ... p_21]</code>, never a single label. Several values may be high at once, and the values do not need to sum to one.</li>
+    <li><b>Measurement and payment are separate.</b> Recording, proposal, verification, accrual, and payment are five distinct events. A contribution can be measured without payment. Fool can be measured at zero. A cycle-gated contribution accrues now and pays later. A <code>$RES</code> payment is never inferred from a classifier label alone.</li>
+    <li><b>Unified Magician.</b> Magician is one dimension of effective creation. Creative, technical, educational, commercial, artistic, and social descriptors are metadata, not separate balances.</li>
+    <li><b>Fool is the crossing, not only the entry.</b> Entry, first action, re-entry, and any pioneering step into unworked territory create Fool events. A credential or account creation may carry <code>C_0 = 0</code>. A crossing that opens a verified path others can follow receives non-zero value under an approved rule.</li>
+    <li><b>No frequency-only rewards.</b> No dimension pays because the same action was repeated. Frequency is evidence only where Wheel applies, and recurrence must still produce a useful, fair cycle outcome.</li>
+    <li><b>No member leaderboard.</b> No member-versus-member ranking by dimension, sector, <code>$RCT</code>, or composite score is a permitted product surface, because ranking forces contributions onto one scale, which quietly reinstates the single score this model exists to replace, and a visible rank turns optimizing the position into the work. Governance may inspect aggregate distributions to detect unfairness; it may never turn them into a race.</li>
+    <li><b>Sovereign purpose.</b> Classification describes how a contribution was made. It never judges why a member chose a purpose, restricts what the member may build, or ranks legitimate purposes. The protection covers purposes, not harm: the <a href="https://augmentatism.com/" target="_blank" rel="noopener">Manifesto</a> names capture and the destruction of sovereignty as negative for the community, and nothing in this economy rewards them. Work that damages the community or takes members' sovereignty fails its outcome check and triggers its guard, starting with the harm rule in 4.2 and the Devil function.</li>
+    <li><b><code>$RES</code> does not create contribution value.</b> Simply holding, spending, or transferring <code>$RES</code> earns nothing. Possession is not an action, and paying it would let money grow into standing and votes by itself.</li>
+    <li><b>Committed capital can be contribution, at low weight.</b> Putting capital to work for the community is an action: locking liquidity, staking backing, or underwriting risk for a defined period. The outcome is verifiable, such as liquidity depth added or capital made available to the treasury. Such commitments are recorded like any other action and scored under the ordinary dimensions, with governed low caps. Two limits keep this safe. Capital-derived contribution never counts toward voting weight, so money cannot become power. And the same commitment cannot be paid twice, once in <code>$RES</code> and again in contribution credit.</li>
+  </ol>
+
+  <h3 class="rv">A.3 The calculation shape</h3>
+  <p class="rv">A candidate action record carries: contributor and beneficiary references, description and context, timestamps, linked artifact or event, evidence and provenance, claimed outcome, participating parties, attribution of the human and AI portions of the work, conflict-of-interest information, informed-by references declaring what prior work shaped the action, harm findings, classifier version, proposed profile, review status, and appeal history.</p>
+  <p class="rv">For a verified action <code>a</code>, the dimension delta follows this shape, not a final coefficient set:</p>
+  <div class="callout rv">
+    <div class="kicker">Contribution delta</div>
+    <p><code>Delta C_i(a) = Match_i(a) × Outcome(a) × Verification(a) × Calibration_i</code><br>
+    <span style="color:var(--muted);font-size:.9rem">Match is the supported intensity of dimension i. Outcome is the verified effect, net of verified harm: where the harm rule in 4.2 applies, the effect is reduced or voided before it enters this product, so a damaging result cannot pay gross. Verification is the confidence and independence of the evidence. Calibration covers normalization, invisible-work protection, time treatment, and caps.</span></p>
+  </div>
+  <p class="rv">Two things add deltas outside a single action. <strong>Chain settlement:</strong> when a downstream outcome pays, attribution flows back along the informed-by chain, so a member may receive a governed, decaying share of a later action's delta, settled at the cycle. <strong>Late settlement:</strong> a pending claim that verifies later produces its delta retroactively, back-dated to when the work happened, under the measurement-failure rules in 4.9.</p>
+  <p class="rv">Each member carries 22 non-transferable balances <code>C(u,t) = [C_0 ... C_21]</code> that accumulate approved deltas. A balance is never silently zero: it distinguishes <code>null</code>, meaning no verified evidence either way, from <code>0</code>, meaning a verified zero such as a Fool entry event, and <code>null</code> never decays into <code>0</code>. The overall value normalizes each balance before aggregation: <code>RCT(u,t) = Aggregate(alpha_i × N_i(C_i))</code>, where <code>N_i</code> treats <code>null</code> as unscored rather than as zero. The aggregate may use bounded nonlinearities or recency treatment, but it must stay explainable and reproducible, and the vector remains the source record. A sector view is a projection <code>SectorView_j = Projection_j(C_0 ... C_21)</code>: a display layer that rewrites nothing.</p>
+
+  <h3 class="rv">A.4 Review tiers</h3>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Tier</th><th>Action type</th><th>Decision path</th></tr></thead>
+    <tbody>
+      <tr><td>Tier 0</td><td>Deterministic events: credential state, artifact hash, test result, recorded transaction</td><td>Automatic verification with periodic audit</td></tr>
+      <tr><td>Tier 1</td><td>Strong evidence, low impact, high classifier confidence</td><td>Machine proposal, contributor visibility, random audit</td></tr>
+      <tr><td>Tier 2</td><td>Ambiguous, relational, invisible, high-impact, or disputed contribution</td><td>Two independent reviewers with conflict checks and written reasons</td></tr>
+      <tr><td>Tier 3</td><td>Appeal, systematic concern, or material disagreement</td><td>Rotating appeal panel and fresh evidence review</td></tr>
+    </tbody>
+  </table></div>
+  <p class="rv">A reviewer judges evidence, not personal worth: they may accept, modify, defer, or reject a proposed dimension, and never invent an outcome or award credit on favor alone. Every review returns its status, affected dimensions, evidence relied upon, boundary reasoning, confidence, conflict declaration, reviewer reference, and the appeal route with its deadline.</p>
+
+  <h3 class="rv">A.5 Fairness controls</h3>
+  <ul class="src-list rv">
+    <li>Reviewer rotation, independence, and conflict-of-interest exclusion; identity blinding where context permits</li>
+    <li>Fixed reviewer compensation unrelated to the outcome, with caps on any single reviewer's effect</li>
+    <li>Evidence and proposed dimensions visible to the contributor, with explanation for every active dimension</li>
+    <li>Appeal and correction without retaliation; a pending state for unresolved cases</li>
+    <li>No automatic negative balance from classifier uncertainty</li>
+    <li>Inter-rater agreement measurement, and audits for under-recognition of care, mediation, research, maintenance, and other less visible work</li>
+    <li>Monitoring of review delay and disagreement by contribution type</li>
+    <li>Published classifier and calibration versions, so a third party can reproduce any calculation</li>
+  </ul>
+
+  <h3 class="rv">A.6 Anti-farming and anti-capture controls</h3>
+  <div class="tbl-wrap rv"><table style="min-width:30rem">
+    <thead><tr><th>Risk</th><th>Control</th></tr></thead>
+    <tbody>
+      <tr><td>Metric capture</td><td>Devil remains a permanent dimension; calibration itself is auditable</td></tr>
+      <tr><td>Frequency farming</td><td>No frequency-only reward; cycle caps and outcome thresholds</td></tr>
+      <tr><td>Sybil entry</td><td>Wallet-bound membership record; Fool can remain zero-valued</td></tr>
+      <tr><td>Manufactured care outcomes</td><td>Empress requires beneficiary-side verified change and per-beneficiary caps</td></tr>
+      <tr><td>Manufactured teaching outcomes</td><td>Hierophant requires demonstrated competence</td></tr>
+      <tr><td>Manufactured collaboration</td><td>Lovers requires a genuine joint result and self-dealing checks</td></tr>
+      <tr><td>Steamrolling</td><td>Chariot uses a net-of-harm condition</td></tr>
+      <tr><td>Conflict farming</td><td>Strength requires a non-party resolver and acceptance by both parties</td></tr>
+      <tr><td>Closure theater</td><td>Death requires released resources and preserved learning</td></tr>
+      <tr><td>Reflection theater</td><td>Hanged Man requires a changed decision</td></tr>
+      <tr><td>Balance theater</td><td>Temperance includes stall detection</td></tr>
+      <tr><td>False accusations</td><td>Devil requires corroboration and carries a governed false-claim penalty</td></tr>
+      <tr><td>Crisis creation</td><td>Tower pays response and stabilization, not detection or caused failure</td></tr>
+      <tr><td>Popularity capture</td><td>Sun is tied to an existing verified contribution</td></tr>
+      <tr><td>Reviewer capture</td><td>Independent review, rotation, conflict checks, appeal, and agreement metrics</td></tr>
+      <tr><td>AI leverage capture</td><td>A member with capital deploys large amounts of AI to flood verified contribution. Measurement and <code>$RES</code> pay the verified outcome in full, but the action record attributes the human and AI portions, voting salience counts only the human-attributed portion, per-member weight caps bound what remains, and Devil audits concentration of agent-amplified output as a capture vector</td></tr>
+      <tr><td>Scalar capture</td><td><code>$RCT</code> never replaces the underlying 22-dimensional profile</td></tr>
+      <tr><td>Sector flattening</td><td>Sector views cannot rewrite dimension balances or <code>$RCT</code></td></tr>
+    </tbody>
+  </table></div>
+  <p class="rv">Devil and Tower bounty amounts remain subject to a separate, governed anti-farming policy. This appendix defines the control requirements, not the bounty values.</p>
+
+  <h3 class="rv">A.7 Timing and cycle rules</h3>
+  <p class="rv"><strong>Continuous credit</strong> applies when the outcome is immediately verifiable: accepted creation, durable record with verified use, demonstrated competence, accepted joint artifact, verified milestone, verified claim resolution, attributed recognition.</p>
+  <p class="rv"><strong>Cycle-gated credit</strong> applies when the result needs time or comparison: enabled growth, discovery that steers later work, a pioneering crossing validated by the followers it later attracts, attribution settled along provenance chains, healthy recurrence, fair accounting, sustainability, capture exposure, crisis stabilization, complete cycle reckoning, whole-system integration.</p>
+  <p class="rv">Judgement cannot finalize a cycle without a current Justice calibration and a readable audit record. A disputed action can remain pending into the next cycle without creating an automatic negative balance.</p>
+
+  <h3 class="rv">A.8 Governed parameters</h3>
+  <div class="tbl-wrap rv"><table>
+    <thead><tr><th>Parameter</th><th>Bootstrap authority</th><th>Post-transition authority</th></tr></thead>
+    <tbody>
+      <tr><td>Dimension definitions and boundaries</td><td>Custodians publish version and rationale</td><td>DAO governance</td></tr>
+      <tr><td>Evidence standards</td><td>Custodians with community review</td><td>DAO governance</td></tr>
+      <tr><td>Normalization functions</td><td>Custodians within published bounds</td><td>DAO governance</td></tr>
+      <tr><td><code>$RCT</code> aggregation weights</td><td>Custodians with audit</td><td>DAO governance</td></tr>
+      <tr><td>Review-tier thresholds</td><td>Custodians</td><td>DAO governance</td></tr>
+      <tr><td>Devil and Tower bounty caps</td><td>Conservative temporary cap pending anti-farming policy</td><td>DAO governance</td></tr>
+      <tr><td>Cycle length</td><td>Custodians with notice</td><td>DAO governance</td></tr>
+      <tr><td>Sector-view definitions</td><td>Interface maintainers under published schema</td><td>DAO governance if they affect rights or rewards</td></tr>
+      <tr><td>Voting weight functions and salience templates</td><td>Custodians with Devil audit</td><td>DAO governance</td></tr>
+    </tbody>
+  </table></div>
+  <p class="rv">Justice and Judgement operators are human-only during bootstrap. AI agents may assist with proposals, evidence organization, and anomaly detection, but do not receive human-only governance rights by implication.</p>
+
+  <h3 class="rv">A.9 The required explanation record</h3>
+  <p class="rv">Every contribution decision that affects <code>C_i</code>, <code>$RCT</code>, or <code>$RES</code> must leave a record containing:</p>
+  <div class="callout rv">
+    <div class="kicker">Explanation record</div>
+    <p><code>action_id · contributor_reference · evidence_references · active_dimensions · proposed_intensities · verified_intensities · outcome_value · verification_confidence · calibration_version · review_tier · review_decisions · contribution_deltas · res_payment_decision · appeal_status</code></p>
+  </div>
+  <p class="rv">With that record, a member can answer: what action was read, which dimensions activated and why, what evidence supported them, what value was assigned, who reviewed it, which calibration version was used, and what can be appealed or corrected.</p>
+</section>
+
+<!-- ================= APPENDIX B: OPEN ================= -->
+<section id="appendix-open">
+  <div class="sec-num rv">Appendix B</div>
+  <h2 class="rv">Open questions and deferred decisions</h2>
+  <p class="lead rv">This specification is a working proposal. The decisions below are deliberately left open until the pilot produces evidence, and the risks below are the known ways the model could fail in practice.</p>
+
+  <h3 class="rv">B.1 Deferred until the model is approved and tested</h3>
+  <ul class="src-list rv">
+    <li>Final contribution balance names or token tickers</li>
+    <li>On-chain representation of the 22 balances; the ledger-first path is evaluated before tokenization</li>
+    <li>The final <code>$RCT</code> formula, normalization, and recency treatment</li>
+    <li>Exact sector projection definitions and their governance</li>
+    <li><code>$RES</code> emissions, bounty values, and timing</li>
+    <li>UCI eligibility and the distribution formula</li>
+    <li>Tenure treatment in calibration</li>
+    <li>The provenance decay function: how much credit flows back along an informed-by chain, and how many links deep it settles</li>
+    <li>The voting weight multiplier shape and the salience templates: which dimensions each class of question draws on, and how balances scale into weight</li>
+    <li>The human and AI attribution method: how the split of a Human+AI action is declared, evidenced, and reviewed</li>
+    <li>The size and governance of the Fool pool for portfolio bets on risky crossings</li>
+  </ul>
+
+  <h3 class="rv">B.2 Residual risks</h3>
+  <ol class="mech rv">
+    <li><b>Scalar capture.</b> <code>$RCT</code> may hide meaningful differences between profiles. Profile-aware governance is required.</li>
+    <li><b>Reviewer bias.</b> Human reviewers may reproduce cultural, linguistic, or status bias. Agreement and under-recognition audits are required.</li>
+    <li><b>Visibility bias.</b> The classifier may prefer visible artifacts over care, maintenance, or thought. The calibration corpus must include invisible work.</li>
+    <li><b>Sector drift.</b> Sector views may quietly become the real system through interface design. They must remain projections by contract and schema.</li>
+    <li><b>Interpretive drift.</b> Pollack's language may be treated as authority rather than a design resource. Evidence remains the basis for credit.</li>
+    <li><b>Technical complexity.</b> 22 separate balances may be more machinery than the pilot needs. The ledger-first path is evaluated first.</li>
+    <li><b>Representation ambiguity.</b> <code>$RCT</code> may end up a token, a derived index, or an attested balance. The public language must match whichever is approved.</li>
+    <li><b>Provenance gaming.</b> Informed-by chains could be stuffed with famous work to siphon downstream credit. Decay, Judgement settlement, and evidence that the influence was real bound this; the pattern needs testing in the pilot.</li>
+    <li><b>Attribution gaming.</b> A member may overstate the human portion of Human+AI work to convert agent output into voting weight. Review of the attribution, per-member weight caps, and Devil audits of concentration bound this; the split is not mechanically provable and must be tested in the pilot.</li>
+    <li><b>Presence inflation.</b> The presence clause widens what counts as an outcome; fabricated or reciprocal care claims are its abuse surface. Beneficiary-side evidence, the bar on mutual attestation alone, caps, and under-recognition audits bound it, and calibration must watch for inflation of presence claims over time.</li>
+  </ol>
+
+  <h3 class="rv">B.3 Implementation sequence</h3>
+  <ol class="mech rv">
+    <li>Build the auditable action ledger.</li>
+    <li>Implement the 22-dimensional candidate profile.</li>
+    <li>Test deterministic verification for Tier 0 actions.</li>
+    <li>Add selective human review for ambiguous actions.</li>
+    <li>Measure inter-rater agreement and under-recognition.</li>
+    <li>Calibrate normalization and dimension weights.</li>
+    <li>Calculate a non-transferable <code>$RCT</code> index from the vector.</li>
+    <li>Add <code>$RES</code> payments only after the evidence and fairness path works.</li>
+    <li>Add optional sector projections for readability.</li>
+    <li>Consider separate on-chain contribution tokens only after the accounting model survives the pilot.</li>
+  </ol>
+
+  <h3 class="rv">B.4 Acceptance tests</h3>
+  <ul class="src-list rv">
+    <li>All 22 foundations are represented, and a single action can activate several dimensions</li>
+    <li>Fool measures every threshold crossing: entry may be zero-valued while a verified pioneering crossing earns value; Magician remains unified</li>
+    <li>Sector views are not the source of truth; <code>$RCT</code> is generated from the 22-dimensional record</li>
+    <li><code>$RES</code> remains separate from contribution accounting</li>
+    <li>Symbolic interpretation cannot create payment without evidence</li>
+    <li>Human review is selective, explainable, conflict-checked, and appealable</li>
+    <li>Unresolved judgment does not create an automatic negative contribution balance</li>
+    <li>Unmeasured work is recorded as null, never silently as zero; late settlement pays back to when the work happened</li>
+    <li>Invisible work is included in calibration and fairness audits</li>
+    <li>No leaderboard ranks members by contribution</li>
+    <li>Verified harm reduces or voids the outcome before any delta is calculated; no damaging result pays gross</li>
+    <li>Chain settlement pays attribution back along informed-by links with governed decay, and no link pays without evidence of real influence</li>
+    <li>Committed capital can earn contribution only as a recorded action with a verified outcome, never counts toward voting weight, and cannot claim both a <code>$RES</code> reward and contribution credit for the same commitment</li>
+    <li>Voting salience counts only the human-attributed portion of balances; agent-performed work earns measurement and <code>$RES</code> but never becomes votes</li>
+    <li>A third party can reproduce a contribution calculation from its record and calibration version</li>
+  </ul>
+</section>
+
+<!-- ================= APPENDIX C: SOURCES ================= -->
+<section id="sources">
+  <div class="sec-num rv">Appendix C</div>
+  <h2 class="rv">Sources</h2>
+  <p class="rv">This page is the canonical and single source of truth for the Contribution Economy. The earlier markdown drafts that preceded it are superseded and retained only as historical material.</p>
+  <h4>Reference sources</h4>
+  <ul class="src-list rv">
+    <li>The <a href="https://augmentatism.com/" target="_blank" rel="noopener">Augmentatism Manifesto</a>, the doctrine this economy aligns with: sovereign purpose, the Law of Anti-Capture, the Law of Creative Latency, cultivation, discovery, the Inter-Agent Economy, and community-verified integrity</li>
+    <li>Fool's Journey, used as an interpretive sequence model (<a href="https://www.learntarot.com/journey.htm" target="_blank" rel="noopener">LearnTarot</a>)</li>
+    <li>Rachel Pollack, <em>Seventy-Eight Degrees of Wisdom</em>, used as an interpretive reference for symbolism, psychological meaning, relationships, and readings (<a href="https://redwheelweiser.com/book/seventy-eight-degrees-of-wisdom-9781578636655" target="_blank" rel="noopener">publisher page</a>)</li>
+    <li>Card images: Rider-Waite Tarot, illustrated by Pamela Colman Smith, published 1909, London; public domain, via Wikimedia Commons. The Tarot itself originated in 15th-century Italy; the 350-year reference in this page dates the standardized 22-card Major Arcana tradition.</li>
+  </ul>
+  <p class="rv" style="margin-top:2rem;color:var(--muted);font-size:.9rem">Contribution Economy working specification v2. The map is a hypothesis; real activity tests the measurement.</p>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="kicker">ResonantDAO · Contribution Economy</div>
+    <p>The map is 22. The filling is open.<br>Contribution Economy working specification v2 · <span id="fdate"></span></p>
+  </div>
+</footer>
+
+<script>
+/* ---------- data: the 22 classes ---------- */
+const W='img/';
+const CARDS=[
+{n:'0',name:'The Fool',cls:'Crossing',img:'RWS_Tarot_00_Fool',def:'The act of crossing a threshold: entering the community, or pioneering a path before precedent or guarantee.',bound:'Every other class presupposes a path; the Fool opens one. Entry alone may be zero; a verified crossing others follow is contribution, once per path.'},
+{n:'1',name:'The Magician',cls:'Building',img:'RWS_Tarot_01_Magician',def:'The act of making: transforming intention into a real, shipped artifact.',bound:'Against Chariot: making from nothing versus driving existing work toward a goal. The signature is the artifact, not the momentum.'},
+{n:'2',name:'The High Priestess',cls:'Recording',img:'RWS_Tarot_02_High_Priestess',def:'The act of capturing and preserving knowledge: making the known findable and attributable.',bound:'The three knowledge classes divide by operation: Priestess records, Hierophant transmits, Hermit discovers. The verb here is preservation.'},
+{n:'3',name:'The Empress',cls:'Nurturing',img:'RWS_Tarot_03_Empress',def:'The act of tending to other members: creating the conditions in which growth is possible.',bound:'The object is a person\u2019s growth, not an artifact or a rule. Frequently produces no deliverable, which is why the scale must be configured to weigh it (Justice).'},
+{n:'4',name:'The Emperor',cls:'Structuring',img:'RWS_Tarot_04_Emperor',def:'The act of creating or changing the rules of the game: the frame, not a move inside it.',bound:'Against Strength: changing the rules versus resolving a live conflict. Against Justice: setting the rule of measurement versus performing a measurement.'},
+{n:'5',name:'The Hierophant',cls:'Teaching',img:'RWS_Tarot_05_Hierophant',def:'The act of transmitting knowledge: making another person able without re-deriving.',bound:'Against Priestess: records make knowledge findable; teaching makes a person able. The output is competence in another member, not a document.'},
+{n:'6',name:'The Lovers',cls:'Joining',img:'RWS_Tarot_06_Lovers',def:'The act of creating an alignment: a union of two that exceeds the parts.',bound:'Against Chariot: joining two into something neither had alone versus driving one force. The signature is the union, not the motion.'},
+{n:'7',name:'The Chariot',cls:'Driving',img:'RWS_Tarot_07_Chariot',def:'The act of directed momentum: pushing existing work toward a goal under constraints.',bound:'Wins without reins: the signature is the will that holds two opposing forces in one direction, not control of one. The reward must not pay for damage done along the way.'},
+{n:'8',name:'Strength',cls:'Resolving',img:'RWS_Tarot_08_Strength',def:'The act of dissolving a live conflict through patience rather than force or decree.',bound:'Against Emperor: relational tension resolved without a rule change. Against Temperance: a specific conflict versus an ongoing balance.'},
+{n:'9',name:'The Hermit',cls:'Discovering',img:'RWS_Tarot_09_Hermit',def:'The act of finding the not-yet-known: deep, long-horizon inquiry.',bound:'Hermit discovers the unknown; Priestess records the known; Hierophant transmits it. Against Fool: the Hermit delivers understanding, the Fool opens a path; mapping a route others can walk is a crossing, not a finding. The output is new understanding, and it often never ships.'},
+{n:'10',name:'Wheel of Fortune',cls:'Cycling',img:'RWS_Tarot_10_Wheel_of_Fortune',def:'The act of keeping the recurring flow turning: the rhythm, not a one-shot.',bound:'The signature is recurrence. A one-shot build is the Magician; the thing that keeps coming around is the Wheel.'},
+{n:'11',name:'Justice',cls:'Weighing',img:'RWS_Tarot_11_Justice',def:'The act of fair accounting: measuring merit and distributing according to cause and effect.',bound:'Justice weighs merit for one contribution; Judgement reckons the cycle as a whole at its end; Moon verifies whether a claim is real.'},
+{n:'12',name:'The Hanged Man',cls:'Re-seeing',img:'RWS_Tarot_12_Hanged_Man',def:'The act of pausing to see a thing from a new angle: a deliberate reframe, not an ending.',bound:'Against Death: pauses and reframes versus ends. Against Hermit: re-sees the known from a new side versus finds the unknown.'},
+{n:'13',name:'Death',cls:'Ending',img:'RWS_Tarot_13_Death',def:'The act of a chosen ending: closing something and keeping what was learned.',bound:'Against Tower: a chosen ending versus an unplanned collapse. Against World: closes a part or a failure versus the successful completion of the whole.'},
+{n:'14',name:'Temperance',cls:'Balancing',img:'RWS_Tarot_14_Temperance',def:'The act of holding an ongoing blend: sustainability and the long-term health of the whole.',bound:'Against Strength: maintains an ongoing balance versus resolves a specific conflict. Against Wheel: the health of the system versus the rhythm of the money.'},
+{n:'15',name:'The Devil',cls:'Exposing',img:'RWS_Tarot_15_Devil',def:'The act of naming and monitoring the system\u2019s own corruption: the shadow made visible.',bound:'Against Moon: exposes an incentive vector versus verifies a claim. Against Tower: the slow corruption the community believes in versus the sudden collapse.'},
+{n:'16',name:'The Tower',cls:'Responding',img:'RWS_Tarot_16_Tower',def:'The act of responding to an unplanned collapse: the incident, the black swan.',bound:'Against Death: unplanned collapse versus chosen ending. Must be prepared to be triggered, and the trigger must be verified as truth rather than manipulation.'},
+{n:'17',name:'The Star',cls:'Meaning',img:'RWS_Tarot_17_Star',def:'The act of making meaning and vision public: the why that orients the whole.',bound:'Against Sun: the why, forward-looking meaning, versus the what-we-did, backward-looking success made public.'},
+{n:'18',name:'The Moon',cls:'Verifying',img:'RWS_Tarot_18_Moon',def:'The act of illuminating the unverified: separating the true from the false before the community acts.',bound:'Against Justice: verifies truth versus weighs merit. Against Devil: checks a claim versus exposes an incentive vector.'},
+{n:'19',name:'The Sun',cls:'Celebrating',img:'RWS_Tarot_19_Sun',def:'The act of making success public: recognition visible to everyone.',bound:'Against Star: the what-worked versus the why. The reward is partly itself: visibility is a contribution and a reward at once.'},
+{n:'20',name:'Judgement',cls:'Reckoning',img:'RWS_Tarot_20_Judgement',def:'The act of end-of-cycle evaluation: calling the record and firing the reward.',bound:'Against Justice: the cycle reckoning, the whole at its end, versus the per-action weighing. Judgement is the trigger; Justice is the fairness of what it distributes.'},
+{n:'21',name:'The World',cls:'Integrating',img:'RWS_Tarot_21_World',def:'The act of completing the whole: the successful end-to-end integration, and the seed of the next cycle.',bound:'Against Death: successful completion of the whole versus a chosen ending of a part. The World is always the seed of the next Fool.'}
+];
+const SYSTEMIC=new Set([4,11,15,16,18,20]);
+
+/* ---------- data: payment specification ---------- */
+const PAY=[
+[0,'Fool','A threshold crossed: verified entry or re-entry, or a pioneering first step into territory the community has not worked before','Measure C_0; entry alone may be zero; a crossing that opens a verified, followable path earns non-zero value under an approved rule','One identity record; no payment for joining alone; a threshold is crossed once per path; pioneering checked against prior art and later followers'],
+[1,'Magician','Artifact shipped and accepted by its beneficiary node','Delivery bounty, sized by scope and complexity, paid on acceptance','Paid on acceptance, never on submission; duplicate and prior-art check'],
+[2,'Priestess','Record created, indexed, attributed, then retrieved or cited later','Base credit on publication, plus a usage bonus each time it is consulted','Usage bonus paid on real retrieval, not volume; spam floor with a minimum quality gate'],
+[3,'Empress','A member the contributor supported later ships accepted work, or a member in difficulty is met and continues','Nurture multiplier: percentage attribution on enabled members\u2019 output, for a bounded window; verified presence counts when the beneficiary confirms its effect','Paid on the other\u2019s growth or continued engagement, never on hours or messages; per-mentee cap; cycle-gated'],
+[4,'Emperor','A rule or process change proposed, then adopted through governance','Accrue C_4; optional governed $RES compensation; contribution standing is non-transferable','Conflict exclusion; later harm can trigger review; no self-approval'],
+[5,'Hierophant','A learner demonstrates competence: assessment passed, or accepted work shipped in that area','Paid per capability transferred, evidenced by learner outcomes','Pays on demonstrated ability, not lectures given or attendance'],
+[6,'Lovers','An alliance or collaboration forms and ships a joint output','Shared pool for the union, split by the ratio the parties declared at formation','Requires a genuine joint artifact, something neither shipped before alone; self-dealing check between paired identities'],
+[7,'Chariot','Milestone reached inside a declared timebox or campaign','Campaign bounty on milestone completion','Net of harm: reward reduced by measured damage to nodes passed through, gated by a community health signal'],
+[8,'Strength','A live dispute closes with both parties accepting the resolution','Resolution token to the resolver or resolvers, sized by dispute severity','Resolver must be a non-party; no payout if the resolver manufactured the dispute; acceptance by both parties required'],
+[9,'Hermit','Research deliverable delivered, or its direction adopted by a decision','Deep-work bounty at declared milestones, plus an adoption bonus when findings steer a real decision','Pays on adoption and steering, not length; timeboxed so open-ended research does not accrue indefinitely; first-entry into a new territory is the Fool crossing, not a Hermit finding; cycle-gated'],
+[10,'Wheel','A full cycle executed on schedule: bounty season run, vesting processed','Recurring operations retainer per completed cycle','Paid on the cycle completing fairly, measured by coverage and participation, not merely on time; if payouts resemble a lottery, the retainer is withheld'],
+[11,'Justice','A distribution event or audit performed','Accrue C_11; fixed governed review compensation may apply; the audit does not grant unchecked authority','No self-weighting; calibration audit; required review path and appeal'],
+[12,'Hanged Man','A documented reframe concludes and changes a real decision','Reflection token, paid only when the re-seeing produces the next move','Paid on decision-changed, never on pause duration; a pause ending in no decision pays nothing'],
+[13,'Death','Closure ritual completed: project retired, resources released, learnings archived','Closure token to the one who ends it cleanly','Requires the Priestess record, learning captured, and verified resource release; abandonment is not closure'],
+[14,'Temperance','System health metrics held in band across a full period','Sustainability retainer while the balance holds','Paid on the system not tipping, not on activity; stall detection, since a frozen decision is not a balance'],
+[15,'Devil','A named incentive distortion validated as real by audit or governance','Integrity bounty in tokens, deliberately among the largest payouts in the system','Must be specific and validated; manufactured accusations penalize the accuser; bounty paid independent of, and unblockable by, the accused'],
+[16,'Tower','A collapse signal fires and is verified as true, not manipulation','Crisis token on stabilization, sized by severity: the response pays, the incident never does','Trigger verification, truth rather than the Devil\u2019s manipulation, and pay-on-response: nobody profits from causing or merely spotting the collapse'],
+[17,'Star','A meaning or vision artifact published, producing orientation: cited by new members, retention or alignment signal','Meaning contribution paid on the orientation effect, not on publication','Orientation test: pays only when the artifact demonstrably orients; slogans that replace work are flagged, not paid'],
+[18,'Moon','A pending claim verified to resolution, confirmed or refuted','Verification token per completed check, paid regardless of which way the check lands','Accuracy tracking over time, a verifier must be right more than chance; time-bound so verification does not become a gate'],
+[19,'Sun','A verified contribution made public with attribution','Recognition token plus visibility boost to the contributor; small credit to the recognizer','Tied to a Justice-verified contribution record: the work must exist before it can be celebrated; popularity alone does not pay'],
+[20,'Judgement','Cycle end reached and record called','The trigger itself: reads the Justice-configured weights, evaluates all cycle-gated accruals, fires the payouts','Evaluation criteria fixed before the cycle starts, no retrofitted rules; record fully readable by every member; refuses to fire without a current Justice calibration'],
+[21,'World','A whole completed end-to-end, all integration corners verified: scope, quality, adoption, closure','Completion token to the integrators, plus seeds the next cycle: allocates the next Fool pool, re-opens entry','Four-corner checklist must pass, since partial delivery is Chariot not World; a World that closes the system instead of seeding the next Fool is a failed World']
+];
+
+/* ---------- render card grid ---------- */
+const grid=document.getElementById('cardgrid');
+CARDS.forEach(c=>{
+  const num=parseInt(c.n,10);
+  const el=document.createElement('article');
+  el.className='card rv'+(SYSTEMIC.has(num)?' sys':'');
+  el.innerHTML=`
+    <div class="card-img">
+      <img src="${W}${c.img}.jpg" alt="${c.name}, Rider-Waite 1909" loading="lazy"
+           onerror="this.closest('.card-img').style.display='none'">
+      <span class="card-num">${String(num).padStart(2,'0')}</span>
+    </div>
+    <div class="card-body">
+      <div class="card-cls">${c.cls}${SYSTEMIC.has(num)?' · systemic':''}</div>
+      <div class="card-name">${c.name}</div>
+      <div class="card-def">${c.def}</div>
+      <div class="card-bound"><b>Boundary</b><br>${c.bound}</div>
+    </div>`;
+  grid.appendChild(el);
+});
+
+/* ---------- render payment table ---------- */
+const tb=document.querySelector('#paytable tbody');
+const DIMENSION_OUTPUTS=Array.from({length:22},(_,i)=>`Contribution balance C_${i}`);
+PAY.forEach(r=>{
+  const tr=document.createElement('tr');
+  const output=`<b>${DIMENSION_OUTPUTS[r[0]]}</b><br><span style="color:var(--muted)">$RES condition: ${r[3]}</span>`;
+  tr.innerHTML=`<td>${String(r[0]).padStart(2,'0')}</td><td><b>${r[1]}</b></td><td>${r[2]}</td><td>${output}</td><td>${r[4]}</td>`;
+  tb.appendChild(tr);
+});
+
+/* ---------- footer date ---------- */
+document.getElementById('fdate').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+/* ---------- reveal on scroll ---------- */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ---------- progress bar ---------- */
+const prog=document.getElementById('progress');
+addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+
+/* ---------- TOC active state ---------- */
+const tocLinks=[...document.querySelectorAll('nav.toc a[href^="#"]')];
+const secObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+tocLinks.forEach(a=>{const t=document.querySelector(a.getAttribute('href'));if(t)secObs.observe(t)});
+
+/* ---------- hero starfield ---------- */
+(function(){
+  const c=document.getElementById('stars');if(!c)return;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ctx=c.getContext('2d');let stars=[],raf;
+  function size(){c.width=c.offsetWidth*devicePixelRatio;c.height=c.offsetHeight*devicePixelRatio;
+    stars=Array.from({length:90},()=>({x:Math.random()*c.width,y:Math.random()*c.height,
+      r:(Math.random()*1.1+.3)*devicePixelRatio,p:Math.random()*Math.PI*2,s:.006+Math.random()*.012}));}
+  function draw(t){ctx.clearRect(0,0,c.width,c.height);
+    for(const s of stars){const a=.18+.5*Math.abs(Math.sin(s.p+t*s.s));
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fillStyle=`rgba(212,190,140,${a})`;ctx.fill();}
+    raf=requestAnimationFrame(draw);}
+  size();addEventListener('resize',size,{passive:true});
+  if(reduced){draw(0);cancelAnimationFrame(raf);}else{raf=requestAnimationFrame(draw);}
+})();
+</script>
+</body>
+</html>
