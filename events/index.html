@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;family=Space+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/site.css" />
@@ -42,6 +42,7 @@
           <a href="https://discord.gg/MRESQnf4R4">Discord</a> (voice channels and Stage) or on
           Zoom. Always take the live link from the Discord event, not from
           bookmarks. Your browser shows the time in your local timezone.
+          <span class="tz-note" style="display:none"></span>
         </p>
         <div class="actions">
           <a class="button primary" href="https://discord.gg/MRESQnf4R4">Join a call</a>
@@ -166,52 +167,78 @@
 
       <script>
       (function() {
-        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        var tz;
+        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
         var now = new Date();
         var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+        // Build a UTC instant for "next <day> <HH:MM> in Europe/Berlin" from the
+        // Berlin wall-clock. Robust across DST and timezones:
+        //   1. guess with the offset Berlin has right now
+        //   2. correct by measuring what offset Berlin actually has at that instant
+        //   3. re-aim once more; converges because offsets change in steps
+        function nextBerlinInstant(dayIdx, hh, mm) {
+          var probe = new Date(now);
+          probe.setUTCDate(probe.getUTCDate() + ((dayIdx - probe.getUTCDay() + 7) % 7));
+          probe.setUTCHours(0, 0, 0, 0);
+
+          function berlinOffset(ms) {
+            var d = new Date(ms);
+            var dtf = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', hour12: false,
+              year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            var p = {}, parts = dtf.formatToParts(d);
+            for (var i = 0; i < parts.length; i++) p[parts[i].type] = parts[i].value;
+            var asUTC = Date.UTC(+p.year, +p.month - 1, +p.day, (+p.hour) % 24, +p.minute, +p.second);
+            return asUTC - d.getTime();
+          }
+
+          var target = Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth(), probe.getUTCDate(), hh, mm);
+          for (var i = 0; i < 3; i++) {
+            var off = berlinOffset(target);
+            target = Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth(), probe.getUTCDate(), hh, mm) - off;
+          }
+          // ensure strictly in the future (next occurrence; if today, use next week)
+          if (target <= now.getTime()) target += 7 * 86400000;
+          return target;
+        }
+
+        var fmt = null;
+        try {
+          fmt = new Intl.DateTimeFormat(undefined, { weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
+        } catch (e) {}
+
         var spans = document.querySelectorAll('.tz-convert');
+        var converted = 0;
         spans.forEach(function(el) {
           var eventDay = el.getAttribute('data-day');
           var eventTime = el.getAttribute('data-time');
-          var parts = eventTime.split(':');
-          var h = parseInt(parts[0], 10);
-          var m = parseInt(parts[1], 10);
+          var hh = parseInt(eventTime.split(':')[0], 10);
+          var mm = parseInt(eventTime.split(':')[1], 10);
+          var dayIdx = dayNames.indexOf(eventDay);
+          if (isNaN(hh) || isNaN(mm) || dayIdx === -1) return;
 
-          // Find next occurrence of this weekday
-          var today = now.getDay();
-          var targetDay = dayNames.indexOf(eventDay);
-          var daysUntil = (targetDay + 7 - today) % 7;
-          if (daysUntil === 0) daysUntil = 7;
-          var d = new Date(now);
-          d.setDate(d.getDate() + daysUntil);
-          d.setHours(h, m, 0, 0);
-
-          // Interpret as Europe/Berlin (CEST)
-          var berlinStr = d.toLocaleString('en-US', { timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit', hour12: false });
-          var berlinParts = berlinStr.split(':');
-          var berlinH = parseInt(berlinParts[0], 10);
-          var berlinM = parseInt(berlinParts[1], 10);
-          var localDate = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), berlinH, berlinM));
-
-          var localH = localDate.getUTCHours();
-          var localM = localDate.getUTCMinutes();
-          var localStr = localH.toString().padStart(2,'0') + ':' + localM.toString().padStart(2,'0');
-
-          // Detect day crossing
-          var nextDay = dayNames[(targetDay + 1) % 7].substring(0,3);
-          var prevDay = dayNames[(targetDay + 6) % 7].substring(0,3);
-          var hourDiff = berlinH - localH;
-          var dayShift = 0;
-          if (hourDiff < -12) dayShift = 1;
-          else if (hourDiff > 12) dayShift = -1;
-
-          var display = localStr;
-          if (dayShift === 1) display = nextDay + ' ' + localStr;
-          else if (dayShift === -1) display = prevDay + ' ' + localStr;
-
-          el.textContent = display;
-          el.title = tz;
+          try {
+            var when = new Date(nextBerlinInstant(dayIdx, hh, mm));
+            var label;
+            if (fmt) {
+              var p = {}, parts = fmt.formatToParts(when);
+              for (var i = 0; i < parts.length; i++) p[parts[i].type] = parts[i].value;
+              label = p.weekday + ' ' + p.hour + ':' + p.minute;
+            } else {
+              label = dayNames[when.getDay()].substring(0,3) + ' ' +
+                when.getHours().toString().padStart(2,'0') + ':' +
+                when.getMinutes().toString().padStart(2,'0');
+            }
+            el.textContent = label;
+            if (tz) el.title = tz;
+            converted++;
+          } catch (e) { /* leave the em-dash fallback */ }
         });
+
+        if (converted === 0) {
+          var t = document.querySelector('.tz-note');
+          if (t) { t.textContent = ' Times below are shown in Berlin time (CET/CEST).'; t.style.display = 'inline'; }
+        }
       })();
       </script>
 

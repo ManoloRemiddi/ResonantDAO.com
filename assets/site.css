@@ -1286,7 +1286,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   gap: 8px 18px;
   color: var(--muted);
   font-size: 0.95rem;
-  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 400;
 }
 .site-header .nav-links a {
   color: var(--text-soft);
