@@ -47,9 +47,9 @@
           human-AI collaboration.
         </p>
         <div class="paper-meta" aria-label="Whitepaper metadata">
-          <span>Version 0.5</span>
+          <span>Version 0.6</span>
           <span>Draft</span>
-          <span>2026-05-07</span>
+          <span>2026-08-30</span>
         </div>
       </section>
 
@@ -177,8 +177,10 @@
               Capital can help build an economy, but it should not automatically
               control it. ResonantDAO is designed so that governance power,
               rights, reputation, and economic participation are linked to
-              verified membership and contribution. Financial contribution can
-              matter in finance-related contexts, but it must not become general
+              verified membership and contribution. Committed capital, such as
+              locked liquidity or staked backing with a verifiable outcome, can
+              be recognized as contribution at governed low weight, but it
+              never counts toward voting weight and can never become general
               control of the DAO.
             </p>
 
@@ -208,7 +210,11 @@
               work together transparently. Human responsibility and human
               governance remain central. AI agents are part of the roadmap, but
               they are experimental in Phase 1 and should not receive human-only
-              governance rights.
+              governance rights. Work performed with a member's AI is
+              contribution: it earns measurement and <code>$RES</code> like any
+              verified outcome, but only the human-attributed portion of a
+              balance can ever count toward voting weight, so no amount of
+              capital deployed as AI can convert into governance power.
             </p>
           </section>
 
@@ -390,66 +396,48 @@
           <section id="rct">
             <h2>6. <code>$RCT</code> and Contribution Reputation</h2>
             <p>
-              <code>$RCT</code>, the Resonant Contribution Token, is the
-              top-layer contribution and reputation token. It is non-transferable
-              and cannot be bought, sold, or transferred.
+              Contribution in ResonantDAO is measured across
+              <strong>22 dimensions</strong>, named after the Major Arcana of
+              the Tarot: a generative map of how humans create value, from
+              building and teaching to care, research, conflict resolution, and
+              completion. The full specification lives in the
+              <a href="../contribution-economy/"
+                >Contribution Economy specification</a
+              >, which is the canonical source for the measurement model.
             </p>
             <p>
-              <code>$RCT</code> measures contribution. It is part of the DAO
-              co-ownership model because it helps determine recognition,
-              reputation, governance influence, eligibility, and future economic
-              participation.
+              Each member carries 22 non-transferable contribution balances,
+              <code>C_0</code> through <code>C_21</code>, one per dimension.
+              Every verified action is scored as a profile across those
+              dimensions, and the balances accumulate the verified results.
+              <code>$RCT</code>, the Resonant Contribution Token, is the
+              derived overall summary calculated from the normalized 22
+              balances. It is non-transferable and cannot be bought, sold, or
+              transferred. It is an approximate indicator, not an objectively
+              true measure, and it never replaces the detailed profile.
             </p>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Sector</th>
-                    <th>Example Token</th>
-                    <th>Tracks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Governance</td>
-                    <td><code>$REX-GOV</code></td>
-                    <td>Voting, proposals, policy work, governance discussion</td>
-                  </tr>
-                  <tr>
-                    <td>Financial</td>
-                    <td><code>$REX-FIN</code></td>
-                    <td>
-                      Treasury support, financial contribution, economic
-                      participation
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Community</td>
-                    <td><code>$REX-COM</code></td>
-                    <td>Support, onboarding, mentoring, moderation, care work</td>
-                  </tr>
-                  <tr>
-                    <td>Creative</td>
-                    <td><code>$REX-CRE</code></td>
-                    <td>Content, design, storytelling, art, documentation</td>
-                  </tr>
-                  <tr>
-                    <td>Technical / Development</td>
-                    <td><code>$REX-TEC</code></td>
-                    <td>Code, reviews, infrastructure, audits, ResonantOS work</td>
-                  </tr>
-                  <tr>
-                    <td>Education</td>
-                    <td><code>$REX-EDU</code></td>
-                    <td>Teaching, Academy content, learning support, workshops</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <p>
+              <code>$RCT</code> is part of the DAO co-ownership model because
+              it helps determine recognition, reputation, eligibility, and
+              future economic participation. Governance weight, however, is
+              computed from the <em>profile</em>, not from the scalar: each
+              governance question declares its salient dimensions, and weight
+              follows the member's verified balances in exactly those
+              dimensions.
+            </p>
+            <p>
+              Six familiar sector views (Governance, Financial, Community,
+              Creative, Technical, Education) remain available as optional
+              reporting projections for readability. They are calculated from
+              the 22-dimensional record and are not separate tokens, not the
+              source of truth, and cannot rewrite balances or
+              <code>$RCT</code>.
+            </p>
             <p>
               Contribution can also be organized into member levels. Levels are
-              not separate market tokens. They are reputation thresholds derived
-              from <code>$RCT</code>, sector contribution tokens, membership
+              not separate market tokens. They are reputation thresholds
+              derived from <code>$RCT</code> and the underlying
+              <code>C_0</code>&ndash;<code>C_21</code> balances, membership
               history, and validated activity. A simple example is that Level 5
               could become the first threshold for deeper DAO participation or
               future UCI eligibility.
@@ -459,11 +447,27 @@
           <section id="contribution">
             <h2>7. How Contribution Is Earned</h2>
             <p>
-              The contribution system will evolve over time. In the beginning,
-              members can earn rewards through simple participation: daily app
-              and website rewards, joining weekly calls, participating in
-              Discord, helping other members, contributing to ResonantOS
-              development, and creating add-ons.
+              The governing principle is simple:
+              <strong>contribution pays on outcome, never on activity.</strong>
+              Showing up does not pay; the verified result of showing up pays.
+              Attendance, message volume, and time spent are never rewarded as
+              such. Presence with a verified effect is: helping a member who
+              then continues, resolving a conflict both parties accept, teaching
+              that produces demonstrated competence. The full doctrine,
+              including how failed experiments, slow work, and inspiration
+              chains are recognized, is specified in the
+              <a href="../contribution-economy/">Contribution Economy
+              specification</a>.
+            </p>
+            <p>
+              In the beginning, members earn through verifiable outcomes:
+              shipping accepted add-ons, contributing to ResonantOS
+              development, teaching in the Academy, helping other members reach
+              real next steps, moderating, governance work, and marketplace
+              activity. Each verified action is scored across the 22 dimensions
+              and reviewed under tiered verification, from automatic checks for
+              deterministic events to independent human review for ambiguous,
+              relational, or high-impact work.
             </p>
             <p>
               As the DAO matures, contribution may be recorded through automatic
@@ -512,9 +516,14 @@
             </p>
             <p>
               Long term, governance influence should depend on verified
-              membership, contribution level, sector reputation, membership
-              tenure, recent activity, and human trust state. The governance
-              model is not "one token, one vote." It is contextual.
+              membership and the member's contribution profile across the 22
+              dimensions. Each governance question declares its salient
+              dimensions, and voting weight follows verified balances in
+              exactly those dimensions: an education decision draws on teaching
+              and discovery evidence, a dispute process on resolution and
+              fairness evidence. Committed capital and agent-performed work
+              never count toward voting weight. The governance model is not
+              "one token, one vote." It is contextual.
             </p>
           </section>
 
@@ -618,8 +627,9 @@
               Long term, UCI should be available to members or accounts that
               pass a defined contribution threshold. The exact threshold is not
               final, but an example could be eligibility after Level 5, with
-              distribution proportional to the amount and quality of contribution
-              reputation held by the account.
+              distribution proportional to the member's contribution profile.
+              UCI rules should not be finalized until the 22-dimensional
+              aggregation, normalization, and fairness rules are approved.
             </p>
             <p>
               UCI may be paid in <code>$RES</code>, Phase 2 tokens, treasury
@@ -724,10 +734,11 @@
             </p>
             <h3>Can financial contribution buy control of the DAO?</h3>
             <p>
-              No. Financial contribution can be recognized in finance-related
-              contexts, but general governance should be based on verified
-              membership, earned contribution, sector reputation, tenure, recent
-              activity, and trust.
+              No. Committed capital with a verifiable outcome can be
+              recognized as contribution at governed low weight, but never
+              toward voting power. General governance is based on verified
+              membership, earned contribution across the 22 dimensions, and the
+              human-attributed portion of a member's profile.
             </p>
             <h3>Is <code>$RES</code> tradable at launch?</h3>
             <p>
@@ -808,12 +819,22 @@
                 Final reward emissions, reward limits, and treasury spending
                 policy for <code>$RES</code>.
               </li>
-              <li>Final names and tickers for sector contribution tokens.</li>
+              <li>
+                Final on-chain representation of the 22 contribution balances
+                and <code>$RCT</code>: token, derived index, or attested
+                balance.
+              </li>
               <li>
                 Contribution validation rules for app activity, Discord, calls,
                 development, Academy, and marketplace work.
               </li>
-              <li>Anti-farming and anti-spam rules.</li>
+              <li>
+                Anti-farming and anti-capture rules; the baseline controls are
+                specified in the
+                <a href="../contribution-economy/"
+                  >Contribution Economy specification</a
+                >.
+              </li>
               <li>
                 Governance thresholds for proposal rights, voting rights, and
                 custodian eligibility.
