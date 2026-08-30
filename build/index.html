@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;family=Space+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../assets/site.css" />
@@ -164,5 +164,37 @@
       <a href="https://augmentedmind.substack.com/">Substack</a>
       <a href="https://discord.gg/MRESQnf4R4">Discord</a>
       <a href="https://augmentatism.com/">Augmentatism</a>
-    </footer>  </body>
+    </footer>
+    <script>
+      (function () {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!matchMedia('(hover: hover)').matches) return;
+        var dot = document.createElement('div');
+        dot.className = 'cursor-dot';
+        document.body.appendChild(dot);
+        var tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty;
+        addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; }, { passive: true });
+        (function loop() {
+          x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+          dot.style.left = x + 'px'; dot.style.top = y + 'px';
+          requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll('a, button, .check-item').forEach(function (el) {
+          el.addEventListener('mouseenter', function () { dot.classList.add('is-link'); });
+          el.addEventListener('mouseleave', function () { dot.classList.remove('is-link'); });
+        });
+        var btn = document.querySelector('.button.primary');
+        if (btn) {
+          var R = 90;
+          btn.style.transition = 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s';
+          addEventListener('mousemove', function (e) {
+            var r = btn.getBoundingClientRect();
+            var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+            if (Math.hypot(dx, dy) < R + r.width / 2) btn.style.transform = 'translate(' + dx * 0.15 + 'px,' + dy * 0.15 + 'px)';
+            else btn.style.transform = '';
+          }, { passive: true });
+        }
+      })();
+    </script>
+  </body>
 </html>
