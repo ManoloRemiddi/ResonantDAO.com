@@ -1257,7 +1257,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(95, 208, 160, 0.09);
   background: rgba(10, 25, 17, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -1267,7 +1267,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   font-weight: 500;
   white-space: nowrap;
   color: var(--jade);
-  font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   text-decoration: none;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1287,7 +1287,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--muted);
   font-size: 0.95rem;
   font-family: "Spectral", Georgia, serif;
-  font-weight: 400;
+  font-weight: 300;
+  letter-spacing: normal;
 }
 .site-header .nav-links a {
   color: var(--text-soft);
