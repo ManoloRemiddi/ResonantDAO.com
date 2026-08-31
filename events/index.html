@@ -38,10 +38,12 @@
           <span>Events</span><span class="gradient-text">&amp; calls</span>
         </h1>
         <p class="lead">
-          Ten recurring calls, every week. They happen on the
-          <a href="https://discord.gg/MRESQnf4R4">Discord</a> (voice channels and Stage) or on
-          Zoom. Always take the live link from the Discord event, not from
-          bookmarks. Your browser shows the time in your local timezone.
+          The live calendar below syncs from the community
+          <a href="https://discord.gg/MRESQnf4R4">Discord</a> event calendar, so
+          every dated session appears automatically — RSVP and join there.
+          Underneath, the weekly rhythm: ten recurring calls, on Discord
+          (voice and Stage) or on Zoom. Every time is shown in your own local
+          timezone.
           <span class="tz-note" style="display:none"></span>
         </p>
         <div class="actions">
@@ -52,7 +54,21 @@
         </div>
       </section>
 
+      <section class="section compact" id="live" hidden>
+        <p class="eyebrow">Synced from the Discord event calendar</p>
+        <h2>Upcoming live sessions</h2>
+        <p class="lead docs-lead" style="margin-bottom: 0;">
+          Concrete, dated events as published in Discord &mdash; times shown in
+          your local timezone<span id="tz-name"></span>. RSVP and join with the
+          button; Discord handles the rest.
+        </p>
+        <div class="event-cards" id="event-cards"></div>
+        <p class="feed-note" id="feed-note"></p>
+      </section>
+
       <section class="section compact">
+        <p class="eyebrow">The weekly rhythm</p>
+        <h2>Ten recurring calls, every week</h2>
         <article class="docs-page" style="max-width: none;">
           <div class="kb-table-wrap events-table-wrap">
           <table class="events-table">
@@ -160,10 +176,175 @@
 
       <section class="section compact">
         <div class="band">
-          <p>This page is a snapshot of the recurring schedule. For anything time-based, the live Discord event always wins.</p>
+          <p>The live sessions above sync automatically from the Discord event calendar; the weekly table is a snapshot of the recurring schedule. For anything time-based, the live Discord event always wins.</p>
           <a class="button primary small" href="https://discord.gg/MRESQnf4R4">Open the Discord</a>
         </div>
       </section>
+
+      <script>
+      // Discord-synced live sessions: render dated event cards with each
+      // visitor's local timezone (Intl.DateTimeFormat), from the sanitized
+      // feed committed by the GitHub Actions sync. Falls back silently:
+      // if the feed is missing, empty, or stale, the weekly table remains.
+      (function () {
+        var feed = document.getElementById('event-cards');
+        var section = document.getElementById('live');
+        var note = document.getElementById('feed-note');
+        if (!feed || !section || typeof fetch !== 'function') return;
+
+        fetch('discord-events.json', { cache: 'no-store' })
+          .then(function (res) {
+            if (!res.ok) throw new Error('feed ' + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            var events = (data && data.events) || [];
+            // keep live + upcoming events, soonest first
+            var nowMs = Date.now();
+            events = events.filter(function (ev) {
+              var end = ev.end ? Date.parse(ev.end) : (ev.start ? Date.parse(ev.start) + 36e5 : NaN);
+              return ev.id && ev.name && ev.start && !isNaN(end) && end >= nowMs - 15 * 6e4;
+            }).sort(function (a, b) {
+              return Date.parse(a.start) - Date.parse(b.start);
+            });
+            if (!events.length) return; // keep the section hidden, table only
+
+            var tzName = '';
+            try { tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+            var tzSpan = document.getElementById('tz-name');
+            if (tzSpan && tzName) tzSpan.textContent = ' (' + tzName + ')';
+
+            var dayFmt = new Intl.DateTimeFormat(undefined, { weekday: 'short' });
+            var dateFmt = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short' });
+            var timeFmt = new Intl.DateTimeFormat(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
+            var zoneFmt = new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' });
+            var zoneLabel = '';
+            try {
+              var parts = zoneFmt.formatToParts(new Date());
+              for (var i = 0; i < parts.length; i++) if (parts[i].type === 'timeZoneName') zoneLabel = parts[i].value;
+            } catch (e) {}
+
+            function truncate(text, max) {
+              if (!text) return '';
+              text = String(text).replace(/\s+/g, ' ').trim();
+              return text.length > max ? text.slice(0, max - 1).replace(/\s+\S*$/, '') + '\u2026' : text;
+            }
+
+            function el(tag, className, textContent) {
+              var node = document.createElement(tag);
+              if (className) node.className = className;
+              if (textContent !== undefined && textContent !== null) node.textContent = textContent;
+              return node;
+            }
+
+            // only ever link out to Discord itself
+            function safeUrl(url) {
+              return typeof url === 'string' && /^https:\/\/(discord\.com|discord\.app|discord\.gg)\//i.test(url) ? url : null;
+            }
+
+            function durationLabel(startMs, endMs) {
+              var mins = Math.round((endMs - startMs) / 6e4);
+              if (!mins || mins < 15) return '';
+              var h = Math.floor(mins / 60), m = mins % 60;
+              return (h ? h + ' h' : '') + (h && m ? ' ' : '') + (m ? m + ' min' : '');
+            }
+
+            function countdown(startMs) {
+              var diff = startMs - nowMs;
+              if (diff <= 0) return 'Live now';
+              var mins = Math.round(diff / 6e4);
+              if (mins < 60) return 'In ' + mins + ' min';
+              var hours = Math.round(mins / 60);
+              if (hours < 24) return 'In ' + hours + ' h';
+              var days = Math.round(hours / 24);
+              return 'In ' + days + (days === 1 ? ' day' : ' days');
+            }
+
+            events.forEach(function (ev) {
+              var startMs = Date.parse(ev.start);
+              var isLive = (ev.status === 'ACTIVE') || (ev.end && nowMs >= startMs && nowMs < Date.parse(ev.end));
+
+              var card = el('article', 'event-card');
+
+              if (ev.image && /^https:\/\/cdn\.discordapp\.com\//i.test(ev.image)) {
+                var img = el('img', 'event-card-cover');
+                img.src = ev.image;
+                img.alt = '';
+                img.loading = 'lazy';
+                // a cover that fails to load must not leave a gap: swap to
+                // the same gradient placeholder used for image-less events
+                img.addEventListener('error', function () {
+                  var ph = el('div', 'event-card-cover event-card-cover--placeholder');
+                  img.replaceWith(ph);
+                });
+                card.appendChild(img);
+              } else {
+                card.appendChild(el('div', 'event-card-cover event-card-cover--placeholder'));
+              }
+
+              var body = el('div', 'event-card-body');
+
+              var top = el('div', 'event-card-top');
+              top.appendChild(el('span', 'event-card-day',
+                dayFmt.format(new Date(startMs)) + ' \u00b7 ' + dateFmt.format(new Date(startMs))));
+              top.appendChild(el('span', 'event-card-count' + (isLive ? ' is-live' : ''),
+                isLive ? '\u25cf Live now' : countdown(startMs)));
+              body.appendChild(top);
+
+              var href = safeUrl(ev.url);
+
+              var heading = el('h3', 'event-card-heading');
+              var title = el('a', 'event-card-title', ev.name);
+              if (href) {
+                title.href = href;
+                title.target = '_blank';
+                title.rel = 'noopener';
+              }
+              heading.appendChild(title);
+              body.appendChild(heading);
+
+              if (ev.description) {
+                body.appendChild(el('p', 'event-card-desc', truncate(ev.description, 180)));
+              }
+
+              var meta = el('p', 'event-card-meta');
+              var endMs = ev.end ? Date.parse(ev.end) : NaN;
+              var time = el('time');
+              time.dateTime = ev.start;
+              time.textContent = timeFmt.format(new Date(startMs)) +
+                (!isNaN(endMs) && endMs > startMs ? ' \u2013 ' + timeFmt.format(new Date(endMs)) : '') +
+                (zoneLabel ? ' ' + zoneLabel : '');
+              time.title = new Date(startMs).toISOString();
+              meta.appendChild(el('span', 'event-card-time-icon', '\u23f0'));
+              meta.appendChild(time);
+              if (!isNaN(endMs) && endMs > startMs) {
+                var dur = durationLabel(startMs, endMs);
+                if (dur) meta.appendChild(el('span', 'event-card-dur', dur));
+              }
+              if (ev.location) meta.appendChild(el('span', 'event-card-where', truncate(ev.location, 40)));
+              body.appendChild(meta);
+
+              if (href) {
+                var cta = el('a', 'event-card-rsvp', isLive ? 'Join on Discord \u2192' : 'RSVP on Discord \u2192');
+                cta.href = href;
+                cta.target = '_blank';
+                cta.rel = 'noopener';
+                body.appendChild(cta);
+              }
+
+              card.appendChild(body);
+              feed.appendChild(card);
+            });
+
+            if (note && data.generated_at) {
+              note.textContent = 'Feed refreshed from Discord at ' +
+                new Date(data.generated_at).toLocaleString() + '.';
+            }
+            section.hidden = false;
+          })
+          .catch(function () { /* offline or missing feed: static table remains */ });
+      })();
+      </script>
 
       <script>
       (function() {
