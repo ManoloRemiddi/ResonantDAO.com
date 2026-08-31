@@ -40,13 +40,17 @@ jobs:
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           GUILD_ID: ${{ vars.DISCORD_GUILD_ID }}
-        run: python3 scripts/sync-discord-events.py events/discord-events.json
+        run: python3 scripts/sync-discord-events.py events/discord-events.json ${{ inputs.diagnose && '--diagnose' || '' }}
 
       - name: Commit the feed when it changed
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ ! -f events/discord-events.json ]; then
+            echo "::warning::no feed was written this run; leaving the repository untouched."
+            exit 0
+          fi
           git add events/discord-events.json
           # stage first, then diff the index: catches a brand-new untracked
           # feed on the very first run, which `git diff` alone would miss

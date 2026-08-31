@@ -25,6 +25,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -45,6 +46,13 @@ def fail(message: str) -> None:
 
 
 def http_get_scheduled_events(guild_id: str, token: str) -> list:
+    """Fetch scheduled events, honoring Discord's retry_after on 429.
+
+    GitHub Actions runners share outbound IPs, so Discord's per-IP limiter can
+    reject a request through no fault of this repo. Retry a few times, and
+    treat a still-limited result as a skipped tick rather than a broken deploy:
+    the previously synced feed stays in place and the page ignores past events.
+    """
     url = (
         f"https://discord.com/api/{API_VERSION}/guilds/{guild_id}/scheduled-events"
         "?with_user_count=true"
@@ -57,23 +65,52 @@ def http_get_scheduled_events(guild_id: str, token: str) -> list:
             "Accept": "application/json",
         },
     )
-    try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            payload = json.load(response)
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", "replace")[:300]
-        hints = {
-            401: "token is missing, revoked, or not a bot token (must start with 'Bot ' in header, raw token in the secret)",
-            403: "bot lacks access: is it a member of this guild, and does it have View Channels (and ideally Manage Events) permission?",
-            404: "guild not found: check GUILD_ID, or the bot is not in that guild",
-            429: "rate limited: retry later",
-        }
-        fail(f"Discord API returned HTTP {exc.code}. {hints.get(exc.code, '')} Body: {body}")
-    except urllib.error.URLError as exc:
-        fail(f"could not reach Discord API: {exc.reason}")
-    if not isinstance(payload, list):
-        fail(f"unexpected API payload type: {type(payload).__name__}")
-    return payload
+    attempts = 5
+    for attempt in range(1, attempts + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                payload = json.load(response)
+            if not isinstance(payload, list):
+                fail(f"unexpected API payload type: {type(payload).__name__}")
+            return payload
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", "replace")[:300]
+            if exc.code == 429:
+                if attempt < attempts:
+                    delay = 3.0
+                    match = re.search(r'"retry_after"\s*:\s*([0-9.]+)', body)
+                    if match:
+                        delay = max(2.0, float(match.group(1)) + 1.0)
+                    print(
+                        f"rate limited by Discord (attempt {attempt}/{attempts}); "
+                        f"waiting {delay:.1f}s",
+                        file=sys.stderr,
+                    )
+                    time.sleep(delay)
+                    continue
+                print(
+                    f"::warning::Discord rate limited this runner after {attempts} "
+                    "attempts; keeping the previously synced feed.",
+                    file=sys.stderr,
+                )
+                sys.exit(0)
+            hints = {
+                401: "token is missing, revoked, or not a bot token (must start with 'Bot ' in header, raw token in the secret)",
+                403: "bot lacks access: is it a member of this guild, and does it have View Channels (and ideally Manage Events) permission?",
+                404: "guild not found: check GUILD_ID, or the bot is not in that guild",
+            }
+            fail(f"Discord API returned HTTP {exc.code}. {hints.get(exc.code, '')} Body: {body}")
+        except urllib.error.URLError as exc:
+            if attempt < attempts:
+                print(
+                    f"network error ({exc.reason}); retrying in 3s "
+                    f"(attempt {attempt}/{attempts})",
+                    file=sys.stderr,
+                )
+                time.sleep(3)
+                continue
+            fail(f"could not reach Discord API: {exc.reason}")
+    fail("unreachable: exhausted fetch attempts")
 
 
 def image_url(event: dict) -> "str | None":
