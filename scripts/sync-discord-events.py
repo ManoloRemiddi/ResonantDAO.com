@@ -36,8 +36,45 @@ FEED_SCHEMA = "resonantdao/discord-events@1"
 DESCRIPTION_MAX = 500
 GRACE_PERIOD = timedelta(minutes=10)  # keep events that just ended
 
-ENTITY_TYPES = {1: "stage", 2: "voice", 3: "external"}
+ENTITY_KINDS_BY_INT = {1: "stage", 2: "voice", 3: "external"}
+ENTITY_KINDS_BY_NAME = {"STAGE_INSTANCE": "stage", "VOICE": "voice", "EXTERNAL": "external"}
+STATUS_BY_INT = {1: "SCHEDULED", 2: "ACTIVE", 3: "COMPLETED", 4: "CANCELLED"}
 KEEP_STATUSES = {"SCHEDULED", "ACTIVE"}
+
+
+def normalize_status(value):
+    """Discord's REST payloads send status as an int; some paths use the name."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return STATUS_BY_INT.get(value)
+    if isinstance(value, str):
+        upper = value.strip().upper()
+        return upper if upper in STATUS_BY_INT.values() else None
+    return None
+
+
+def normalize_kind(value):
+    if isinstance(value, bool):
+        return "external"
+    if isinstance(value, int):
+        return ENTITY_KINDS_BY_INT.get(value, "external")
+    if isinstance(value, str):
+        return ENTITY_KINDS_BY_NAME.get(value.strip().upper(), "external")
+    return "external"
+
+
+def normalize_privacy(value):
+    """2 / "GUILD_ONLY" is the only level these events can carry."""
+    if value is None:
+        return None  # absent: tolerate rather than drop everything
+    if isinstance(value, bool):
+        return "other"
+    if isinstance(value, int):
+        return "guild" if value == 2 else "other"
+    if isinstance(value, str):
+        return "guild" if value.strip().upper() == "GUILD_ONLY" else "other"
+    return "other"
 
 
 def fail(message: str) -> None:
@@ -152,16 +189,16 @@ def filter_event(event: dict, now: datetime) -> "tuple[dict | None, str | None]"
     if not isinstance(event, dict) or "id" not in event:
         return None, "record has no id"
 
-    status = event.get("status")
+    status = normalize_status(event.get("status"))
     if status not in KEEP_STATUSES:
-        return None, f"status={status!r} (kept: {sorted(KEEP_STATUSES)})"
+        return None, f"status={event.get('status')!r} -> {status!r} (kept: {sorted(KEEP_STATUSES)})"
 
-    # 2 = GUILD_ONLY, the only level Discord currently defines for these.
-    # Tolerate the field being absent rather than silently dropping every
-    # event; only an explicit non-guild value is rejected.
-    privacy = event.get("privacy_level")
-    if privacy is not None and privacy != 2:
-        return None, f"privacy_level={privacy!r}"
+    # GUILD_ONLY is the only privacy level these events can carry. Tolerate
+    # the field being absent rather than silently dropping every event; only an
+    # explicit non-guild value is rejected.
+    privacy = normalize_privacy(event.get("privacy_level"))
+    if privacy == "other":
+        return None, f"privacy_level={event.get('privacy_level')!r} is not guild-public"
 
     start = parse_discord_time(event.get("scheduled_start_time"))
     if start is None:
@@ -176,15 +213,13 @@ def filter_event(event: dict, now: datetime) -> "tuple[dict | None, str | None]"
         )
 
     entity_type = event.get("entity_type")
+    kind = normalize_kind(entity_type)
     location = None
     metadata = event.get("entity_metadata") or {}
     if isinstance(metadata, dict):
         location = metadata.get("location")
     if not location:
-        location = {
-            "stage": "Discord Stage",
-            "voice": "Discord voice",
-        }.get(ENTITY_TYPES.get(entity_type, "external"))
+        location = {"stage": "Discord Stage", "voice": "Discord voice"}.get(kind)
 
     return {
         "id": str(event["id"]),
@@ -194,7 +229,7 @@ def filter_event(event: dict, now: datetime) -> "tuple[dict | None, str | None]"
         "start": event.get("scheduled_start_time"),
         "end": event.get("scheduled_end_time"),
         "status": status,
-        "kind": ENTITY_TYPES.get(entity_type, "external"),
+        "kind": kind,
         "location": location,
         "interested": event.get("user_count") or 0,
     }, None
@@ -220,6 +255,28 @@ def build_feed(events: list, guild_id: str, now: datetime) -> dict:
     }
 
 
+def describe_recurrence(event: dict) -> str:
+    """Compact summary of Discord's recurrence_rule, for the diagnose log."""
+    rule = event.get("recurrence_rule")
+    if not isinstance(rule, dict) or not rule:
+        return "one-off"
+    frequency = rule.get("frequency")
+    names = {0: "NONE", 1: "DAILY", 2: "WEEKLY", 3: "MONTHLY"}
+    label = names.get(frequency, f"freq={frequency!r}")
+    parts = [f"{label} x{rule.get('interval', 1)}"]
+    if rule.get("by_weekday"):
+        parts.append(f"weekday={rule['by_weekday']}")
+    if rule.get("by_monthday"):
+        parts.append(f"monthday={rule['by_monthday']}")
+    end = rule.get("end")
+    if isinstance(end, dict):
+        parts.append(f"until={end.get('until') or end.get('count')}")
+    exceptions = event.get("guild_scheduled_event_exceptions")
+    if exceptions:
+        parts.append(f"exceptions={len(exceptions) if isinstance(exceptions, list) else '?'}")
+    return "recurring(" + " ".join(parts) + ")"
+
+
 def diagnose(events: list, now: datetime) -> None:
     """Log per-record keep/drop decisions. Public fields only, never secrets."""
     print(f"--- diagnose: {len(events)} raw record(s); now = {now.isoformat()} ---")
@@ -230,11 +287,15 @@ def diagnose(events: list, now: datetime) -> None:
             print(f"  DROP   non-object record: {event!r}")
             continue
         _, reason = filter_event(event, now)
-        name = str(event.get("name", ""))[:44]
+        name = str(event.get("name", ""))[:40]
+        detail = (
+            f"start={event.get('scheduled_start_time')} end={event.get('scheduled_end_time')} "
+            f"status={event.get('status')!r} {describe_recurrence(event)}"
+        )
         if reason is None:
-            print(f"  KEEP   {name!r} start={event.get('scheduled_start_time')}")
+            print(f"  KEEP   {name!r} {detail}")
         else:
-            print(f"  DROP   {name!r} -> {reason}")
+            print(f"  DROP   {name!r} -> {reason} | {detail}")
 
 
 def write_atomic(path: str, feed: dict) -> None:
