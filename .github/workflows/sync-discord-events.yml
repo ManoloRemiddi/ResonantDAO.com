@@ -12,6 +12,11 @@ on:
     # worst-case staleness under an hour including the Pages rebuild.
     - cron: "*/30 * * * *"
   workflow_dispatch:
+    inputs:
+      diagnose:
+        description: "Log why each Discord record was kept or dropped (public fields only)"
+        type: boolean
+        default: false
   push:
     paths:
       - "scripts/sync-discord-events.py"
