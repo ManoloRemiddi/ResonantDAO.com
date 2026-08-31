@@ -157,9 +157,11 @@ def image_url(event: dict) -> "str | None":
         return cover
     image_hash = event.get("image")
     if isinstance(image_hash, str) and image_hash:
+        # cards render ~300px wide; 512 stays sharp at 2x DPR and weighs a
+        # quarter of 1024
         return (
             f"https://cdn.discordapp.com/guild-events/{event['id']}/"
-            f"{image_hash}.png?size=1024"
+            f"{image_hash}.png?size=512"
         )
     return None
 
