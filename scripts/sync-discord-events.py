@@ -328,6 +328,36 @@ def main() -> None:
     if diagnose_mode:
         diagnose(raw_events, now)
     feed = build_feed(raw_events, guild_id, now)
+
+    # Avoid a commit on every cron tick: if the published set is unchanged,
+    # leave the file byte-identical so the workflow has nothing to push.
+    # RSVP counts (interested) change constantly and are excluded from the
+    # comparison; the file keeps its last written values for those.
+    if os.path.exists(output):
+        try:
+            with open(output, encoding="utf-8") as handle:
+                previous = json.load(handle)
+        except (OSError, ValueError):
+            previous = None
+        if (
+            isinstance(previous, dict)
+            and previous.get("guild_id") == guild_id
+            and previous.get("count") == feed["count"]
+            and [
+                {k: v for k, v in event.items() if k != "interested"}
+                for event in previous.get("events", [])
+            ]
+            == [
+                {k: v for k, v in event.items() if k != "interested"}
+                for event in feed["events"]
+            ]
+        ):
+            print(
+                f"feed unchanged ({feed['count']} event(s) same as the last "
+                "sync); leaving the file untouched."
+            )
+            return
+
     write_atomic(output, feed)
 
     print(
