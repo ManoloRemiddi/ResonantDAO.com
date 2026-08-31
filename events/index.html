@@ -55,8 +55,7 @@
         <p class="eyebrow">Synced from the Discord event calendar</p>
         <h2>Upcoming live sessions</h2>
         <p class="lead docs-lead" style="margin-bottom: 0;">
-          Concrete, dated events as published in Discord &mdash; times shown in
-          your local timezone<span id="tz-name"></span>. RSVP and join with the
+          Concrete, dated events as published in Discord. RSVP and join with the
           button; Discord handles the rest.
         </p>
         <div class="event-cards" id="event-cards"></div>
@@ -129,11 +128,6 @@
               return Date.parse(a.start) - Date.parse(b.start);
             });
             if (!events.length) return; // keep the section hidden
-
-            var tzName = '';
-            try { tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-            var tzSpan = document.getElementById('tz-name');
-            if (tzSpan && tzName) tzSpan.textContent = ' (' + tzName + ')';
 
             var dayFmt = new Intl.DateTimeFormat(undefined, { weekday: 'short' });
             var dateFmt = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short' });
