@@ -1,0 +1,23 @@
+<!-- ResonantDAO — website (resonantdao.com)
+     Copyright © 2026 Manolo Remiddi
+     SPDX-License-Identifier: MIT
+     License: MIT — see LICENSE at the repository root. -->
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10b981"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
+  <!-- stylised 'R' frost mark (Resonant/ResonantOS) -->
+  <path d="M19 48 L19 16 L31 16
+           C37 16 39 20 39 24
+           C39 28 37 32 31 32
+           L19 32
+           M31 32 L40 48"
+        fill="none" stroke="url(#g)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- spark / snow glint -->
+  <circle cx="48" cy="17" r="2.6" fill="#e7f8ef"/>
+</svg>
