@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Events | ResonantDAO — all 10 weekly calls</title>
-    <meta name="description" content="All 10 weekly calls of the ResonantDAO community: days, times in your local timezone, and descriptions. Learning, building, showcasing, and the Sunday Co-Op Engine." />
+    <meta name="description" content="Live events &amp; calls of the ResonantDAO community, synced from the Discord event calendar, with every time shown in your local timezone." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -41,10 +41,7 @@
           The live calendar below syncs from the community
           <a href="https://discord.gg/MRESQnf4R4">Discord</a> event calendar, so
           every dated session appears automatically — RSVP and join there.
-          Underneath, the weekly rhythm: ten recurring calls, on Discord
-          (voice and Stage) or on Zoom. Every time is shown in your own local
-          timezone.
-          <span class="tz-note" style="display:none"></span>
+          Every time is shown in your own local timezone.
         </p>
         <div class="actions">
           <a class="button primary" href="https://discord.gg/MRESQnf4R4">Join a call</a>
@@ -64,82 +61,6 @@
         </p>
         <div class="event-cards" id="event-cards"></div>
         <p class="feed-note" id="feed-note"></p>
-      </section>
-
-      <section class="section compact">
-        <p class="eyebrow">The weekly rhythm</p>
-        <h2>Ten recurring calls, every week</h2>
-        <article class="docs-page" style="max-width: none;">
-          <div class="kb-table-wrap events-table-wrap">
-          <table class="events-table">
-            <thead>
-              <tr><th>Day</th><th>Meeting</th><th>Your time</th><th>Where</th></tr>
-            </thead>
-            <tbody>
-          <tr>
-            <td class="td-day">Mon</td>
-            <td><strong>ResonantDAO Exploration &amp; Community Sync</strong><span class="meeting-desc">Explore &amp; shape the DAO · For anyone interested in the dao · Updates &rarr; discuss</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Monday" data-time="20:00">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-          <tr>
-            <td class="td-day">Mon</td>
-            <td><strong>ResonantOS &mdash; Tech Team Sync</strong><span class="meeting-desc">Coordinate technical development · For developers &amp; tech team · Coordinate &rarr; unblock</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Monday" data-time="21:30">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-          <tr>
-            <td class="td-day">Tue</td>
-            <td><strong>Resonant Academy</strong><span class="meeting-desc">Learn together through doing · For anyone who wants to learn/share · Share &rarr; learn &rarr; discuss</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Tuesday" data-time="20:00">&mdash;</span></td>
-            <td>Discord Stage</td>
-          </tr>
-          <tr>
-            <td class="td-day">Wed</td>
-            <td><strong>AI Stack</strong><span class="meeting-desc">Build your personal AI stack · For ai users &amp; builders · Advise and discuss</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Wednesday" data-time="19:00">&mdash;</span></td>
-            <td>Discord Stage</td>
-          </tr>
-          <tr>
-            <td class="td-day">Wed</td>
-            <td><strong>Creative Lab &mdash; ResonantDAO</strong><span class="meeting-desc">Make &amp; develop creative work · For artists · Explore and make</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Wednesday" data-time="20:00">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-          <tr>
-            <td class="td-day">Wed</td>
-            <td><strong>ResonantOS Coding Academy</strong><span class="meeting-desc">Learn AI-assisted coding · For beginners &amp; aspiring developers · Build &rarr; troubleshoot &rarr; Q&amp;A</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Wednesday" data-time="22:00">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-          <tr>
-            <td class="td-day">Thu</td>
-            <td><strong>Bridge</strong><span class="meeting-desc">Connect across regions · For global community · Updates &rarr; connect &rarr; discuss</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Thursday" data-time="13:00">&mdash;</span></td>
-            <td>Discord voice</td>
-          </tr>
-          <tr>
-            <td class="td-day">Thu</td>
-            <td><strong>Augmented Minds</strong><span class="meeting-desc">Explore human &amp; community questions · For curious minds &amp; community members · Think &rarr; discuss</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Thursday" data-time="20:00">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-          <tr>
-            <td class="td-day">Fri</td>
-            <td><strong>Friday Automation &mdash; Showcase Your Project</strong><span class="meeting-desc">Showcase &amp; develop automation projects · For automation builders · Showcase</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Friday" data-time="20:00">&mdash;</span></td>
-            <td>Discord Stage</td>
-          </tr>
-          <tr>
-            <td class="td-day">Sun</td>
-            <td><strong>The Resonant Co-Op Engine</strong><span class="meeting-desc">Connect ideas, skills &amp; projects · For builders &amp; collaborators · Collaborate and share</span></td>
-            <td class="td-tz"><span class="tz-convert" data-day="Sunday" data-time="22:00">&mdash;</span></td>
-            <td>Zoom</td>
-          </tr>
-            </tbody>
-          </table>
-          </div>
-        </article>
       </section>
 
       <section class="section" id="first">
@@ -185,7 +106,7 @@
       // Discord-synced live sessions: render dated event cards with each
       // visitor's local timezone (Intl.DateTimeFormat), from the sanitized
       // feed committed by the GitHub Actions sync. Falls back silently:
-      // if the feed is missing, empty, or stale, the weekly table remains.
+      // if the feed is missing, empty, or stale, the section stays hidden.
       (function () {
         var feed = document.getElementById('event-cards');
         var section = document.getElementById('live');
@@ -207,7 +128,7 @@
             }).sort(function (a, b) {
               return Date.parse(a.start) - Date.parse(b.start);
             });
-            if (!events.length) return; // keep the section hidden, table only
+            if (!events.length) return; // keep the section hidden
 
             var tzName = '';
             try { tzName = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
@@ -342,84 +263,7 @@
             }
             section.hidden = false;
           })
-          .catch(function () { /* offline or missing feed: static table remains */ });
-      })();
-      </script>
-
-      <script>
-      (function() {
-        var tz;
-        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
-        var now = new Date();
-        var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-        // Build a UTC instant for "next <day> <HH:MM> in Europe/Berlin" from the
-        // Berlin wall-clock. Robust across DST and timezones:
-        //   1. guess with the offset Berlin has right now
-        //   2. correct by measuring what offset Berlin actually has at that instant
-        //   3. re-aim once more; converges because offsets change in steps
-        function nextBerlinInstant(dayIdx, hh, mm) {
-          var probe = new Date(now);
-          probe.setUTCDate(probe.getUTCDate() + ((dayIdx - probe.getUTCDay() + 7) % 7));
-          probe.setUTCHours(0, 0, 0, 0);
-
-          function berlinOffset(ms) {
-            var d = new Date(ms);
-            var dtf = new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', hour12: false,
-              year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            var p = {}, parts = dtf.formatToParts(d);
-            for (var i = 0; i < parts.length; i++) p[parts[i].type] = parts[i].value;
-            var asUTC = Date.UTC(+p.year, +p.month - 1, +p.day, (+p.hour) % 24, +p.minute, +p.second);
-            return asUTC - d.getTime();
-          }
-
-          var target = Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth(), probe.getUTCDate(), hh, mm);
-          for (var i = 0; i < 3; i++) {
-            var off = berlinOffset(target);
-            target = Date.UTC(probe.getUTCFullYear(), probe.getUTCMonth(), probe.getUTCDate(), hh, mm) - off;
-          }
-          // ensure strictly in the future (next occurrence; if today, use next week)
-          if (target <= now.getTime()) target += 7 * 86400000;
-          return target;
-        }
-
-        var fmt = null;
-        try {
-          fmt = new Intl.DateTimeFormat(undefined, { weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false });
-        } catch (e) {}
-
-        var spans = document.querySelectorAll('.tz-convert');
-        var converted = 0;
-        spans.forEach(function(el) {
-          var eventDay = el.getAttribute('data-day');
-          var eventTime = el.getAttribute('data-time');
-          var hh = parseInt(eventTime.split(':')[0], 10);
-          var mm = parseInt(eventTime.split(':')[1], 10);
-          var dayIdx = dayNames.indexOf(eventDay);
-          if (isNaN(hh) || isNaN(mm) || dayIdx === -1) return;
-
-          try {
-            var when = new Date(nextBerlinInstant(dayIdx, hh, mm));
-            var label;
-            if (fmt) {
-              var p = {}, parts = fmt.formatToParts(when);
-              for (var i = 0; i < parts.length; i++) p[parts[i].type] = parts[i].value;
-              label = p.weekday + ' ' + p.hour + ':' + p.minute;
-            } else {
-              label = dayNames[when.getDay()].substring(0,3) + ' ' +
-                when.getHours().toString().padStart(2,'0') + ':' +
-                when.getMinutes().toString().padStart(2,'0');
-            }
-            el.textContent = label;
-            if (tz) el.title = tz;
-            converted++;
-          } catch (e) { /* leave the em-dash fallback */ }
-        });
-
-        if (converted === 0) {
-          var t = document.querySelector('.tz-note');
-          if (t) { t.textContent = ' Times below are shown in Berlin time (CET/CEST).'; t.style.display = 'inline'; }
-        }
+          .catch(function () { /* offline or missing feed: section stays hidden */ });
       })();
       </script>
 

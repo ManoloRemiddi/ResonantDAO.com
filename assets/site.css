@@ -815,16 +815,6 @@ p {
 .explore-list .exp-sub { display: block; font-weight: 400; font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
 .explore-list .exp-arrow { color: var(--muted); font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.9rem; }
 
-/* Events page */
-.events-table-wrap { border: none; }
-.events-table { width: 100%; border-collapse: collapse; }
-.events-table th { text-align: left; padding: 12px 8px; font-size: 0.85rem; color: var(--muted-foreground); font-weight: 600; border-bottom: 1px solid var(--border); }
-.events-table td { padding: 14px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
-.events-table tbody tr:last-child td { border-bottom: none; }
-.events-table .td-day { font-weight: 600; color: var(--muted-foreground); font-size: 0.9rem; width: 64px; }
-.events-table .td-tz { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--muted-foreground); font-size: 0.95rem; }
-.events-table .td-tz:hover { color: var(--foreground); cursor: help; }
-.events-table .meeting-desc { display: block; font-size: 0.85rem; color: var(--muted-foreground); margin-top: 2px; line-height: 1.4; max-width: 340px; }
 .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-top: 6px; }
 .track-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem; line-height: 1.35; }
 .track-card strong { color: var(--foreground); }
@@ -973,9 +963,6 @@ body::before {
 .inline-link:hover, .docs-page a:hover { color: var(--amber); }
 
 /* tables */
-.events-table th { color: var(--muted); border-bottom-color: var(--line); }
-.events-table td { border-bottom-color: var(--line); }
-.events-table .td-tz { color: var(--jade); }
 .docs-page th { background: rgba(95, 208, 160, 0.06); }
 .docs-page code { color: var(--jade); background: rgba(95, 208, 160, 0.08); }
 .docs-page blockquote { border-left-color: var(--jade); background: rgba(95, 208, 160, 0.07); }
