@@ -1,35 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-01T17:11:07Z",
+  "generated_at": "2026-09-01T20:03:26Z",
   "guild_id": "1423225702135894111",
   "count": 12,
   "events": [
-    {
-      "id": "1519313296652505198",
-      "name": "🚀 Member Onboarding: Get Connected",
-      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
-      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-09-01T17:45:00+00:00",
-      "end": null,
-      "status": "SCHEDULED",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 14,
-      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
-    },
-    {
-      "id": "1519306427737313330",
-      "name": "Resonant Academy",
-      "description": "We learn from one another. We learn through doing.",
-      "image": "https://cdn.discordapp.com/guild-events/1519306427737313330/a323bd3611accde0936c8081731f3540.png?size=512",
-      "start": "2026-09-01T18:00:00+00:00",
-      "end": "2026-09-01T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 47,
-      "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
-    },
     {
       "id": "1519366696559972352",
       "name": "AI Stack",
@@ -42,6 +16,19 @@
       "location": "Discord voice",
       "interested": 48,
       "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
+    },
+    {
+      "id": "1519313296652505198",
+      "name": "🚀 Member Onboarding: Get Connected",
+      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
+      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
+      "start": "2026-09-02T17:45:00+00:00",
+      "end": null,
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 14,
+      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
     },
     {
       "id": "1519308543310823494",
@@ -159,6 +146,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 18,
       "url": "https://discord.com/events/1423225702135894111/1519304056504320151"
+    },
+    {
+      "id": "1519306427737313330",
+      "name": "Resonant Academy",
+      "description": "We learn from one another. We learn through doing.",
+      "image": "https://cdn.discordapp.com/guild-events/1519306427737313330/a323bd3611accde0936c8081731f3540.png?size=512",
+      "start": "2026-09-08T18:00:00+00:00",
+      "end": "2026-09-08T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 47,
+      "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     }
   ]
 }
