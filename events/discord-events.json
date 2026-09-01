@@ -1,6 +1,6 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-08-31T22:36:18Z",
+  "generated_at": "2026-09-01T17:11:07Z",
   "guild_id": "1423225702135894111",
   "count": 12,
   "events": [
@@ -23,10 +23,10 @@
       "description": "We learn from one another. We learn through doing.",
       "image": "https://cdn.discordapp.com/guild-events/1519306427737313330/a323bd3611accde0936c8081731f3540.png?size=512",
       "start": "2026-09-01T18:00:00+00:00",
-      "end": null,
+      "end": "2026-09-01T20:00:00+00:00",
       "status": "SCHEDULED",
-      "kind": "stage",
-      "location": "Discord Stage",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 47,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     },
@@ -144,7 +144,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 15,
+      "interested": 16,
       "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
     },
     {
