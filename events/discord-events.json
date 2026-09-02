@@ -1,35 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-02T17:58:56Z",
+  "generated_at": "2026-09-02T20:56:38Z",
   "guild_id": "1423225702135894111",
   "count": 12,
   "events": [
-    {
-      "id": "1519366696559972352",
-      "name": "AI Stack",
-      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
-      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
-      "start": "2026-09-02T17:00:00+00:00",
-      "end": "2026-09-02T19:00:00+00:00",
-      "status": "ACTIVE",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 50,
-      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
-    },
-    {
-      "id": "1519308543310823494",
-      "name": "Creative Lab — ResonantDAO",
-      "description": "Making things alone is hard. Creative Lab is where the creatives and artists of ResonantDAO come together to do the work, not talk about it, but actually make. Bring your ideas, your half-finished projects, your stuck pieces. Share what you're exploring, get real feedback, support others, and build things together. No agendas, no deliverables, just creative time among people who get it. This isn't about tech or AI. It's about craft, expression, and the human side of making. We learn together, p…",
-      "image": "https://cdn.discordapp.com/guild-events/1519308543310823494/5fcbbdc4ec26892cfc85b3b5e1d36788.png?size=512",
-      "start": "2026-09-02T18:00:00+00:00",
-      "end": "2026-09-02T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 21,
-      "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
-    },
     {
       "id": "1524014529049133137",
       "name": "ResonantOS Coding Academy",
@@ -37,7 +11,7 @@
       "image": "https://cdn.discordapp.com/guild-events/1524014529049133137/69582da0e8801594185cb96cc49cc202.png?size=512",
       "start": "2026-09-02T20:00:00+00:00",
       "end": "2026-09-02T21:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 20,
@@ -159,6 +133,32 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 48,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
+    },
+    {
+      "id": "1519366696559972352",
+      "name": "AI Stack",
+      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
+      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
+      "start": "2026-09-09T17:00:00+00:00",
+      "end": "2026-09-09T19:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 50,
+      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
+    },
+    {
+      "id": "1519308543310823494",
+      "name": "Creative Lab — ResonantDAO",
+      "description": "Making things alone is hard. Creative Lab is where the creatives and artists of ResonantDAO come together to do the work, not talk about it, but actually make. Bring your ideas, your half-finished projects, your stuck pieces. Share what you're exploring, get real feedback, support others, and build things together. No agendas, no deliverables, just creative time among people who get it. This isn't about tech or AI. It's about craft, expression, and the human side of making. We learn together, p…",
+      "image": "https://cdn.discordapp.com/guild-events/1519308543310823494/5fcbbdc4ec26892cfc85b3b5e1d36788.png?size=512",
+      "start": "2026-09-09T18:00:00+00:00",
+      "end": "2026-09-09T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 21,
+      "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
     }
   ]
 }
