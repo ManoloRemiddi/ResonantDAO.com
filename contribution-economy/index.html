@@ -130,6 +130,7 @@ td b{color:var(--ink);font-weight:500}
 .lifecycle .st{background:var(--paper);border:1px solid var(--border-soft);border-radius:99px;padding:.34rem .8rem;white-space:nowrap;color:var(--ink-dim)}
 .lifecycle .st.hot{border-color:var(--amber);color:var(--amber)}
 .lifecycle .arr{color:var(--faint)}
+@media(max-width:48rem){.lifecycle .st{white-space:normal;text-align:center;line-height:1.5}}
 
 ol.mech{counter-reset:m;list-style:none;margin:1.6rem 0}
 ol.mech li{counter-increment:m;position:relative;padding:0 0 1.5rem 3.2rem}
@@ -151,6 +152,27 @@ footer{border-top:1px solid var(--border-soft);margin-top:5rem;padding:3rem 1.4r
   border:1px solid var(--border-soft);border-radius:99px;padding:.3rem .7rem;background:var(--paper)}
 .mtoc a:hover{color:var(--gold);border-color:var(--border)}
 @media(min-width:66rem){.mtoc{display:none}}
+
+/* ---------- worked examples ---------- */
+.ex{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:1.7rem 1.8rem 1.5rem;margin:2.4rem 0}
+.ex-top{display:flex;justify-content:space-between;align-items:baseline;gap:.4rem 1.2rem;flex-wrap:wrap;margin-bottom:1rem}
+.ex-num{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber)}
+.ex-dims{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:var(--gold);text-align:right}
+.ex h4{margin:.1rem 0 .8rem;font-size:1.45rem}
+.ex p{color:var(--ink-dim)}
+.ex .ex-scene{color:var(--ink)}
+.ex-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:1.2rem 0 0}
+@media(max-width:42rem){.ex-cols{grid-template-columns:1fr}}
+.ex-k{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.ex-cols p{font-size:.9rem;line-height:1.6;color:var(--muted);margin:0}
+ul.ex-read{list-style:none;margin:1.2rem 0 0;padding:0}
+ul.ex-read li{padding:.75rem 0;border-top:1px dashed var(--border-soft);font-size:.95rem;line-height:1.65;color:var(--ink-dim)}
+ul.ex-read li:first-child{border-top:0;padding-top:.2rem}
+ul.ex-read b{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-l)}
+.ex-pay{display:block;margin-top:.35rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--gold)}
+.ex-vec-cap{margin:1.3rem 0 .4rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:1.7}
+.ex .tbl-wrap{margin:0}
+.ex table{min-width:0;font-size:.8rem}
 
 /* ---------- ResonantDAO site header (theme-adapted) ---------- */
 .site-header{position:sticky;top:0;z-index:70;width:100%;min-height:64px;
@@ -222,6 +244,7 @@ footer{border-top:1px solid var(--border-soft);margin-top:5rem;padding:3rem 1.4r
   <a href="#why22-lock" class="toc-sub">Design hypothesis</a>
   <a href="#ontology">3 · Contribution ontology</a>
   <a href="#ontology-grid" class="toc-sub">The 22 classes</a>
+  <a href="#ontology-examples" class="toc-sub">Worked examples</a>
   <a href="#payment">4 · The reward engine</a>
   <a href="#payment-table" class="toc-sub">Trigger, rule, guard</a>
   <a href="#payment-human" class="toc-sub">Governed parameters</a>
@@ -336,6 +359,127 @@ footer{border-top:1px solid var(--border-soft);margin-top:5rem;padding:3rem 1.4r
   <div class="axis-note rv" id="ontology-grid" style="margin-top:3rem;font-size:.78rem;color:var(--ink-dim)">The 22 classes · imagery: Rider-Waite 1909, public domain</div>
   <p class="rv" style="font-size:.95rem;font-style:italic;color:var(--ink);max-width:var(--measure);margin:-0.5rem 0 1.5rem">A note on the imagery. The card images are the Rider-Waite deck, drawn in 1909 by Pamela Colman Smith (of Jamaican-American-British heritage) and published in London, and are used because they are the most widely recognized rendering of the 22 archetypes and are in the public domain. The figures reflect the conventions of their time and place, and the lack of diversity in them is understood and regretted. The dimensions are the map, not the pictures: any faithful rendering of the 22 archetypes could serve the same measurement.</p>
   <div class="grid" id="cardgrid"></div>
+
+  <div style="max-width:var(--measure);margin-top:3.6rem">
+    <h3 class="rv" id="ontology-examples">Worked examples: how real actions read</h3>
+    <p class="rv">The 22 are read together, not as a menu. A real action usually lights several of them at once, each with its own evidence, its own boundary test, and its own timing. The examples below are composite scenarios — typical community actions, not named members — showing how one action becomes a sparse profile: which dimensions fire, on what evidence, what pays and when, and what is deliberately not credited. Dimension intensities are illustrative; the real scale is a pending governed parameter (Appendix A.8), and every real record would also carry the full explanation record (Appendix A.9).</p>
+    <p class="rv">Each example also shows what does <em>not</em> get credit, and why: a neighboring dimension that stays dark, or an input that never pays. That is where the boundaries do their work.</p>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 1</span><span class="ex-dims">C_3 Empress · C_5 Hierophant · C_2 Priestess</span></div>
+      <h4>Onboarding a newcomer</h4>
+      <p class="ex-scene">Newcomer B joins the DAO. Member A takes B on: a first week of setup help, a small task done side by side, and a written "how we do things here" doc that A publishes to the wiki. Two months later, B ships their first accepted contribution in their own area and stays active.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The onboarding doc (artifact hash, attributed); B's accepted contribution (verified outcome); B's continued engagement (beneficiary-side signal); A's claim, with timeline.</p></div>
+        <div><span class="ex-k">What does not pay</span><p>A's hours, messages, and attendance. Inputs are never the outcome. B's entry itself is recorded as a Fool event at <code>C_0 = 0</code> — a verified zero, not a gap.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_3 · Empress — Nurturing</b><br>A created the conditions in which B's growth was possible. What pays is B's growth: the nurture multiplier, a percentage of the enabled member's accepted output over a bounded window, capped per mentee.
+          <span class="ex-pay">Pays → on B's enabled growth · cycle-gated · Tier 2 review (relational work, beneficiary-side evidence)</span></li>
+        <li><b>C_5 · Hierophant — Teaching</b><br>B demonstrated competence: shipped accepted work in the area A taught. Teaching is credited for demonstrated ability in another member, never for lectures given or attendance.
+          <span class="ex-pay">Pays → on demonstrated competence · continuous · Tier 1 (strong artifact evidence)</span></li>
+        <li><b>C_2 · Priestess — Recording</b><br>The "how we do things" doc is a durable record: indexed, attributed, findable.
+          <span class="ex-pay">Pays → base credit on publication · usage bonus on each real retrieval</span></li>
+      </ul>
+      <div class="ex-vec-cap">Example 1 as the ledger would hold it. The other eighteen dimensions are null — no evidence either way — not zero, and null never decays into zero. The intensities are illustrative until calibration (Appendix A.8) and do not need to sum to one.</div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Dim</th><th>Class</th><th>Intensity</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>C_0</td><td><b>Fool</b> — B's entry</td><td>0 (verified zero)</td><td>Entry event, one identity record. Deliberate named exception, not a gap.</td></tr>
+          <tr><td>C_2</td><td><b>Priestess</b> — onboarding doc</td><td>0.20</td><td>Base credit on publication; usage bonuses accrue on later retrieval.</td></tr>
+          <tr><td>C_3</td><td><b>Empress</b> — B's growth</td><td>0.50</td><td>Pending → settles at the cycle (nurture multiplier, per-mentee cap).</td></tr>
+          <tr><td>C_5</td><td><b>Hierophant</b> — B's competence</td><td>0.30</td><td>On demonstrated competence, evidenced by B's accepted work.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 2</span><span class="ex-dims">C_2 Priestess · C_1 Magician</span></div>
+      <h4>The guide that got cited</h4>
+      <p class="ex-scene">Member C writes a deployment guide for the DAO's tooling and publishes it to the wiki with attribution. Three weeks later, two other members follow it to deploy the tool, and one of them cites it in a governance proposal.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The wiki record (hash, attribution); the two follow-on deployments, each verifiably following the guide; the governance proposal citing it.</p></div>
+        <div><span class="ex-k">What does not pay</span><p>View counts alone, drafts, or time spent writing. And the guide is not teaching by itself: Hierophant would fire only when a person demonstrates competence because of it, as in Example 1.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_2 · Priestess — Recording</b><br>A durable record, findable and attributable. Base credit on publication, plus a usage bonus on each real consultation: the two follow-on deployments and the proposal citation are three verified retrievals.
+          <span class="ex-pay">Pays → base on publication · usage bonus per real retrieval · continuous</span></li>
+        <li><b>C_1 · Magician — Building</b><br>The guide is a real, accepted artifact: the team uses it.
+          <span class="ex-pay">Pays → delivery bounty on acceptance, sized by scope · never on submission</span></li>
+      </ul>
+      <p class="rv" style="font-size:.9rem">Guard: the usage bonus pays on real retrieval, not volume — C cannot farm it by re-reading their own doc — and a spam floor with a minimum quality gate applies.</p>
+    </div>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 3</span><span class="ex-dims">C_8 Strength · C_18 Moon</span></div>
+      <h4>The Discord truce</h4>
+      <p class="ex-scene">Members D and E fall out over how a shared budget should be spent, and the dispute stalls two workstreams. F, who has no stake in either position, takes it on: F pulls the actual usage data, checks E's claim about the numbers, and proposes a split both can live with. D and E both accept it in writing.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The dispute thread; the usage data; E's claim and the check that resolved it; the written resolution; acceptance by both parties.</p></div>
+        <div><span class="ex-k">What does not pay</span><p>F's time listening, or which side F leaned toward. The credit lives in the closed dispute and the verified claim, not in the diplomacy.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_8 · Strength — Resolving</b><br>A live dispute closes with both parties accepting the resolution. A resolution token, sized by dispute severity.
+          <span class="ex-pay">Pays → on both-parties acceptance · Tier 2 review · resolver must be a non-party (checked) · no payout if F manufactured or prolonged the dispute · one party's silence is not acceptance</span></li>
+        <li><b>C_18 · Moon — Verifying</b><br>E's claim about the numbers was a pending claim; the data check resolved it, confirmed or refuted. A verification token per completed check, paid either way.
+          <span class="ex-pay">Pays → per verified claim, regardless of direction · accuracy tracked over time: a verifier must be right more than chance</span></li>
+      </ul>
+    </div>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 4</span><span class="ex-dims">C_9 Hermit · C_12 Hanged Man</span></div>
+      <h4>The deep dive that changed a decision</h4>
+      <p class="ex-scene">Member G takes a timeboxed three-month inquiry into the DAO's staking model — the not-yet-known, deliberately. The result is negative: the model G was asked to validate does not scale past a hundred validators. G writes it up, and the community re-reads the whole staking question from that finding. At the next vote, the direction changes.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The timeboxed inquiry with declared milestones; the delivered finding; the community's reframe; the vote that changed direction (a real decision, not a mood).</p></div>
+        <div><span class="ex-k">What does not pay</span><p>Three months as such — research length earns nothing, adoption earns. And a reframe that ends in no decision pays nothing: reflection theater is the named guard.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_9 · Hermit — Discovering</b><br>New understanding, delivered, and its direction adopted by a real decision: the deep-work bounty at declared milestones, plus the adoption bonus when the finding steers a vote.
+          <span class="ex-pay">Pays → on adoption and steering, not length · cycle-gated (settles when the cycle containing the decision closes)</span></li>
+        <li><b>C_12 · Hanged Man — Re-seeing</b><br>G's writeup reframes how the community sees the problem — a deliberate pause and re-seeing, not an ending — and the reframe changes a real decision.
+          <span class="ex-pay">Pays → on decision-changed · never on pause duration</span></li>
+      </ul>
+      <p class="rv" style="font-size:.9rem">Boundary: G entered territory no one had worked — that first step is a Fool crossing, not a Hermit finding. Mapping a route others can walk is a crossing; delivering understanding is a finding.</p>
+    </div>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 5</span><span class="ex-dims">C_13 Death · C_2 Priestess</span></div>
+      <h4>The sunset</h4>
+      <p class="ex-scene">The community decides an old moderation bot has outlived its use. Member H runs the closure: the bot's last six months of behavior are written up as a learnings record in the wiki, its hosting and budget are released back to the treasury, and a short closing note goes out.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The learnings record (a Priestess record); verified resource release (hosting down, budget returned); the closing note.</p></div>
+        <div><span class="ex-k">What does not pay</span><p>The sentiment of the closing note. And abandonment is not closure: a bot simply left running, with no one to call it closed, pays nothing.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_13 · Death — Ending</b><br>A chosen ending, done cleanly. A closure token to the one who ends it.
+          <span class="ex-pay">Pays → on the completed closure ritual · requires the Priestess record, learning captured, verified resource release</span></li>
+        <li><b>C_2 · Priestess — Recording</b><br>The learnings record is credited on its own terms, independently of the closure.
+          <span class="ex-pay">Pays → base on publication · usage bonus when the lesson is later retrieved</span></li>
+      </ul>
+      <p class="rv" style="font-size:.9rem">Boundary: this is a chosen ending of a part — not the Tower (an unplanned collapse, which pays response and stabilization) and not the World (the successful completion of the whole).</p>
+    </div>
+
+    <div class="ex rv">
+      <div class="ex-top"><span class="ex-num">Worked example 6</span><span class="ex-dims">C_16 Tower · C_18 Moon · C_15 Devil</span></div>
+      <h4>The duplicate payouts</h4>
+      <p class="ex-scene">A misconfigured bounty rule starts paying the same submission twice. Member I notices the spike, verifies the signal is real, and stabilizes: the rule is stopped, the duplicate payments are identified and reversed, and a written incident note is filed. Two months later, J's audit traces the root cause to an incentive vector in the config: the rule was written so one team could double-claim their own submissions. Governance validates the finding.</p>
+      <div class="ex-cols">
+        <div><span class="ex-k">Evidence</span><p>The payment spike; I's verification that it is a true incident and not manipulation or a false alarm; the stabilization (rule stopped, payments reversed, incident note); J's audit; governance validation.</p></div>
+        <div><span class="ex-k">What does not pay</span><p>I's vigilance as such, or merely spotting the spike — the response pays, the incident never does. And J's suspicion before validation: exposure pays on validated truth, not on the nerve of naming.</p></div>
+      </div>
+      <ul class="ex-read">
+        <li><b>C_16 · Tower — Responding</b><br>The collapse signal fires and is verified as truth; I's stabilization is the response. A crisis token, sized by severity.
+          <span class="ex-pay">Pays → on stabilization · trigger verified as truth rather than manipulation · nobody profits from causing — or merely spotting — the collapse</span></li>
+        <li><b>C_18 · Moon — Verifying</b><br>The check that the spike was a true incident and not manipulation or a false alarm.
+          <span class="ex-pay">Pays → per completed check, regardless of which way it lands</span></li>
+        <li><b>C_15 · Devil — Exposing</b><br>J names an incentive distortion and governance validates it as real. The integrity bounty, deliberately among the largest payouts in the system.
+          <span class="ex-pay">Pays → on validated exposure, independent of and unblockable by the accused · manufactured accusations penalize the accuser</span></li>
+      </ul>
+    </div>
+
+    <p class="rv">Six composite actions, twelve different dimensions active, and not one single score anywhere. In a system that counts only tasks or hours, these six actions would be six labels: "helped," "wrote a doc," "argued," "researched," "cleaned up," "fixed." The 22-dimensional record keeps all of that visible at once, and keeps each dimension payable on its own evidence and its own timing. The remaining ten light up on other everyday actions — the Chariot's milestone inside a campaign, the Emperor's adopted rule change, the Lovers' joint build, the Wheel's bounty season, the Justice audit, the Temperance-held health band, the Star's orientation, the Sun's public recognition, the Judgement's end-of-cycle reckoning, and the World's completed whole — and the completeness test in Section 5 is how the community checks, against real actions, whether the map has any dark corners.</p>
+  </div>
 </section>
 
 <!-- ================= 4 REWARD ENGINE ================= -->
