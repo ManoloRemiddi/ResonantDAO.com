@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>The Long Night · A Worked Example · ResonantDAO Contribution Economy</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="description" content="One ten-week community story, mapped across all 22 contribution dimensions. A slide presentation of the ResonantDAO Contribution Economy in action.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1a12; --bg2:#102417; --paper:#12291b; --paper2:#16301f;
+  --ink:#e4efe4; --ink-dim:#c9dcc9; --muted:#8fae97; --faint:#5c7a66;
+  --gold:#5fd0a0; --gold-soft:#4db387; --gold-dim:rgba(95,208,160,.14);
+  --amber:#e8a84c; --amber-l:#d9a559; --amber-dim:rgba(232,168,76,.15);
+  --border:rgba(95,208,160,.16); --border-soft:rgba(95,208,160,.09);
+  --serif:'Fraunces',Georgia,serif;
+  --body:'Spectral',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:300;
+  font-size:1.05rem;line-height:1.6;overflow:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold-dim);color:var(--gold)}
+
+#bar{position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
+  background:linear-gradient(90deg,var(--gold-soft),var(--gold));transition:width .45s ease}
+
+.chrome{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;
+  padding:.95rem 1.6rem;z-index:70;pointer-events:none;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
+.chrome a{color:var(--muted);text-decoration:none;pointer-events:auto}
+.chrome a:hover{color:var(--gold)}
+#count{position:fixed;right:1.6rem;bottom:1.05rem;z-index:70;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--faint)}
+#hint{position:fixed;left:1.6rem;bottom:1.05rem;z-index:70;transition:opacity 1.2s;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+#hint.dim{opacity:0}
+
+.deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:5.2rem 6vw 4.8rem;opacity:0;transform:translateY(16px);
+  transition:opacity .55s ease,transform .55s ease;pointer-events:none;overflow:auto}
+.slide.active{opacity:1;transform:none;pointer-events:auto}
+
+.eyebrow{font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.7rem,6vw,4.8rem);line-height:1.05;letter-spacing:-.015em}
+h1 em{font-style:italic;color:var(--amber);font-weight:400}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:.9rem}
+.lead{max-width:56rem;color:var(--ink-dim);font-size:clamp(1rem,1.35vw,1.2rem);line-height:1.65}
+.beat{max-width:52rem;color:var(--muted);font-size:clamp(.95rem,1.2vw,1.1rem);margin-top:-.3rem}
+.fine{margin-top:1.5rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);line-height:2}
+a{color:var(--gold)}
+
+/* ---------- title slide ---------- */
+.title-slide{align-items:center;text-align:center}
+.title-card{width:118px;border-radius:6px;margin-bottom:2.2rem;transform:rotate(-3.5deg);
+  box-shadow:0 24px 70px -18px rgba(0,0,0,.85),0 0 0 1px var(--border)}
+.title-slide .lead{margin:1.6rem auto 0}
+.title-meta{margin-top:2.4rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.title-meta b{color:var(--amber);font-weight:400}
+.title-sub{margin-top:2.8rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* ---------- cast ---------- */
+.cast{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem;margin-top:1.8rem}
+.person{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:1.1rem 1.2rem 1.15rem}
+.person b{font-family:var(--serif);font-size:1.28rem;font-weight:600}
+.person .role{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:.28rem 0 .5rem}
+.person p{font-size:.86rem;color:var(--muted);line-height:1.5}
+
+/* ---------- timeline ---------- */
+.acts{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:1.9rem}
+.act{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:1rem 1.05rem 1.1rem}
+.act .an{font-family:var(--mono);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber)}
+.act .aw{font-family:var(--mono);font-size:.62rem;color:var(--faint);margin:.22rem 0 .5rem}
+.act h3{font-family:var(--serif);font-size:1.22rem;font-weight:600;margin-bottom:.35rem}
+.act p{font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* ---------- contrast ---------- */
+.miss{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:1.7rem}
+.miss>div{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:1.15rem 1.2rem 1.1rem}
+.miss .kicker{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.miss .big{font-family:var(--mono);font-size:.98rem;line-height:1.75;color:var(--ink);margin:.5rem 0 .7rem}
+.miss .big em{font-style:normal;color:var(--faint)}
+.miss .score{font-family:var(--serif);font-size:2.1rem;font-weight:500;color:var(--ink);margin:.2rem 0 .35rem}
+.miss .score small{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.12em;margin-left:.4rem}
+.miss .gone{font-size:.85rem;color:var(--muted);line-height:1.55}
+.miss .gone b{color:var(--amber-l);font-weight:500}
+.concl{margin-top:1.6rem;background:var(--paper);border:1px solid var(--border);border-radius:10px;
+  padding:1.1rem 1.4rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.6vw,1.35rem);line-height:1.55;color:var(--ink)}
+
+/* ---------- principles ---------- */
+ol.mech{list-style:none;counter-reset:sec;margin-top:1.4rem;display:grid;gap:.7rem}
+ol.mech li{counter-increment:sec;display:flex;gap:1.2rem;align-items:baseline;padding:1rem 1.3rem;
+  background:var(--paper);border:1px solid var(--border-soft);border-radius:10px}
+ol.mech li::before{content:counter(sec,upper-roman) "·";font-family:var(--mono);font-size:.78rem;color:var(--amber);min-width:2.2rem}
+ol.mech p{color:var(--ink-dim);font-size:.98rem;line-height:1.55}
+ol.mech p b{color:var(--ink);font-weight:500}
+
+/* ---------- dimension tiles ---------- */
+.t-grid{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin-top:1.6rem}
+.t-grid.dense{grid-template-columns:repeat(6,minmax(0,1fr));gap:.6rem;margin-top:1.4rem}
+.tile{display:flex;background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;min-height:7.4rem}
+.tile img{width:4.3rem;object-fit:cover;opacity:.92}
+.tile-b{padding:.75rem .85rem .7rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.t-name{font-family:var(--serif);font-weight:600;font-size:1rem;line-height:1.12}
+.t-name .n{font-family:var(--mono);font-size:.6rem;font-weight:400;color:var(--amber);letter-spacing:.08em;margin-right:.45rem}
+.t-mom{font-size:.8rem;line-height:1.48;color:var(--ink-dim);flex:1}
+.chip{align-self:flex-start;font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.26rem .5rem;border-radius:4px;white-space:nowrap}
+.chip.g{background:var(--gold-dim);color:var(--gold)}
+.chip.a{background:var(--amber-dim);color:var(--amber)}
+.chip.n{background:rgba(143,174,151,.12);color:var(--muted)}
+.t-grid.dense .tile{min-height:6.3rem}
+.t-grid.dense img{width:3.3rem}
+.t-grid.dense .t-name{font-size:.85rem}
+.t-grid.dense .t-mom{font-size:.68rem;line-height:1.4}
+.t-grid.dense .chip{font-size:.52rem}
+.tile.note{flex-direction:column;justify-content:center;padding:.9rem 1rem;background:var(--paper2)}
+.tile.note p{font-size:.72rem;line-height:1.5;color:var(--muted)}
+.tile.note .kicker{font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+
+/* ---------- null beat ---------- */
+.nullbeat{margin-top:1.4rem;background:linear-gradient(180deg,rgba(232,168,76,.07),rgba(232,168,76,.015));
+  border:1px solid rgba(232,168,76,.4);border-radius:10px;padding:1.35rem 1.6rem}
+.nullbeat .kicker{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem}
+.nullbeat p{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,1.7vw,1.38rem);line-height:1.55;color:var(--ink)}
+.nullbeat p b{color:var(--amber);font-weight:500;font-style:normal}
+
+/* ---------- two-column closing slides ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.7rem}
+.split>div{background:var(--paper);border:1px solid var(--border-soft);border-radius:10px;padding:1.3rem 1.4rem}
+.split .kicker{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.split p{font-size:.95rem;line-height:1.6;color:var(--ink-dim)}
+.split p b{color:var(--ink);font-weight:500}
+.split .good{border-color:var(--border)}
+.split .good .kicker{color:var(--gold)}
+
+/* ---------- close slide ---------- */
+.close-slide{align-items:center;text-align:center}
+.close-card{width:104px;border-radius:6px;margin-bottom:2rem;transform:rotate(3deg);
+  box-shadow:0 24px 70px -18px rgba(0,0,0,.85),0 0 0 1px var(--border)}
+.close-slide h2{font-size:clamp(2.1rem,4.6vw,3.6rem);margin-bottom:1.2rem}
+.close-slide .lead{margin:0 auto}
+.close-cta{margin-top:2.6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase}
+.close-cta a{text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:.3rem}
+.close-cta a:hover{border-color:var(--gold);color:#8fe6c0}
+
+/* ---------- responsive ---------- */
+@media(max-width:70rem){
+  .cast{grid-template-columns:repeat(2,1fr)}
+  .acts{grid-template-columns:repeat(2,1fr)}
+  .miss{grid-template-columns:1fr}
+  .t-grid{grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+  .t-grid.dense{grid-template-columns:repeat(4,1fr)}
+  .split{grid-template-columns:1fr}
+}
+@media(max-width:46rem){
+  .cast{grid-template-columns:1fr}
+  .t-grid.dense{grid-template-columns:repeat(2,1fr)}
+  .slide{padding:4.6rem 6vw 4.4rem}
+}
+
+/* ---------- print: one slide per page ---------- */
+@media print{
+  body{overflow:visible}
+  .deck{position:static}
+  .slide{position:static;opacity:1;transform:none;pointer-events:auto;min-height:100vh;
+    page-break-after:always;overflow:hidden}
+  .chrome,#count,#hint,#bar{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+<div class="chrome">
+  <span>ResonantDAO · Contribution Economy</span>
+  <a href="../">The 22 · full specification</a>
+</div>
+
+<div class="deck">
+
+  <!-- ============ 1 · TITLE ============ -->
+  <section class="slide title-slide">
+    <img class="title-card" src="../img/RWS_Tarot_00_Fool.jpg" alt="The Fool">
+    <div class="eyebrow">A worked example · in slides</div>
+    <h1>The Long <em>Night</em></h1>
+    <p class="lead">One community story. Ten weeks. Six people.<br>
+    Mapped across all 22 contribution dimensions — with no single score anywhere.</p>
+    <div class="title-meta"><b>build</b> · burnout · incident · care · reckoning · return</div>
+    <div class="title-sub">ResonantDAO · Contribution Economy · the 22 in action</div>
+  </section>
+
+  <!-- ============ 2 · THE STORY ============ -->
+  <section class="slide">
+    <div class="eyebrow">The story in one breath</div>
+    <h2>What happened in ten weeks</h2>
+    <p class="lead">Ari and Lena build the community's payout engine and launch it on a campaign. In week seven the engine double-pays a bounty pool — and Ari, who had been running it on nothing, goes dark. For two weeks a small group keeps the community running, stops the bleeding, and quietly looks after Ari. The audit that follows finds the rule had let the engine team self-approve its own bounties. The community pauses, re-looks, changes the rule, and settles its books. Then v2 ships — with Ari back in it.</p>
+    <p class="beat">One story. Six people. Twenty-two dimensions — every one of them earned by evidence, none of them by hours.</p>
+    <div class="fine">A composite story — real-shaped, not a real incident. The point is the measurement, not the people.</div>
+  </section>
+
+  <!-- ============ 3 · THE CAST ============ -->
+  <section class="slide">
+    <div class="eyebrow">Six people, one community</div>
+    <h2>The cast</h2>
+    <div class="cast">
+      <div class="person"><b>Ari</b><span class="role">the engineer</span><p>Built the engine. Burned out in week seven. Returned in week nine.</p></div>
+      <div class="person"><b>Lena</b><span class="role">co-builder</span><p>Built it with Ari. The first to notice what was happening.</p></div>
+      <div class="person"><b>Kofi</b><span class="role">the newcomer</span><p>Joined in week one. Mentored by Lena. Shipped the tool that stopped the bleeding.</p></div>
+      <div class="person"><b>Sana</b><span class="role">the analyst</span><p>Ran the root-cause deep dive. Mediated a dispute she was not a party to.</p></div>
+      <div class="person"><b>Rook</b><span class="role">the auditor</span><p>Verified the claim from the data. Named the flaw out loud.</p></div>
+      <div class="person"><b>Petra</b><span class="role">the operator</span><p>Kept the season turning through the crisis. Stopped the bleeding.</p></div>
+    </div>
+    <div class="fine">Every role is a role the community already has. The framework measures what they did — not who they are.</div>
+  </section>
+
+  <!-- ============ 4 · TIMELINE ============ -->
+  <section class="slide">
+    <div class="eyebrow">Ten weeks, five acts</div>
+    <h2>The shape of the story</h2>
+    <p class="beat">The acts follow the weeks, not the cards. The cards will come, one by one.</p>
+    <div class="acts">
+      <div class="act"><div class="an">Act I</div><div class="aw">weeks 1–5</div><h3>The build</h3><p>The engine is made, the newcomer is mentored, the season keeps turning.</p></div>
+      <div class="act"><div class="an">Act II</div><div class="aw">week 7</div><h3>The collapse</h3><p>The double payment. The silence. The care that has no deliverable.</p></div>
+      <div class="act"><div class="an">Act III</div><div class="aw">week 8</div><h3>The truth</h3><p>The data speaks. The flaw is named. The dispute closes.</p></div>
+      <div class="act"><div class="an">Act IV</div><div class="aw">week 9</div><h3>The reckoning</h3><p>The reframe. The new rule. The audit. The retirement.</p></div>
+      <div class="act"><div class="an">Act V</div><div class="aw">weeks 9–10</div><h3>The return</h3><p>The books settle. The engine ships. The story goes public.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 5 · CONTRAST ============ -->
+  <section class="slide">
+    <div class="eyebrow">The contrast</div>
+    <h2>What the other systems record of this story</h2>
+    <div class="miss">
+      <div>
+        <div class="kicker">An hours log</div>
+        <div class="big">Ari <em>612h</em> · Lena <em>401h</em><br>Kofi <em>240h</em> · Sana <em>210h</em><br>Rook <em>96h</em> · Petra <em>88h</em></div>
+        <p class="gone">The care: <b>uncounted</b>. The reframe: <b>uncounted</b>. The exposure: <b>uncounted</b>.</p>
+      </div>
+      <div>
+        <div class="kicker">A task counter</div>
+        <div class="big">41 tickets closed<br>1 incident resolved<br>2 releases shipped</div>
+        <p class="gone">The dispute that nearly split the team: <b>zero tickets</b>. The pause that saved it: <b>no ticket</b>.</p>
+      </div>
+      <div>
+        <div class="kicker">A single score</div>
+        <div class="score">6,214<small>points</small></div>
+        <p class="gone">One number. A leaderboard turns caring into a race — and the profile is gone.</p>
+      </div>
+    </div>
+    <div class="concl">Same story, three records — and in all three, the part that held the community together is not in the record.</div>
+  </section>
+
+  <!-- ============ 6 · PRINCIPLES ============ -->
+  <section class="slide">
+    <div class="eyebrow">The rules of the reading</div>
+    <h2>What the 22 do instead</h2>
+    <ol class="mech">
+      <li><p><b>One action, a sparse profile.</b> An action can light several dimensions at once; the intensities need not sum to one.</p></li>
+      <li><p><b>Credit only on evidence.</b> A dimension is credited when the action and its outcome support it — never because the card sounds right.</p></li>
+      <li><p><b>null is not zero.</b> Unmeasured is recorded as null, and null never decays into zero. When the system cannot yet measure, the debt is the system's — not the member's.</p></li>
+      <li><p><b>Outcome pays, activity never does.</b> Hours, messages, attendance: never. The effect they produced: yes.</p></li>
+      <li><p><b>Every credit carries a guard, a tier, and a timing.</b> Continuous, cycle-gated, or settled late — and a third party can recompute any one of them.</p></li>
+    </ol>
+    <div class="fine">The names come from the 22 Major Arcana — a 350-year-old map of action. The measurement is ours; the vocabulary is borrowed.</div>
+  </section>
+
+  <!-- ============ 7 · ACT I ============ -->
+  <section class="slide">
+    <div class="eyebrow">Act I · weeks 1–5</div>
+    <h2>The build</h2>
+    <p class="beat">The engine is made. A newcomer is mentored. The season keeps turning.</p>
+    <div class="t-grid">
+      <div class="tile"><img src="../img/RWS_Tarot_01_Magician.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">01</span>The Magician</div><div class="t-mom">The payout engine, v1: shipped, and accepted by the community that runs it.</div><span class="chip g">paid on acceptance</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_06_Lovers.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">06</span>The Lovers</div><div class="t-mom">Ari and Lena, one union: a joint artifact neither could have shipped alone. Split by the ratio declared at the start.</div><span class="chip g">shared pool · declared ratio</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_07_Chariot.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">07</span>The Chariot</div><div class="t-mom">The launch campaign, inside the declared timebox. The milestone is reached.</div><span class="chip g">milestone bounty</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_02_High_Priestess.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">02</span>The High Priestess</div><div class="t-mom">The architecture doc: indexed, attributed, findable.</div><span class="chip g">base + usage</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_03_Empress.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">03</span>The Empress</div><div class="t-mom">Lena takes Kofi on: setup, the first task, work done side by side.</div><span class="chip a">gated → settles at the cycle</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_10_Wheel_of_Fortune.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">10</span>The Wheel</div><div class="t-mom">The bounty season keeps turning around all of it.</div><span class="chip n">recorded · retainer at cycle end</span></div></div>
+    </div>
+    <div class="fine">Kofi's entry is logged as a verified zero — C_0 = 0. A threshold, not yet a path. The Fool will be paid in Act V, on the return.</div>
+  </section>
+
+  <!-- ============ 8 · ACT II ============ -->
+  <section class="slide">
+    <div class="eyebrow">Act II · week 7</div>
+    <h2>The collapse</h2>
+    <p class="beat">The engine double-pays a bounty pool. Ari goes dark.</p>
+    <div class="t-grid" style="grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))">
+      <div class="tile"><img src="../img/RWS_Tarot_16_Tower.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">16</span>The Tower</div><div class="t-mom">The incident: Petra stops the rule, Kofi's script reverses the duplicates, the note is filed. The response pays — the incident never does.</div><span class="chip g">crisis token · on stabilization</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_07_Chariot.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">07</span>The Chariot</div><div class="t-mom">The campaign's milestone is paid — reduced by the verified harm of the double payment.</div><span class="chip a">net of verified harm</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_03_Empress.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">03</span>The Empress</div><div class="t-mom">Lena and Petra meet Ari: check-ins, cover, presence. No deliverable. No hours logged.</div><span class="chip a">pending · unmeasured</span></div></div>
+    </div>
+    <div class="nullbeat">
+      <div class="kicker">What the record says · week 7</div>
+      <p>Empress is <b>null</b>. The care happened; the system could not yet measure it. Null is not zero — and null never decays into zero. The debt is the system's, not the caregiver's. In Act V this line settles late, back-dated to this week.</p>
+    </div>
+  </section>
+
+  <!-- ============ 9 · ACT III ============ -->
+  <section class="slide">
+    <div class="eyebrow">Act III · week 8</div>
+    <h2>The truth</h2>
+    <p class="beat">The data speaks. The flaw is named. The dispute closes.</p>
+    <div class="t-grid">
+      <div class="tile"><img src="../img/RWS_Tarot_18_Moon.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">18</span>The Moon</div><div class="t-mom">Rook verifies the claim from the payment data: the pool was double-paid. The check is paid either way it lands.</div><span class="chip g">per check · either way</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_15_Devil.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">15</span>The Devil</div><div class="t-mom">The root cause: the rule let the engine team self-approve its own bounties. Rook names it; governance validates. Paid unblockable by the accused.</div><span class="chip g">integrity bounty</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_08_Strength.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">08</span>Strength</div><div class="t-mom">Hotfix or rewrite — Ari and Lena disagree. Sana, a non-party, closes it: stop the bleeding, then rewrite. Both accept, in writing.</div><span class="chip g">resolution token</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_09_Hermit.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">09</span>The Hermit</div><div class="t-mom">Sana's timeboxed root-cause analysis, delivered: the vector, and the pace failure behind it.</div><span class="chip a">adoption bonus · at cycle</span></div></div>
+    </div>
+    <div class="fine">Rook holds two balances from the same audit. One person, several dimensions — that is what a profile is.</div>
+  </section>
+
+  <!-- ============ 10 · ACT IV ============ -->
+  <section class="slide">
+    <div class="eyebrow">Act IV · week 9</div>
+    <h2>The reckoning</h2>
+    <p class="beat">The reframe. The new rule. The audit. The retirement.</p>
+    <div class="t-grid">
+      <div class="tile"><img src="../img/RWS_Tarot_12_Hanged_Man.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">12</span>The Hanged Man</div><div class="t-mom">Ari, after the pause, in writing: "we measured output, not health." The community re-reads the pace question — and the rule changes.</div><span class="chip g">paid on decision-changed</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_04_Emperor.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">04</span>The Emperor</div><div class="t-mom">The sustainable-pace rule, and the end of self-approval: adopted through governance, the builders recused.</div><span class="chip n">C_4 accrual</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_11_Justice.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">11</span>Justice</div><div class="t-mom">The cycle audit finds what was under-measured: the care. The calibration changes.</div><span class="chip g">fixed review comp</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_13_Death.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">13</span>Death</div><div class="t-mom">The self-approval rule, formally retired: learnings archived, resources released. Not abandonment — closure.</div><span class="chip g">closure token</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_10_Wheel_of_Fortune.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">10</span>The Wheel</div><div class="t-mom">The season through the crisis completes on schedule, with coverage: paid on the cycle being fair, not merely on time.</div><span class="chip a">retainer · fair cycle</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 11 · ACT V ============ -->
+  <section class="slide">
+    <div class="eyebrow">Act V · weeks 9–10</div>
+    <h2>The return</h2>
+    <p class="beat">The books settle. The engine ships. The story goes public.</p>
+    <div class="t-grid">
+      <div class="tile"><img src="../img/RWS_Tarot_20_Judgement.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">20</span>Judgement</div><div class="t-mom">The cycle is called. The care settles late — back-dated to week seven. Nothing settles without the Justice calibration.</div><span class="chip a">settled late · back-dated</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_05_Hierophant.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">05</span>The Hierophant</div><div class="t-mom">Kofi's reversal tool, accepted and used in the incident — and the seed of v2's reconciliation. Competence, demonstrated.</div><span class="chip g">paid on competence</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_00_Fool.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">00</span>The Fool</div><div class="t-mom">Ari returns. The first step of v2 opens a path others follow: a crossing, not an entry.</div><span class="chip g">paid · re-entry crossing</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_14_Temperance.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">14</span>Temperance</div><div class="t-mom">The pace metric, held in range for a full period after the rule change. Paid on the state held, with stall detection.</div><span class="chip a">retainer · state held</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_21_World.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">21</span>The World</div><div class="t-mom">v2, end-to-end: scope, quality, adoption, closure — four corners verified. It seeds the next cycle: the Fool pool, entry reopened.</div><span class="chip a">completion + next seed</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_19_Sun.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">19</span>The Sun</div><div class="t-mom">The return, made public with full attribution. Recognition tied to the verified record.</div><span class="chip g">recognition token</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_17_Star.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">17</span>The Star</div><div class="t-mom">The Long Night, written up, becomes orientation: the next intake cites it. Paid on the effect, not the publication.</div><span class="chip a">orientation effect</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 12 · THE FULL LEDGER ============ -->
+  <section class="slide">
+    <div class="eyebrow">The reveal</div>
+    <h2>The whole story, twenty-two tiles</h2>
+    <div class="t-grid dense">
+      <div class="tile"><img src="../img/RWS_Tarot_00_Fool.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">00</span>The Fool</div><div class="t-mom">Kofi enters (0) · Ari's return opens the path</div><span class="chip g">0 + paid crossing</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_01_Magician.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">01</span>The Magician</div><div class="t-mom">the engine, shipped and accepted</div><span class="chip g">paid on acceptance</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_02_High_Priestess.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">02</span>The High Priestess</div><div class="t-mom">the doc · the incident record · the learnings</div><span class="chip g">base + usage</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_03_Empress.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">03</span>The Empress</div><div class="t-mom">Kofi mentored · Ari cared for</div><span class="chip a">at cycle · settled late</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_04_Emperor.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">04</span>The Emperor</div><div class="t-mom">the pace rule, adopted, builders recused</div><span class="chip n">C_4 accrual</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_05_Hierophant.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">05</span>The Hierophant</div><div class="t-mom">Kofi's tool, accepted and used</div><span class="chip g">paid on competence</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_06_Lovers.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">06</span>The Lovers</div><div class="t-mom">one union, a declared split</div><span class="chip g">shared pool</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_07_Chariot.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">07</span>The Chariot</div><div class="t-mom">the milestone, net of harm</div><span class="chip a">reduced by harm</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_08_Strength.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">08</span>Strength</div><div class="t-mom">the fix dispute, closed by a non-party</div><span class="chip g">both accept</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_09_Hermit.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">09</span>The Hermit</div><div class="t-mom">the root cause, delivered</div><span class="chip a">adoption · at cycle</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_10_Wheel_of_Fortune.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">10</span>The Wheel</div><div class="t-mom">the season, kept turning</div><span class="chip a">retainer · fair</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_11_Justice.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">11</span>Justice</div><div class="t-mom">the audit that found the gap</div><span class="chip g">review comp</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_12_Hanged_Man.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">12</span>The Hanged Man</div><div class="t-mom">the reframe that changed the rule</div><span class="chip g">decision-changed</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_13_Death.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">13</span>Death</div><div class="t-mom">the flawed rule, retired cleanly</div><span class="chip g">closure token</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_14_Temperance.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">14</span>Temperance</div><div class="t-mom">the pace band, held in range</div><span class="chip a">state held</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_15_Devil.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">15</span>The Devil</div><div class="t-mom">the vector, named and validated</div><span class="chip g">integrity bounty</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_16_Tower.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">16</span>The Tower</div><div class="t-mom">the double payment, stopped</div><span class="chip g">on response</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_17_Star.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">17</span>The Star</div><div class="t-mom">the story, made orientation</div><span class="chip a">orientation effect</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_18_Moon.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">18</span>The Moon</div><div class="t-mom">the claim, verified either way</div><span class="chip g">per check</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_19_Sun.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">19</span>The Sun</div><div class="t-mom">the return, made public</div><span class="chip g">recognition</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_20_Judgement.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">20</span>Judgement</div><div class="t-mom">the cycle settled, care back-dated</div><span class="chip a">settled late</span></div></div>
+      <div class="tile"><img src="../img/RWS_Tarot_21_World.jpg" alt=""><div class="tile-b"><div class="t-name"><span class="n">21</span>The World</div><div class="t-mom">v2 end-to-end, the next seed</div><span class="chip a">completion + seed</span></div></div>
+      <div class="tile note"><div class="kicker">The chips</div><p><b style="color:var(--gold)">gold</b> — paid or settled<br><b style="color:var(--amber)">amber</b> — gated, at cycle or late<br><b style="color:var(--muted)">gray</b> — accrual only, no $RES</p></div>
+      <div class="tile note"><div class="kicker">The shape</div><p>26 records · 22 dimensions · 6 people · 10 weeks. No single score, no leaderboard. Every line recomputable from its evidence.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 13 · WHY NO OTHER MAP ============ -->
+  <section class="slide">
+    <div class="eyebrow">The point of the exercise</div>
+    <h2>Why this story could not be mapped any other way</h2>
+    <div class="split">
+      <div>
+        <div class="kicker">A single score says</div>
+        <p><b>6,214 points.</b> It cannot say who cared, who exposed, who reframed — or that the care happened five weeks before anyone could prove it. The profile, which is the whole point, is gone.</p>
+      </div>
+      <div class="good">
+        <div class="kicker">The 22 records say</div>
+        <p><b>26 lines.</b> Each with its own evidence, its own guard, its own timing. The care is null for five weeks, then settles late, back-dated. The milestone pays less, because the harm is verified. The exposure pays, unblockable by the accused. The reframe pays, because a decision changed.</p>
+      </div>
+    </div>
+    <div class="concl">If a future story needs a dimension this map lacks, the gap is logged — and the ontology grows on evidence, never on speculation.</div>
+  </section>
+
+  <!-- ============ 14 · THE COMPLETENESS TEST ============ -->
+  <section class="slide">
+    <div class="eyebrow">What this proves</div>
+    <h2>The completeness test, in action</h2>
+    <p class="beat">The design hypothesis says: 22 dimensions are enough to express any meaningful contribution. This story is an instance of that test, run on real-shaped actions.</p>
+    <ol class="mech">
+      <li><p><b>Distinguished boundaries.</b> All 22 dimensions are active in one story, and each is explainable against its nearest neighbors: Tower (unplanned collapse) vs Death (chosen ending) vs World (completion of the whole); Empress's presence vs Hierophant's competence; Hermit's finding vs Fool's crossing.</p></li>
+      <li><p><b>Useful combinations.</b> One action lights several at once: the incident is Tower + Moon + Hierophant + Chariot's harm at the same time — without flattening into "an incident happened."</p></li>
+      <li><p><b>No gaps found.</b> Every beat of the story is expressed as a combination. If one had not been, the gap would be logged as a boundary revision — never as a failure of the members.</p></li>
+    </ol>
+    <div class="fine">And the fairness guarantees, observed live: null → settled late (the care) · harm reduces the reward (the milestone) · no leaderboard (the story ends in attribution, not ranking).</div>
+  </section>
+
+  <!-- ============ 15 · CLOSE ============ -->
+  <section class="slide close-slide">
+    <img class="close-card" src="../img/RWS_Tarot_21_World.jpg" alt="The World">
+    <div class="eyebrow">The Long Night · end of example</div>
+    <h2>The map is 22.<br><em>The filling is open.</em></h2>
+    <p class="lead">This is a community that can measure its own care without reducing it to a number.
+    The profile stays visible. The summary stays approximate. The gaps, when they come, become the next lesson.</p>
+    <div class="close-cta">The full specification → <a href="../">resonantdao.com/contribution-economy</a></div>
+  </section>
+
+</div>
+
+<div id="hint">← → · space to advance</div>
+<div id="count"></div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const bar=document.getElementById('bar');
+  const count=document.getElementById('count');
+  const hint=document.getElementById('hint');
+  let i=0, touched=false;
+  function go(n){
+    i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    bar.style.width=(i/(slides.length-1)*100)+'%';
+    count.textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+    if(!touched){touched=true;hint.classList.add('dim');setTimeout(()=>hint.remove(),1500);}
+  }
+  addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='Enter'){e.preventDefault();go(i+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='Backspace'){e.preventDefault();go(i-1);}
+    else if(e.key==='Home'){go(0);}
+    else if(e.key==='End'){go(slides.length-1);}
+  },{passive:false});
+  document.addEventListener('click',e=>{
+    if(e.target.closest('a,button'))return;
+    const w=innerWidth;
+    if(e.clientX>w*0.62)go(i+1);
+    else if(e.clientX<w*0.38)go(i-1);
+  });
+  let tx=null;
+  addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;},{passive:true});
+  addEventListener('touchend',e=>{
+    if(tx===null)return;
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>48)(dx<0?go(i+1):go(i-1));
+    tx=null;
+  },{passive:true});
+  const h=parseInt((location.hash||'').replace('#',''),10);
+  go(isNaN(h)?0:h-1);
+})();
+</script>
+</body>
+</html>
