@@ -1,35 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-04T19:19:07Z",
+  "generated_at": "2026-09-04T21:40:18Z",
   "guild_id": "1423225702135894111",
   "count": 13,
   "events": [
-    {
-      "id": "1519304427939561582",
-      "name": "Friday Automation - Showcase your project",
-      "description": "Talk to @Mel DeWeese or @ximonomix to reserve a spot.",
-      "image": "https://cdn.discordapp.com/guild-events/1519304427939561582/bd0de23f55d3ea47166e1088f60127b4.png?size=512",
-      "start": "2026-09-04T18:00:00+00:00",
-      "end": "2026-09-04T20:00:00+00:00",
-      "status": "ACTIVE",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 20,
-      "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
-    },
-    {
-      "id": "1519944153973391481",
-      "name": "Community Leader Session",
-      "description": "This session is for current community leaders and anyone interested in becoming one. We’ll discuss how we can better support our members, strengthen the community, and help create a welcoming and engaging environment for everyone.",
-      "image": "https://cdn.discordapp.com/guild-events/1519944153973391481/54d5d274799763e09a066d35c3d4556a.png?size=512",
-      "start": "2026-09-04T19:30:00+00:00",
-      "end": "2026-09-04T21:30:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 15,
-      "url": "https://discord.com/events/1423225702135894111/1519944153973391481"
-    },
     {
       "id": "1523301264623140874",
       "name": "The Resonant Co-Op Engine",
@@ -172,6 +146,32 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 11,
       "url": "https://discord.com/events/1423225702135894111/1519310167894786128"
+    },
+    {
+      "id": "1519304427939561582",
+      "name": "Friday Automation - Showcase your project",
+      "description": "Talk to @Mel DeWeese or @ximonomix to reserve a spot.",
+      "image": "https://cdn.discordapp.com/guild-events/1519304427939561582/bd0de23f55d3ea47166e1088f60127b4.png?size=512",
+      "start": "2026-09-11T18:00:00+00:00",
+      "end": "2026-09-11T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 20,
+      "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
+    },
+    {
+      "id": "1519944153973391481",
+      "name": "Community Leader Session",
+      "description": "This session is for current community leaders and anyone interested in becoming one. We’ll discuss how we can better support our members, strengthen the community, and help create a welcoming and engaging environment for everyone.",
+      "image": "https://cdn.discordapp.com/guild-events/1519944153973391481/54d5d274799763e09a066d35c3d4556a.png?size=512",
+      "start": "2026-09-18T19:30:00+00:00",
+      "end": "2026-09-18T21:30:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 15,
+      "url": "https://discord.com/events/1423225702135894111/1519944153973391481"
     }
   ]
 }
