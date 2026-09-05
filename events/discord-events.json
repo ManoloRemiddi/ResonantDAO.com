@@ -1,8 +1,8 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-04T21:40:18Z",
+  "generated_at": "2026-09-05T07:48:56Z",
   "guild_id": "1423225702135894111",
-  "count": 13,
+  "count": 11,
   "events": [
     {
       "id": "1523301264623140874",
@@ -107,32 +107,6 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 22,
       "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
-    },
-    {
-      "id": "1545451327688286269",
-      "name": "Discovery Time run by Coughfee",
-      "description": "An hour for people who are building with AI and are still early on. No technical bar to clear. How it runs: Round the room: 1–2 min each on your win or your best failure of the week. Passing is fine. Showcase: one 10–20 min walkthrough of a real project. Usually a beginner demo build in Claude using Throughliner; sometimes someone else's Throughliner setup in whatever environment they work in. Bring a half-finished thing, bring something that broke, or bring nothing and just listen.",
-      "image": null,
-      "start": "2026-09-10T05:00:00+00:00",
-      "end": "2026-09-10T06:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "Coughfee will provide location",
-      "interested": 1,
-      "url": "https://discord.com/events/1423225702135894111/1545451327688286269"
-    },
-    {
-      "id": "1524007099627999323",
-      "name": "Event changing to Discovery Time 3pm Melbourne time",
-      "description": "RESONANT BRIDGE By RESANONTOS We are saying goodbye to this event",
-      "image": "https://cdn.discordapp.com/guild-events/1524007099627999323/8aa98674101c8a642351d9bd678ce87c.png?size=512",
-      "start": "2026-09-10T11:00:00+00:00",
-      "end": "2026-09-10T13:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 25,
-      "url": "https://discord.com/events/1423225702135894111/1524007099627999323"
     },
     {
       "id": "1519310167894786128",
