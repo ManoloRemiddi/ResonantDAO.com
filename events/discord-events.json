@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-06T20:39:57Z",
+  "generated_at": "2026-09-06T22:43:57Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
-    {
-      "id": "1523301264623140874",
-      "name": "The Resonant Co-Op Engine",
-      "description": "Got a project that needs hands, or skills looking for a collaborative spark? This is where they meet. The Co-Op Engine is our weekly 45-minute sync for turning ideas into working team experiments. Come to share a concept, offer your skills, or just listen in and see how we collaborate. Everyone is welcome, no experience required. How the 45 minutes run: 00:00 - 00:05 | Grounding: A quick welcome. 00:05 - 00:30 | The Match Floor: Rapid 90-second outlines. Share a project, a skill, or a collabora…",
-      "image": "https://cdn.discordapp.com/guild-events/1523301264623140874/47f062e82d9be4310a39b51e4a52cf90.png?size=512",
-      "start": "2026-09-06T20:00:00+00:00",
-      "end": "2026-09-06T22:00:00+00:00",
-      "status": "ACTIVE",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 31,
-      "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
-    },
     {
       "id": "1519313296652505198",
       "name": "🚀 Member Onboarding: Get Connected",
@@ -133,6 +120,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 20,
       "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
+    },
+    {
+      "id": "1523301264623140874",
+      "name": "The Resonant Co-Op Engine",
+      "description": "Got a project that needs hands, or skills looking for a collaborative spark? This is where they meet. The Co-Op Engine is our weekly 45-minute sync for turning ideas into working team experiments. Come to share a concept, offer your skills, or just listen in and see how we collaborate. Everyone is welcome, no experience required. How the 45 minutes run: 00:00 - 00:05 | Grounding: A quick welcome. 00:05 - 00:30 | The Match Floor: Rapid 90-second outlines. Share a project, a skill, or a collabora…",
+      "image": "https://cdn.discordapp.com/guild-events/1523301264623140874/47f062e82d9be4310a39b51e4a52cf90.png?size=512",
+      "start": "2026-09-13T20:00:00+00:00",
+      "end": "2026-09-13T22:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 32,
+      "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
     },
     {
       "id": "1519944153973391481",
