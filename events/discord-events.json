@@ -1,6 +1,6 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-05T07:48:56Z",
+  "generated_at": "2026-09-06T20:39:57Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
@@ -11,10 +11,10 @@
       "image": "https://cdn.discordapp.com/guild-events/1523301264623140874/47f062e82d9be4310a39b51e4a52cf90.png?size=512",
       "start": "2026-09-06T20:00:00+00:00",
       "end": "2026-09-06T22:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 30,
+      "interested": 31,
       "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
     },
     {
