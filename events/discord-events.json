@@ -1,48 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-06T22:43:57Z",
+  "generated_at": "2026-09-07T20:42:36Z",
   "guild_id": "1423225702135894111",
-  "count": 11,
+  "count": 10,
   "events": [
-    {
-      "id": "1519313296652505198",
-      "name": "🚀 Member Onboarding: Get Connected",
-      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
-      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-09-07T17:45:00+00:00",
-      "end": null,
-      "status": "SCHEDULED",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 14,
-      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
-    },
-    {
-      "id": "1521061356646961234",
-      "name": "ResonantDAO Exploration & Community Sync",
-      "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
-      "image": "https://cdn.discordapp.com/guild-events/1521061356646961234/9b2ce174f19aa57f78615f24c81761bc.png?size=512",
-      "start": "2026-09-07T18:00:00+00:00",
-      "end": "2026-09-07T19:30:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 16,
-      "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
-    },
-    {
-      "id": "1519304056504320151",
-      "name": "ResonantOS — Tech Team Sync",
-      "description": "This is the weekly sync for the Tech Team working on ResonantOS. The meeting is for sharing updates, coordinating work, and resolving blockers. It's a technical call meant to speed up development and align the team on priorities and milestones. Duration: 45 minutes, weekly.",
-      "image": "https://cdn.discordapp.com/guild-events/1519304056504320151/4e9742244df224a1157aa78e6e3a0411.png?size=512",
-      "start": "2026-09-07T19:30:00+00:00",
-      "end": "2026-09-07T20:15:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 18,
-      "url": "https://discord.com/events/1423225702135894111/1519304056504320151"
-    },
     {
       "id": "1519306427737313330",
       "name": "Resonant Academy",
@@ -92,7 +53,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 22,
+      "interested": 23,
       "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
     },
     {
@@ -105,7 +66,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 11,
+      "interested": 12,
       "url": "https://discord.com/events/1423225702135894111/1519310167894786128"
     },
     {
@@ -133,6 +94,32 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 32,
       "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
+    },
+    {
+      "id": "1521061356646961234",
+      "name": "ResonantDAO Exploration & Community Sync",
+      "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
+      "image": "https://cdn.discordapp.com/guild-events/1521061356646961234/9b2ce174f19aa57f78615f24c81761bc.png?size=512",
+      "start": "2026-09-14T18:00:00+00:00",
+      "end": "2026-09-14T19:30:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 17,
+      "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
+    },
+    {
+      "id": "1519304056504320151",
+      "name": "ResonantOS — Tech Team Sync",
+      "description": "This is the weekly sync for the Tech Team working on ResonantOS. The meeting is for sharing updates, coordinating work, and resolving blockers. It's a technical call meant to speed up development and align the team on priorities and milestones. Duration: 45 minutes, weekly.",
+      "image": "https://cdn.discordapp.com/guild-events/1519304056504320151/4e9742244df224a1157aa78e6e3a0411.png?size=512",
+      "start": "2026-09-14T19:30:00+00:00",
+      "end": "2026-09-14T20:15:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 18,
+      "url": "https://discord.com/events/1423225702135894111/1519304056504320151"
     },
     {
       "id": "1519944153973391481",
