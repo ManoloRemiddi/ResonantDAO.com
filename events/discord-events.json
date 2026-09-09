@@ -1,6 +1,6 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-08T21:59:37Z",
+  "generated_at": "2026-09-09T17:55:21Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
@@ -11,24 +11,11 @@
       "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
       "start": "2026-09-09T17:00:00+00:00",
       "end": "2026-09-09T19:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "voice",
       "location": "Discord voice",
       "interested": 55,
       "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
-    },
-    {
-      "id": "1519313296652505198",
-      "name": "🚀 Member Onboarding: Get Connected",
-      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
-      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-09-09T17:45:00+00:00",
-      "end": null,
-      "status": "SCHEDULED",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 15,
-      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
     },
     {
       "id": "1519308543310823494",
@@ -40,7 +27,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 22,
+      "interested": 23,
       "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
     },
     {
@@ -53,8 +40,21 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 24,
+      "interested": 25,
       "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
+    },
+    {
+      "id": "1519313296652505198",
+      "name": "🚀 Member Onboarding: Get Connected",
+      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
+      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
+      "start": "2026-09-10T17:45:00+00:00",
+      "end": null,
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 15,
+      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
     },
     {
       "id": "1519310167894786128",
@@ -105,7 +105,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 18,
+      "interested": 19,
       "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
     },
     {
@@ -131,7 +131,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 48,
+      "interested": 49,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     },
     {
