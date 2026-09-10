@@ -1,8 +1,8 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-09T22:58:37Z",
+  "generated_at": "2026-09-10T10:46:19Z",
   "guild_id": "1423225702135894111",
-  "count": 10,
+  "count": 11,
   "events": [
     {
       "id": "1519313296652505198",
@@ -96,6 +96,19 @@
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     },
     {
+      "id": "1519366696559972352",
+      "name": "AI Stack",
+      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
+      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
+      "start": "2026-09-16T17:00:00+00:00",
+      "end": "2026-09-16T19:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 55,
+      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
+    },
+    {
       "id": "1519308543310823494",
       "name": "Creative Lab — ResonantDAO",
       "description": "Making things alone is hard. Creative Lab is where the creatives and artists of ResonantDAO come together to do the work, not talk about it, but actually make. Bring your ideas, your half-finished projects, your stuck pieces. Share what you're exploring, get real feedback, support others, and build things together. No agendas, no deliverables, just creative time among people who get it. This isn't about tech or AI. It's about craft, expression, and the human side of making. We learn together, p…",
@@ -118,7 +131,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 25,
+      "interested": 26,
       "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
     },
     {
