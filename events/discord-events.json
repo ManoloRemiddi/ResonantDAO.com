@@ -1,6 +1,6 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-17T01:36:50Z",
+  "generated_at": "2026-09-17T20:31:20Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
@@ -9,26 +9,13 @@
       "name": "🚀 Member Onboarding: Get Connected",
       "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
       "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-09-17T17:45:00+00:00",
+      "start": "2026-09-18T17:45:00+00:00",
       "end": null,
       "status": "SCHEDULED",
       "kind": "voice",
       "location": "Discord voice",
       "interested": 20,
       "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
-    },
-    {
-      "id": "1519310167894786128",
-      "name": "Augmented Minds",
-      "description": "On non-tech days, we focus on our humanity and our community.",
-      "image": "https://cdn.discordapp.com/guild-events/1519310167894786128/cdf92ef8b29296fec737041964a99990.png?size=512",
-      "start": "2026-09-17T18:00:00+00:00",
-      "end": "2026-09-17T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 12,
-      "url": "https://discord.com/events/1423225702135894111/1519310167894786128"
     },
     {
       "id": "1519304427939561582",
@@ -92,7 +79,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 21,
+      "interested": 22,
       "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
     },
     {
@@ -144,8 +131,21 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 25,
+      "interested": 26,
       "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
+    },
+    {
+      "id": "1519310167894786128",
+      "name": "Augmented Minds",
+      "description": "On non-tech days, we focus on our humanity and our community.",
+      "image": "https://cdn.discordapp.com/guild-events/1519310167894786128/cdf92ef8b29296fec737041964a99990.png?size=512",
+      "start": "2026-09-24T18:00:00+00:00",
+      "end": "2026-09-24T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 12,
+      "url": "https://discord.com/events/1423225702135894111/1519310167894786128"
     }
   ]
 }
