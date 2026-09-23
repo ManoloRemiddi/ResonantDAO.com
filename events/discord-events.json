@@ -1,47 +1,21 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-23T17:45:18Z",
+  "generated_at": "2026-09-23T21:10:35Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
-    {
-      "id": "1519366696559972352",
-      "name": "AI Stack",
-      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
-      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
-      "start": "2026-09-23T17:00:00+00:00",
-      "end": "2026-09-23T19:00:00+00:00",
-      "status": "ACTIVE",
-      "kind": "external",
-      "location": "https://kmeet.infomaniak.com/bhkvdmalyympcres",
-      "interested": 67,
-      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
-    },
     {
       "id": "1519313296652505198",
       "name": "🚀 Member Onboarding: Get Connected",
       "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
       "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-09-23T17:45:00+00:00",
+      "start": "2026-09-24T17:45:00+00:00",
       "end": null,
       "status": "SCHEDULED",
       "kind": "voice",
       "location": "Discord voice",
       "interested": 22,
       "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
-    },
-    {
-      "id": "1519308543310823494",
-      "name": "Creative Lab — ResonantDAO",
-      "description": "Making things alone is hard. Creative Lab is where the creatives and artists of ResonantDAO come together to do the work, not talk about it, but actually make. Bring your ideas, your half-finished projects, your stuck pieces. Share what you're exploring, get real feedback, support others, and build things together. No agendas, no deliverables, just creative time among people who get it. This isn't about tech or AI. It's about craft, expression, and the human side of making. We learn together, p…",
-      "image": "https://cdn.discordapp.com/guild-events/1519308543310823494/5fcbbdc4ec26892cfc85b3b5e1d36788.png?size=512",
-      "start": "2026-09-23T18:00:00+00:00",
-      "end": "2026-09-23T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 28,
-      "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
     },
     {
       "id": "1519310167894786128",
@@ -146,6 +120,32 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 51,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
+    },
+    {
+      "id": "1519366696559972352",
+      "name": "AI Stack",
+      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
+      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
+      "start": "2026-09-30T17:00:00+00:00",
+      "end": "2026-09-30T19:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://kmeet.infomaniak.com/bhkvdmalyympcres",
+      "interested": 67,
+      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
+    },
+    {
+      "id": "1519308543310823494",
+      "name": "Creative Lab — ResonantDAO",
+      "description": "Making things alone is hard. Creative Lab is where the creatives and artists of ResonantDAO come together to do the work, not talk about it, but actually make. Bring your ideas, your half-finished projects, your stuck pieces. Share what you're exploring, get real feedback, support others, and build things together. No agendas, no deliverables, just creative time among people who get it. This isn't about tech or AI. It's about craft, expression, and the human side of making. We learn together, p…",
+      "image": "https://cdn.discordapp.com/guild-events/1519308543310823494/5fcbbdc4ec26892cfc85b3b5e1d36788.png?size=512",
+      "start": "2026-09-30T18:00:00+00:00",
+      "end": "2026-09-30T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 28,
+      "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
     }
   ]
 }
