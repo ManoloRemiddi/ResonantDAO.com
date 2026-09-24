@@ -1,8 +1,8 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-23T21:10:35Z",
+  "generated_at": "2026-09-24T14:03:40Z",
   "guild_id": "1423225702135894111",
-  "count": 11,
+  "count": 12,
   "events": [
     {
       "id": "1519313296652505198",
@@ -14,7 +14,7 @@
       "status": "SCHEDULED",
       "kind": "voice",
       "location": "Discord voice",
-      "interested": 22,
+      "interested": 23,
       "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
     },
     {
@@ -83,6 +83,19 @@
       "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
     },
     {
+      "id": "1552675419923156992",
+      "name": "Creative AI Video Lab",
+      "description": "Welcome to the Creative AI Video Lab—a collaborative space for exploring how AI is transforming video creation. From generating scenes and developing concepts to editing, voice, sound, visual effects, and publishing, we’ll share practical workflows, useful tools, experiments, and lessons learned. Bring your ideas, current projects, and questions. Let’s turn ideas into videos—together.",
+      "image": "https://cdn.discordapp.com/guild-events/1552675419923156992/1083d3a03585546db874551174006037.png?size=512",
+      "start": "2026-09-28T17:00:00+00:00",
+      "end": null,
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 1,
+      "url": "https://discord.com/events/1423225702135894111/1552675419923156992"
+    },
+    {
       "id": "1521061356646961234",
       "name": "ResonantDAO Exploration & Community Sync",
       "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
@@ -144,7 +157,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 28,
+      "interested": 29,
       "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
     }
   ]
