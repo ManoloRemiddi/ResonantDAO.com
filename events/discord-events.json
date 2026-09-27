@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-09-25T19:51:48Z",
+  "generated_at": "2026-09-27T20:18:26Z",
   "guild_id": "1423225702135894111",
-  "count": 12,
+  "count": 11,
   "events": [
-    {
-      "id": "1524014529049133137",
-      "name": "ResonantOS Coding Academy",
-      "description": "AI workflows, development practices, and live Q&A.",
-      "image": "https://cdn.discordapp.com/guild-events/1524014529049133137/69582da0e8801594185cb96cc49cc202.png?size=512",
-      "start": "2026-09-27T19:00:00+00:00",
-      "end": "2026-09-27T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 29,
-      "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
-    },
     {
       "id": "1523301264623140874",
       "name": "The Resonant Co-Op Engine",
@@ -24,7 +11,7 @@
       "image": "https://cdn.discordapp.com/guild-events/1523301264623140874/47f062e82d9be4310a39b51e4a52cf90.png?size=512",
       "start": "2026-09-27T20:00:00+00:00",
       "end": "2026-09-27T22:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 35,
@@ -40,7 +27,7 @@
       "status": "SCHEDULED",
       "kind": "voice",
       "location": "Discord voice",
-      "interested": 1,
+      "interested": 2,
       "url": "https://discord.com/events/1423225702135894111/1552675419923156992"
     },
     {
@@ -92,7 +79,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 51,
+      "interested": 53,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     },
     {
@@ -144,7 +131,7 @@
       "status": "SCHEDULED",
       "kind": "external",
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 23,
+      "interested": 25,
       "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
     },
     {
