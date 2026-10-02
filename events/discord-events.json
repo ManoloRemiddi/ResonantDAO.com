@@ -1,8 +1,8 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-10-01T23:42:49Z",
+  "generated_at": "2026-10-02T16:30:51Z",
   "guild_id": "1423225702135894111",
-  "count": 12,
+  "count": 13,
   "events": [
     {
       "id": "1519313296652505198",
@@ -29,6 +29,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 25,
       "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
+    },
+    {
+      "id": "1555587629414617180",
+      "name": "🎉 One Year Together. Let’s Party!",
+      "description": "Our community turns ONE! 🥳 Come hang out, celebrate the memories, and help us kick off another year together. Bring your good vibes. It wouldn’t be a party without you! 🎂",
+      "image": "https://cdn.discordapp.com/guild-events/1555587629414617180/f4d31d66de42bed3b17774088b4fe2ea.png?size=512",
+      "start": "2026-10-02T18:00:00.271000+00:00",
+      "end": "2026-10-02T19:30:00.271000+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 7,
+      "url": "https://discord.com/events/1423225702135894111/1555587629414617180"
     },
     {
       "id": "1519944153973391481",
