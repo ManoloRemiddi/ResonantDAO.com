@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-10-20T19:51:11Z",
+  "generated_at": "2026-10-20T22:57:35Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
-    {
-      "id": "1519306427737313330",
-      "name": "Resonant Academy",
-      "description": "We learn from one another. We learn through doing.",
-      "image": "https://cdn.discordapp.com/guild-events/1519306427737313330/a323bd3611accde0936c8081731f3540.png?size=512",
-      "start": "2026-10-20T18:00:00+00:00",
-      "end": "2026-10-20T20:00:00+00:00",
-      "status": "ACTIVE",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 55,
-      "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
-    },
     {
       "id": "1519366696559972352",
       "name": "AI Stack",
@@ -146,6 +133,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 27,
       "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
+    },
+    {
+      "id": "1519306427737313330",
+      "name": "Resonant Academy",
+      "description": "We learn from one another. We learn through doing.",
+      "image": "https://cdn.discordapp.com/guild-events/1519306427737313330/a323bd3611accde0936c8081731f3540.png?size=512",
+      "start": "2026-10-27T18:00:00+00:00",
+      "end": "2026-10-27T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 56,
+      "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     }
   ]
 }
