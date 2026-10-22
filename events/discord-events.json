@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-10-22T05:11:50Z",
+  "generated_at": "2026-10-22T19:46:24Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
-    {
-      "id": "1519313296652505198",
-      "name": "🚀 Member Onboarding: Get Connected",
-      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
-      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
-      "start": "2026-10-22T17:45:00+00:00",
-      "end": null,
-      "status": "SCHEDULED",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 25,
-      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
-    },
     {
       "id": "1519310167894786128",
       "name": "Augmented Minds",
@@ -24,11 +11,24 @@
       "image": "https://cdn.discordapp.com/guild-events/1519310167894786128/cdf92ef8b29296fec737041964a99990.png?size=512",
       "start": "2026-10-22T18:00:00+00:00",
       "end": "2026-10-22T20:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "stage",
       "location": "Discord Stage",
       "interested": 17,
       "url": "https://discord.com/events/1423225702135894111/1519310167894786128"
+    },
+    {
+      "id": "1519313296652505198",
+      "name": "🚀 Member Onboarding: Get Connected",
+      "description": "Welcome to the community! 👋 Jump into this quick daily huddle to introduce yourself, meet fellow members, and find your footing in the server. Whether you want to pitch a concept, ask a quick question, or just listen in and see what we’re building here, this is your starting point. No high-pressure pitches, just a casual space to sync up and get oriented. Runs Monday through Friday. See you in the voice channel!",
+      "image": "https://cdn.discordapp.com/guild-events/1519313296652505198/a71043bfc1fad1e2b7441e23b9c092b4.png?size=512",
+      "start": "2026-10-23T17:45:00+00:00",
+      "end": null,
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 25,
+      "url": "https://discord.com/events/1423225702135894111/1519313296652505198"
     },
     {
       "id": "1519304427939561582",
