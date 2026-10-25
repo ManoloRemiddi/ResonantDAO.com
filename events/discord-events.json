@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-10-23T23:19:34Z",
+  "generated_at": "2026-10-25T19:52:49Z",
   "guild_id": "1423225702135894111",
   "count": 11,
   "events": [
-    {
-      "id": "1524014529049133137",
-      "name": "ResonantOS Coding Academy",
-      "description": "AI workflows, development practices, and live Q&A.",
-      "image": "https://cdn.discordapp.com/guild-events/1524014529049133137/69582da0e8801594185cb96cc49cc202.png?size=512",
-      "start": "2026-10-25T19:00:00+00:00",
-      "end": "2026-10-25T20:00:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 37,
-      "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
-    },
     {
       "id": "1523301264623140874",
       "name": "The Resonant Co-Op Engine",
@@ -146,6 +133,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 18,
       "url": "https://discord.com/events/1423225702135894111/1519944153973391481"
+    },
+    {
+      "id": "1524014529049133137",
+      "name": "ResonantOS Coding Academy",
+      "description": "AI workflows, development practices, and live Q&A.",
+      "image": "https://cdn.discordapp.com/guild-events/1524014529049133137/69582da0e8801594185cb96cc49cc202.png?size=512",
+      "start": "2026-11-01T19:00:00+00:00",
+      "end": "2026-11-01T20:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 38,
+      "url": "https://discord.com/events/1423225702135894111/1524014529049133137"
     }
   ]
 }
