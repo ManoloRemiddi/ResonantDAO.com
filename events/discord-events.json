@@ -1,8 +1,8 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-11-11T21:50:08Z",
+  "generated_at": "2026-11-12T02:43:20Z",
   "guild_id": "1423225702135894111",
-  "count": 8,
+  "count": 9,
   "events": [
     {
       "id": "1519310167894786128",
@@ -107,6 +107,19 @@
       "location": "Discord voice",
       "interested": 36,
       "url": "https://discord.com/events/1423225702135894111/1519308543310823494"
+    },
+    {
+      "id": "1519366696559972352",
+      "name": "AI Stack",
+      "description": "Hardware to harness, helping each member design the right personal AI stack. Join us to learn and get personal advice.",
+      "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
+      "start": "2026-11-18T18:00:00+00:00",
+      "end": "2026-11-18T19:00:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 88,
+      "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
     }
   ]
 }
