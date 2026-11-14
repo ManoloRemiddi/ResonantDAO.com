@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-11-13T21:13:16Z",
+  "generated_at": "2026-11-14T01:35:54Z",
   "guild_id": "1423225702135894111",
-  "count": 9,
+  "count": 10,
   "events": [
-    {
-      "id": "1519944153973391481",
-      "name": "Community Leader Session",
-      "description": "This session is for current community leaders and anyone interested in becoming one. We’ll discuss how we can better support our members, strengthen the community, and help create a welcoming and engaging environment for everyone.",
-      "image": "https://cdn.discordapp.com/guild-events/1519944153973391481/54d5d274799763e09a066d35c3d4556a.png?size=512",
-      "start": "2026-11-13T19:30:00+00:00",
-      "end": "2026-11-13T21:30:00+00:00",
-      "status": "ACTIVE",
-      "kind": "external",
-      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
-      "interested": 18,
-      "url": "https://discord.com/events/1423225702135894111/1519944153973391481"
-    },
     {
       "id": "1524014529049133137",
       "name": "ResonantOS Coding Academy",
@@ -120,6 +107,32 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 28,
       "url": "https://discord.com/events/1423225702135894111/1519304427939561582"
+    },
+    {
+      "id": "1519944153973391481",
+      "name": "Community Leader Session",
+      "description": "This session is for current community leaders and anyone interested in becoming one. We’ll discuss how we can better support our members, strengthen the community, and help create a welcoming and engaging environment for everyone.",
+      "image": "https://cdn.discordapp.com/guild-events/1519944153973391481/54d5d274799763e09a066d35c3d4556a.png?size=512",
+      "start": "2026-11-20T19:30:00+00:00",
+      "end": "2026-11-20T21:30:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "external",
+      "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
+      "interested": 18,
+      "url": "https://discord.com/events/1423225702135894111/1519944153973391481"
+    },
+    {
+      "id": "1521061356646961234",
+      "name": "ResonantDAO Exploration & Community Sync",
+      "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
+      "image": "https://cdn.discordapp.com/guild-events/1521061356646961234/9b2ce174f19aa57f78615f24c81761bc.png?size=512",
+      "start": "2026-11-23T18:00:00+00:00",
+      "end": "2026-11-23T19:30:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 27,
+      "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
     }
   ]
 }
