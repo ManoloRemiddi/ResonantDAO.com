@@ -1,22 +1,9 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-11-16T17:17:33Z",
+  "generated_at": "2026-11-17T00:57:53Z",
   "guild_id": "1423225702135894111",
   "count": 9,
   "events": [
-    {
-      "id": "1521061356646961234",
-      "name": "ResonantDAO Exploration & Community Sync",
-      "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
-      "image": "https://cdn.discordapp.com/guild-events/1521061356646961234/9b2ce174f19aa57f78615f24c81761bc.png?size=512",
-      "start": "2026-11-16T18:30:00+00:00",
-      "end": "2026-11-23T19:30:00+00:00",
-      "status": "SCHEDULED",
-      "kind": "voice",
-      "location": "Discord voice",
-      "interested": 27,
-      "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
-    },
     {
       "id": "1519306427737313330",
       "name": "Resonant Academy",
@@ -120,6 +107,19 @@
       "location": "https://us06web.zoom.us/j/4636020243?pwd=TEU5RHFUWVhiUmxadkVrNHlIbmhWdz09",
       "interested": 39,
       "url": "https://discord.com/events/1423225702135894111/1523301264623140874"
+    },
+    {
+      "id": "1521061356646961234",
+      "name": "ResonantDAO Exploration & Community Sync",
+      "description": "In this 90-minute call, we explore our DAO, from token economics and social dynamics to growth and governance. We share updates on what we’re building, including ResonantOS, and discuss upcoming community calls and initiatives. Duration: 1 hour and 30 minutes.",
+      "image": "https://cdn.discordapp.com/guild-events/1521061356646961234/9b2ce174f19aa57f78615f24c81761bc.png?size=512",
+      "start": "2026-11-30T18:30:00+00:00",
+      "end": "2026-12-07T19:30:00+00:00",
+      "status": "SCHEDULED",
+      "kind": "voice",
+      "location": "Discord voice",
+      "interested": 28,
+      "url": "https://discord.com/events/1423225702135894111/1521061356646961234"
     }
   ]
 }
