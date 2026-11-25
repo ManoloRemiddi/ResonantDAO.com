@@ -1,6 +1,6 @@
 {
   "schema": "resonantdao/discord-events@1",
-  "generated_at": "2026-11-24T23:59:54Z",
+  "generated_at": "2026-11-25T18:45:26Z",
   "guild_id": "1423225702135894111",
   "count": 10,
   "events": [
@@ -11,10 +11,10 @@
       "image": "https://cdn.discordapp.com/guild-events/1519366696559972352/5eca4680995a9b0dcf8bb75873965bdb.png?size=512",
       "start": "2026-11-25T18:00:00+00:00",
       "end": "2026-11-25T19:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "voice",
       "location": "Discord voice",
-      "interested": 90,
+      "interested": 91,
       "url": "https://discord.com/events/1423225702135894111/1519366696559972352"
     },
     {
@@ -24,7 +24,7 @@
       "image": "https://cdn.discordapp.com/guild-events/1519308543310823494/5fcbbdc4ec26892cfc85b3b5e1d36788.png?size=512",
       "start": "2026-11-25T18:30:00+00:00",
       "end": "2026-11-25T20:00:00+00:00",
-      "status": "SCHEDULED",
+      "status": "ACTIVE",
       "kind": "voice",
       "location": "Discord voice",
       "interested": 35,
@@ -118,7 +118,7 @@
       "status": "SCHEDULED",
       "kind": "voice",
       "location": "Discord voice",
-      "interested": 65,
+      "interested": 66,
       "url": "https://discord.com/events/1423225702135894111/1519306427737313330"
     },
     {
